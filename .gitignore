@@ -1,0 +1,28 @@
+# Node
+node_modules/
+*.log
+npm-debug.log*
+
+# Remotion build artifacts
+remotion/out/
+remotion/.remotion/
+remotion/dist/
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Local preview / browser test artifacts
+.playwright-mcp/
+.tmp-preview/
+tmp/
+
+# Dev iteration screenshots (kept out of repo)
+/rainsday-*.png
+/rainsday-*.PNG
+
+# Raw video exports left in root
+/_users_*.MP4
+/_users_*.mp4
