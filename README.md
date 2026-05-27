@@ -12,13 +12,20 @@ creative tools. Live at **https://rainsday.com**.
 
 ```
 .
-├── index.html              # Single-page site
-├── styles.css              # Theme + layout + interaction styles
-├── script.js               # Cursor, magnetic, tilt, reveal, gallery, sound, particles
-├── assets/                 # Images and section signal videos
+├── index.html              # V1 — cyber/orange portfolio
+├── styles.css
+├── script.js               # V1 — Cursor, magnetic, tilt, reveal, gallery, sound, particles
+├── assets/                 # V1 images and section signal videos
+├── v2/                     # V2 — editorial Japanese resume (rainsday.com/v2/)
+│   ├── index.html
+│   ├── styles.css          # washi · sumi · shu palette · Mincho display
+│   ├── script.js           # sumi cursor, magnetic, tilt, reveal
+│   └── assets/             # 4 Remotion-rendered ink videos
 ├── remotion/               # Remotion compositions (see remotion/README.md)
 └── CNAME                   # Custom domain for GitHub Pages
 ```
+
+Both versions cross-link in their headers (`V2 ↗` / `V1 ↗`).
 
 ## Local preview
 

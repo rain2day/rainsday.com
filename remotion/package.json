@@ -8,7 +8,12 @@
     "render:mission": "remotion render src/index.ts MissionSignal ../assets/signal-mission.mp4 --concurrency=1 --codec=h264 --crf=22",
     "render:product": "remotion render src/index.ts ProductSignal ../assets/signal-product.mp4 --concurrency=1 --codec=h264 --crf=22",
     "render:campaign": "remotion render src/index.ts CampaignSignal ../assets/signal-campaign.mp4 --concurrency=1 --codec=h264 --crf=22",
-    "render:all": "npm run render:hero && npm run render:mission && npm run render:product && npm run render:campaign"
+    "render:all": "npm run render:hero && npm run render:mission && npm run render:product && npm run render:campaign",
+    "render:v2:hero-ink": "remotion render src/index.ts HeroInk ../v2/assets/hero-ink.mp4 --concurrency=1 --codec=h264 --crf=22",
+    "render:v2:line": "remotion render src/index.ts LineTransition ../v2/assets/line-divider.mp4 --concurrency=1 --codec=h264 --crf=22",
+    "render:v2:brush": "remotion render src/index.ts BrushTimeline ../v2/assets/brush-timeline.mp4 --concurrency=1 --codec=h264 --crf=22",
+    "render:v2:komon": "remotion render src/index.ts KomonPattern ../v2/assets/komon-pattern.mp4 --concurrency=1 --codec=h264 --crf=22",
+    "render:v2:all": "npm run render:v2:hero-ink && npm run render:v2:line && npm run render:v2:brush && npm run render:v2:komon"
   },
   "dependencies": {
     "@remotion/bundler": "^4.0.250",
