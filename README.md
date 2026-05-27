@@ -21,11 +21,15 @@ creative tools. Live at **https://rainsday.com**.
 │   ├── styles.css          # washi · sumi · shu palette · Mincho display
 │   ├── script.js           # sumi cursor, magnetic, tilt, reveal
 │   └── assets/             # 4 Remotion-rendered ink videos
+├── v3/                     # V3 — cinematic field index (rainsday.com/v3/)
+│   ├── index.html
+│   ├── styles.css          # wide-card landscape cover, menu/social/resource index
+│   └── script.js           # cursor, pointer light, magnetic CTA
 ├── remotion/               # Remotion compositions (see remotion/README.md)
 └── CNAME                   # Custom domain for GitHub Pages
 ```
 
-Both versions cross-link in their headers (`V2 ↗` / `V1 ↗`).
+Versions cross-link in their headers (`V1 ↗` / `V2 ↗` / `V3 ↗`).
 
 ## Local preview
 
