@@ -11,15 +11,25 @@
   const cursorDot = cursor?.querySelector(".cursor-dot");
   const cursorRing = cursor?.querySelector(".cursor-ring");
 
-  if (cursor && !coarse && !reduced) {
-    const target = { x: innerWidth / 2, y: innerHeight / 2 };
-    const dot    = { x: target.x, y: target.y };
-    const ring   = { x: target.x, y: target.y };
+  // Module-scope cursor target. shared with fish + pixel proximity layers.
+  const mouse = {
+    x: innerWidth / 2, y: innerHeight / 2,
+    nx: 0.5, ny: 0.5,
+    active: false,
+  };
 
-    addEventListener("mousemove", (e) => {
-      target.x = e.clientX;
-      target.y = e.clientY;
-    }, { passive: true });
+  addEventListener("mousemove", (e) => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+    mouse.nx = e.clientX / innerWidth;
+    mouse.ny = e.clientY / innerHeight;
+    mouse.active = true;
+  }, { passive: true });
+  addEventListener("mouseleave", () => { mouse.active = false; });
+
+  if (cursor && !coarse && !reduced) {
+    const dot  = { x: mouse.x, y: mouse.y };
+    const ring = { x: mouse.x, y: mouse.y };
 
     const pointerSel = "a, button, [data-magnetic], [data-tilt], .project-card, .news-row, .partner-cell, .people-tag";
     document.addEventListener("mouseover", (e) => {
@@ -32,10 +42,10 @@
     });
 
     const loop = () => {
-      dot.x  += (target.x - dot.x)  * 0.55;
-      dot.y  += (target.y - dot.y)  * 0.55;
-      ring.x += (target.x - ring.x) * 0.18;
-      ring.y += (target.y - ring.y) * 0.18;
+      dot.x  += (mouse.x - dot.x)  * 0.55;
+      dot.y  += (mouse.y - dot.y)  * 0.55;
+      ring.x += (mouse.x - ring.x) * 0.18;
+      ring.y += (mouse.y - ring.y) * 0.18;
       cursorDot.style.transform  = `translate3d(${dot.x}px, ${dot.y}px, 0)`;
       cursorRing.style.transform = `translate3d(${ring.x}px, ${ring.y}px, 0)`;
       requestAnimationFrame(loop);
@@ -66,6 +76,8 @@
    * ------------------------------------------------------------ */
   if (!coarse && !reduced) {
     document.querySelectorAll("[data-tilt]").forEach((el) => {
+      // Fish container handles its own yaw, skip the generic tilt.
+      if (el.hasAttribute("data-fish")) return;
       const max = el.classList.contains("project-card") ? 4 : 6;
       el.addEventListener("mousemove", (e) => {
         const r = el.getBoundingClientRect();
@@ -82,8 +94,28 @@
   }
 
   /* ------------------------------------------------------------
-   * 4. Scroll reveal — [data-reveal], [data-reveal-stagger]
+   * 4. Scroll reveal. [data-reveal], [data-reveal-stagger]
+   *    Plus: per-letter reveal on [data-letters] containers.
    * ------------------------------------------------------------ */
+  // Split [data-letters] contents into per-character spans BEFORE
+  // the observer runs, so the staggered CSS transition has elements to animate.
+  document.querySelectorAll("[data-letters]").forEach((el) => {
+    const raw = el.textContent.trim();
+    el.textContent = "";
+    [...raw].forEach((char, i) => {
+      const span = document.createElement("span");
+      if (char === " ") {
+        span.className = "ch space";
+        span.innerHTML = "&nbsp;";
+      } else {
+        span.className = "ch";
+        span.textContent = char;
+      }
+      span.style.transitionDelay = (i * 14) + "ms";
+      el.appendChild(span);
+    });
+  });
+
   const reveals = document.querySelectorAll("[data-reveal], [data-reveal-stagger]");
   if ("IntersectionObserver" in window) {
     const obs = new IntersectionObserver((entries) => {
@@ -100,9 +132,60 @@
   }
 
   /* ------------------------------------------------------------
-   * 5. Hero bento pixel field — generative
+   * 5. Hero scramble headline (load-once)
+   *    Justification: storytelling. signals arrival.
+   * ------------------------------------------------------------ */
+  const scrambleHost = document.querySelector("[data-scramble]");
+  if (scrambleHost && !reduced) {
+    const GLYPHS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#@*+/<>".split("");
+    const lines = scrambleHost.querySelectorAll(".scramble-text");
+
+    lines.forEach((line, lineIdx) => {
+      const final = line.textContent;
+      line.textContent = "";
+      const chars = [];
+      [...final].forEach((ch) => {
+        const span = document.createElement("span");
+        span.className = "ch";
+        span.dataset.final = ch;
+        span.textContent = ch === " " ? " " : ch;
+        line.appendChild(span);
+        chars.push(span);
+      });
+
+      const startDelay = 180 + lineIdx * 110;
+      const perLetterDuration = 380;
+      const stepInterval = 30;
+
+      chars.forEach((span, i) => {
+        const finalChar = span.dataset.final;
+        if (!finalChar || finalChar === " ") return;
+        const charStart = startDelay + i * 22;
+
+        // Preview a random glyph until the staggered scramble actually starts.
+        span.textContent = GLYPHS[(Math.random() * GLYPHS.length) | 0];
+
+        setTimeout(() => {
+          let elapsed = 0;
+          const tick = setInterval(() => {
+            if (elapsed >= perLetterDuration) {
+              span.textContent = finalChar;
+              clearInterval(tick);
+              return;
+            }
+            span.textContent = GLYPHS[(Math.random() * GLYPHS.length) | 0];
+            elapsed += stepInterval;
+          }, stepInterval);
+        }, charStart);
+      });
+    });
+  }
+
+  /* ------------------------------------------------------------
+   * 6. Hero pixel field. bento stagger + cursor proximity glow.
    * ------------------------------------------------------------ */
   const field = document.querySelector("[data-bento-field]");
+  const fieldSquares = [];
   if (field) buildBentoField(field, reduced);
 
   function buildBentoField(host, reduced) {
@@ -110,15 +193,13 @@
     const rng = (a, b) => a + Math.random() * (b - a);
     const irng = (a, b) => Math.floor(rng(a, b + 1));
 
-    // Grid step: pixels snap to 16px increments so they feel mosaic-like
     const STEP = 16;
     const COUNT = 110;
     const palette = [
-      { cls: "",        weight: 70 },  // lime (default)
-      { cls: "is-ink",  weight: 20 },  // ink
-      { cls: "is-paper",weight: 10 },  // paper outlined
+      { cls: "",         weight: 70 },
+      { cls: "is-ink",   weight: 20 },
+      { cls: "is-paper", weight: 10 },
     ];
-
     function pickColor() {
       const total = palette.reduce((s, p) => s + p.weight, 0);
       let r = Math.random() * total;
@@ -130,42 +211,40 @@
     }
 
     const { w, h } = rect();
-    const squares = [];
     for (let i = 0; i < COUNT; i++) {
       const px = document.createElement("span");
       px.className = "px " + pickColor();
 
-      // Edge-weighted distribution — leave the centre mostly clear so
-      // the portrait reads, push pixels toward the corners/edges.
       const cx = w / 2, cy = h / 2;
       const ang = Math.random() * Math.PI * 2;
       const r = Math.pow(Math.random(), 0.6) * Math.min(w, h) * 0.55;
       const x = Math.round((cx + Math.cos(ang) * r) / STEP) * STEP;
       const y = Math.round((cy + Math.sin(ang) * r) / STEP) * STEP;
-
       const size = STEP * irng(1, 3);
+
       px.style.left = x + "px";
       px.style.top  = y + "px";
       px.style.width  = size + "px";
       px.style.height = size + "px";
+      px.dataset.x = x + size / 2;
+      px.dataset.y = y + size / 2;
 
       if (Math.random() < 0.08) px.classList.add("is-pulse");
 
       host.appendChild(px);
-      squares.push(px);
+      fieldSquares.push(px);
     }
 
-    // Stagger pop-in
     if (reduced) {
-      squares.forEach((s) => s.classList.add("is-in"));
+      fieldSquares.forEach((s) => s.classList.add("is-in"));
     } else {
-      squares.forEach((s, i) => {
+      fieldSquares.forEach((s) => {
         const delay = Math.random() * 1500;
         setTimeout(() => s.classList.add("is-in"), delay);
       });
     }
 
-    // Mouse parallax — small drift on whole field
+    // Mouse parallax. drifts the WHOLE field gently.
     if (!coarse && !reduced) {
       host.parentElement.addEventListener("mousemove", (e) => {
         const r = host.getBoundingClientRect();
@@ -175,10 +254,10 @@
       });
     }
 
-    // Re-shuffle gently — occasionally reposition a random pixel
+    // Gentle reshuffle. occasional pixel reposition.
     if (!reduced) {
       setInterval(() => {
-        const target = squares[Math.floor(Math.random() * squares.length)];
+        const target = fieldSquares[Math.floor(Math.random() * fieldSquares.length)];
         const { w, h } = rect();
         const cx = w / 2, cy = h / 2;
         const ang = Math.random() * Math.PI * 2;
@@ -189,6 +268,8 @@
         setTimeout(() => {
           target.style.left = x + "px";
           target.style.top  = y + "px";
+          target.dataset.x = x + parseFloat(target.style.width) / 2;
+          target.dataset.y = y + parseFloat(target.style.height) / 2;
           target.classList.add("is-in");
         }, 320);
       }, 1800);
@@ -196,7 +277,89 @@
   }
 
   /* ------------------------------------------------------------
-   * 6. Topbar hamburger — visual only (no menu panel yet)
+   * 7. Pixel proximity glow + fish look-at (shared rAF loop)
+   *    No window.addEventListener('scroll'). uses motion values only.
+   * ------------------------------------------------------------ */
+  const fishHost = document.querySelector("[data-fish]");
+  if (!coarse && !reduced && (fieldSquares.length || fishHost)) {
+    const fieldEl = field;
+    let fieldRect = fieldEl?.getBoundingClientRect();
+    let fishRect = fishHost?.getBoundingClientRect();
+
+    // Refresh rects on viewport changes (no scroll listener needed,
+    // resize covers reflow cases; rects auto-refresh per frame is too expensive).
+    addEventListener("resize", () => {
+      fieldRect = fieldEl?.getBoundingClientRect();
+      fishRect = fishHost?.getBoundingClientRect();
+    });
+
+    // Sample rects every 250ms instead of every frame.
+    setInterval(() => {
+      fieldRect = fieldEl?.getBoundingClientRect();
+      fishRect = fishHost?.getBoundingClientRect();
+    }, 250);
+
+    let fishYaw = 0;
+    let fishYawTarget = 0;
+
+    const reactLoop = () => {
+      // Pixel proximity: pixels within radius scale slightly + glow class.
+      if (fieldRect && fieldSquares.length) {
+        const localX = mouse.x - fieldRect.left;
+        const localY = mouse.y - fieldRect.top;
+        const RADIUS = 140;
+        const RADIUS_SQ = RADIUS * RADIUS;
+        for (let i = 0; i < fieldSquares.length; i++) {
+          const s = fieldSquares[i];
+          const sx = +s.dataset.x || 0;
+          const sy = +s.dataset.y || 0;
+          const dx = sx - localX;
+          const dy = sy - localY;
+          const d2 = dx * dx + dy * dy;
+          if (d2 < RADIUS_SQ) {
+            const t = 1 - Math.sqrt(d2) / RADIUS;
+            s.style.setProperty("--lift", (1 + t * 0.4).toFixed(3));
+            s.style.transform = `scale(${1 + t * 0.35})`;
+            if (!s.classList.contains("near")) s.classList.add("near");
+          } else if (s.classList.contains("near")) {
+            s.classList.remove("near");
+            s.style.transform = "";
+          }
+        }
+      }
+
+      // Fish look-at: max ±4deg yaw, follows cursor horizontally.
+      if (fishRect && fishHost) {
+        const cx = fishRect.left + fishRect.width / 2;
+        const dx = mouse.x - cx;
+        fishYawTarget = Math.max(-4, Math.min(4, dx * 0.012));
+        fishYaw += (fishYawTarget - fishYaw) * 0.12;
+        fishHost.style.setProperty("--fish-yaw", fishYaw.toFixed(2) + "deg");
+      }
+
+      requestAnimationFrame(reactLoop);
+    };
+    requestAnimationFrame(reactLoop);
+  }
+
+  /* ------------------------------------------------------------
+   * 8. Project card directional hover sweep
+   *    JS sets --sx --sy CSS vars; CSS draws radial gradient.
+   * ------------------------------------------------------------ */
+  if (!coarse && !reduced) {
+    document.querySelectorAll("[data-sweep]").forEach((card) => {
+      card.addEventListener("mousemove", (e) => {
+        const r = card.getBoundingClientRect();
+        const sx = ((e.clientX - r.left) / r.width  * 100).toFixed(1) + "%";
+        const sy = ((e.clientY - r.top)  / r.height * 100).toFixed(1) + "%";
+        card.style.setProperty("--sx", sx);
+        card.style.setProperty("--sy", sy);
+      });
+    });
+  }
+
+  /* ------------------------------------------------------------
+   * 9. Topbar hamburger
    * ------------------------------------------------------------ */
   const menuBtn = document.querySelector(".topbar-menu");
   if (menuBtn) {
@@ -207,7 +370,7 @@
   }
 
   /* ------------------------------------------------------------
-   * 7. Smooth scroll for in-page anchors
+   * 10. Smooth scroll for in-page anchors
    * ------------------------------------------------------------ */
   document.addEventListener("click", (e) => {
     const link = e.target.closest('a[href^="#"]');

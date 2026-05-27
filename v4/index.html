@@ -3,9 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="rainsday — design, iOS apps, vibe code. Build for what's next.">
-    <title>rainsday — Build for what's next.</title>
+    <meta name="description" content="rainsday. Design, iOS apps, vibe code. Build for what's next.">
+    <title>rainsday | Build for what's next.</title>
     <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+    <link rel="preload" as="image" href="assets/hero-fish.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -16,6 +17,9 @@
   </head>
   <body class="v4">
     <a class="skip-link" href="#main">Skip to content</a>
+
+    <!-- Scroll-progress hairline (CSS animation-timeline: scroll(root block)) -->
+    <div class="scroll-progress" aria-hidden="true"></div>
 
     <div class="cursor" aria-hidden="true">
       <span class="cursor-dot"></span>
@@ -63,29 +67,28 @@
 
     <main id="main">
       <!-- =========================================================
-           1. HERO — bento pixel field + portrait + headline + pickup card
+           1. HERO. bento pixel field + fish subject + scramble headline
            ========================================================= -->
       <section class="hero" id="top" aria-labelledby="hero-title">
-        <!-- Bento pixel field (DOM squares injected by script.js) -->
         <div class="hero-field" data-bento-field aria-hidden="true"></div>
 
-        <!-- Portrait subject -->
-        <div class="hero-portrait" data-tilt>
+        <!-- White betta fish subject. living motion + cursor look-at -->
+        <div class="hero-portrait" data-fish data-tilt>
           <img
-            src="assets/hero-portrait.jpg"
-            alt="rainsday — portrait subject"
-            width="1200" height="1500"
+            class="fish-img"
+            src="assets/hero-fish.png"
+            alt="rainsday cover. White betta fish hero subject on ivory background."
+            width="1200" height="675"
             loading="eager"
           >
-          <div class="hero-portrait-mask" aria-hidden="true"></div>
         </div>
 
         <!-- Headline + lede left -->
         <div class="hero-copy">
-          <h1 id="hero-title" class="hero-title" data-reveal-stagger>
-            <span class="reveal-line"><span>Build for</span></span>
-            <span class="reveal-line"><span>what's</span></span>
-            <span class="reveal-line"><span>next.</span></span>
+          <h1 id="hero-title" class="hero-title" data-scramble>
+            <span class="scramble-line"><span class="scramble-text">Build for</span></span>
+            <span class="scramble-line"><span class="scramble-text">what's</span></span>
+            <span class="scramble-line"><span class="scramble-text">next.</span></span>
           </h1>
 
           <div class="hero-lede" data-reveal>
@@ -117,7 +120,7 @@
       </section>
 
       <!-- =========================================================
-           2. WE ARE — 6-tile photo bento + display wordmark + tagline
+           2. WE ARE
            ========================================================= -->
       <section class="we-are" id="we-are" aria-labelledby="we-title">
         <div class="we-grid" aria-hidden="true">
@@ -146,13 +149,13 @@
       </section>
 
       <!-- =========================================================
-           3. PROJECT — case carousel of iOS apps
+           3. PROJECT. case rail with directional hover sweep
            ========================================================= -->
       <section class="project" id="project" aria-labelledby="project-title">
         <header class="project-head">
           <p class="kicker" data-reveal>
             <span class="square"></span>
-            <span>Approach</span>
+            <span>Selected work</span>
           </p>
           <h2 id="project-title" class="section-title" data-reveal-stagger>
             <span class="reveal-line"><span>Project</span></span>
@@ -169,9 +172,9 @@
         </header>
 
         <div class="project-rail" data-rail>
-          <article class="project-card" data-tilt>
+          <article class="project-card" data-tilt data-sweep>
             <div class="project-shot">
-              <img src="assets/project-1.jpg" alt="expenseCal — settlement &amp; group expense iOS app">
+              <img src="assets/project-1.jpg" alt="expenseCal. Settlement and group expense iOS app.">
             </div>
             <div class="project-body">
               <div class="project-tag">
@@ -179,7 +182,7 @@
                 <span>新興ブランドの拡大</span>
               </div>
               <h3 class="project-headline">
-                expenseCal — settle group spend without spreadsheets.
+                expenseCal. Settle group spend without spreadsheets.
               </h3>
               <p class="project-lede">
                 A SwiftUI / Firestore app that turns messy chat-log
@@ -192,9 +195,9 @@
             </div>
           </article>
 
-          <article class="project-card" data-tilt>
+          <article class="project-card" data-tilt data-sweep>
             <div class="project-shot">
-              <img src="assets/project-2.jpg" alt="Love Contract — relationship promise tracker iOS app">
+              <img src="assets/project-2.jpg" alt="Love Contract. Relationship promise tracker iOS app.">
             </div>
             <div class="project-body">
               <div class="project-tag">
@@ -202,7 +205,7 @@
                 <span>M&amp;Aの取り組み</span>
               </div>
               <h3 class="project-headline">
-                Love Contract — small daily promises, kept on schedule.
+                Love Contract. Small daily promises, kept on schedule.
               </h3>
               <p class="project-lede">
                 A native iOS contract-style relationship app. Built
@@ -215,9 +218,9 @@
             </div>
           </article>
 
-          <article class="project-card" data-tilt>
+          <article class="project-card" data-tilt data-sweep>
             <div class="project-shot">
-              <img src="assets/project-3.jpg" alt="rainsday tools — design system &amp; automation scripts">
+              <img src="assets/project-3.jpg" alt="rainsday tools. Design system and automation scripts.">
             </div>
             <div class="project-body">
               <div class="project-tag">
@@ -225,7 +228,7 @@
                 <span>老舗企業の再生</span>
               </div>
               <h3 class="project-headline">
-                rainsday tools — the scripts behind the apps.
+                rainsday tools. The scripts behind the apps.
               </h3>
               <p class="project-lede">
                 Internal automation, Claude Code skills, doc generators
@@ -238,9 +241,9 @@
             </div>
           </article>
 
-          <article class="project-card" data-tilt>
+          <article class="project-card" data-tilt data-sweep>
             <div class="project-shot">
-              <img src="assets/project-4.jpg" alt="rainsday writing — research and analysis longform">
+              <img src="assets/project-4.jpg" alt="rainsday writing. Research and analysis longform.">
             </div>
             <div class="project-body">
               <div class="project-tag">
@@ -248,7 +251,7 @@
                 <span>リサーチ &amp; 文書</span>
               </div>
               <h3 class="project-headline">
-                Research &amp; longform — turn data into a decision.
+                Research and longform. Turn data into a decision.
               </h3>
               <p class="project-lede">
                 CSV / chat-log / Excel analysis with a designer's
@@ -264,7 +267,7 @@
       </section>
 
       <!-- =========================================================
-           4. PEOPLE / APPROACH — left title + right green grid + bento tags
+           4. PEOPLE
            ========================================================= -->
       <section class="people" id="people" aria-labelledby="people-title">
         <div class="people-copy">
@@ -290,7 +293,7 @@
           <div class="people-grid"></div>
 
           <h3 class="people-wordmark" data-reveal-stagger>
-            <span class="reveal-line"><span>rains-</span></span>
+            <span class="reveal-line"><span>rains</span></span>
             <span class="reveal-line"><span>day</span></span>
           </h3>
 
@@ -333,6 +336,7 @@
 
       <!-- =========================================================
            6. BRAND PRODUCE + BRAND PARTNER (split)
+              Partner is now an infinite marquee (one marquee per page).
            ========================================================= -->
       <section class="split" id="produce">
         <article class="split-card produce" aria-labelledby="produce-title">
@@ -360,14 +364,26 @@
               <span class="reveal-line"><span>Brand Partner</span></span>
             </h3>
           </header>
-          <div class="partner-grid">
-            <span class="partner-cell">rainsday<sup>·</sup></span>
-            <span class="partner-cell">expenseCal</span>
-            <span class="partner-cell">Love Contract</span>
-            <span class="partner-cell">vibe code</span>
-            <span class="partner-cell">Claude Code</span>
-            <span class="partner-cell">霜霜.studio</span>
+
+          <div class="partner-marquee" aria-label="Brand partner roster" data-marquee>
+            <div class="partner-track">
+              <!-- Set A -->
+              <span class="partner-cell">rainsday<sup>·</sup></span>
+              <span class="partner-cell">expenseCal</span>
+              <span class="partner-cell">Love Contract</span>
+              <span class="partner-cell">vibe code</span>
+              <span class="partner-cell">Claude Code</span>
+              <span class="partner-cell">霜霜.studio</span>
+              <!-- Set B (duplicate for seamless loop) -->
+              <span class="partner-cell" aria-hidden="true">rainsday<sup>·</sup></span>
+              <span class="partner-cell" aria-hidden="true">expenseCal</span>
+              <span class="partner-cell" aria-hidden="true">Love Contract</span>
+              <span class="partner-cell" aria-hidden="true">vibe code</span>
+              <span class="partner-cell" aria-hidden="true">Claude Code</span>
+              <span class="partner-cell" aria-hidden="true">霜霜.studio</span>
+            </div>
           </div>
+
           <a class="section-cta" href="#produce" data-magnetic>
             <span>View more</span>
             <span class="arrow">↳</span>
@@ -376,7 +392,7 @@
       </section>
 
       <!-- =========================================================
-           7. NEWS list
+           7. NEWS. letter-by-letter reveal on enter
            ========================================================= -->
       <section class="news" id="news" aria-labelledby="news-title">
         <header class="news-head">
@@ -392,8 +408,8 @@
         <ol class="news-list">
           <li class="news-row" data-reveal>
             <a href="#news">
-              <span class="news-title">
-                expenseCal 1.5 — net settlement and pair batches now generally available
+              <span class="news-title" data-letters>
+                expenseCal 1.5: net settlement and pair batches now generally available
               </span>
               <span class="news-foot">
                 <time datetime="2026-05-26">2026.05.26</time>
@@ -403,8 +419,8 @@
           </li>
           <li class="news-row" data-reveal>
             <a href="#news">
-              <span class="news-title">
-                rainsday.com edition 04 — a layout study in lime and ink
+              <span class="news-title" data-letters>
+                rainsday.com edition 04: a layout study in lime and ink
               </span>
               <span class="news-foot">
                 <time datetime="2026-05-27">2026.05.27</time>
@@ -414,8 +430,8 @@
           </li>
           <li class="news-row" data-reveal>
             <a href="#news">
-              <span class="news-title">
-                vibe code — three Claude Code skills written this month
+              <span class="news-title" data-letters>
+                vibe code: three Claude Code skills written this month
               </span>
               <span class="news-foot">
                 <time datetime="2026-05-22">2026.05.22</time>
@@ -425,8 +441,8 @@
           </li>
           <li class="news-row" data-reveal>
             <a href="#news">
-              <span class="news-title">
-                Love Contract — App Store submission, polish pass complete
+              <span class="news-title" data-letters>
+                Love Contract: App Store submission, polish pass complete
               </span>
               <span class="news-foot">
                 <time datetime="2026-05-18">2026.05.18</time>
@@ -438,9 +454,9 @@
       </section>
 
       <!-- =========================================================
-           8. IR + RECRUIT — two big lime cards over wordmark bg
+           8. DUAL
            ========================================================= -->
-      <section class="dual" aria-label="Studio &amp; contact">
+      <section class="dual" aria-label="Studio and contact">
         <div class="dual-stage" aria-hidden="true">
           <span class="dual-word">RAINS</span>
           <span class="dual-word">DAY</span>
@@ -453,7 +469,7 @@
           <p class="kicker"><span class="square dark"></span><span>About rainsday</span></p>
           <p class="dual-body">
             rainsday は香港 base の一人 studio。<br>
-            iOS、web、automation、document craft——<br>
+            iOS、web、automation、document craft。<br>
             「to ship」をいちばん大切にしています。
           </p>
           <a class="dual-cta" href="#we-are" data-magnetic>
@@ -538,7 +554,6 @@
         </a>
       </div>
 
-      <!-- giant footer wordmark, partially clipped -->
       <p class="foot-megaword" aria-hidden="true">rainsday</p>
     </footer>
 

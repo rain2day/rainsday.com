@@ -375,20 +375,33 @@ a { color: inherit; text-decoration: none; }
   align-self: stretch;
   display: grid;
   place-items: center;
+  will-change: transform;
 }
-.hero-portrait img {
+.hero-portrait[data-fish] {
+  --fish-yaw: 0deg;
+  --fish-pitch: 0deg;
+}
+.fish-img {
   width: 100%;
-  max-width: 480px;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
-  filter: grayscale(1) contrast(1.05);
-  border: 1px solid var(--line);
+  max-width: 640px;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  filter:
+    drop-shadow(0 24px 50px rgba(10, 10, 10, 0.18))
+    drop-shadow(0 4px 16px rgba(52, 255, 0, 0.08));
+  transform-origin: 60% 50%;
+  animation: fish-swim 7.4s ease-in-out infinite;
 }
-.hero-portrait-mask {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, transparent 60%, rgba(255,255,255,0.6) 100%);
-  pointer-events: none;
+.hero-portrait[data-fish] .fish-img {
+  transform: rotate(var(--fish-yaw)) translate3d(0, 0, 0);
+  transition: transform 380ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fish-swim {
+  0%, 100% { translate: 0 0; rotate: -0.4deg; }
+  25%      { translate: 6px -4px; rotate: 0.6deg; }
+  50%      { translate: 0 -8px; rotate: 0.2deg; }
+  75%      { translate: -4px -3px; rotate: -0.8deg; }
 }
 
 .hero-copy {
@@ -843,29 +856,49 @@ a { color: inherit; text-decoration: none; }
 .produce-tiles img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(0.2); transition: transform 380ms ease; }
 .produce-tiles figure:hover img { transform: scale(1.06); }
 
-.partner-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 4px;
+/* Brand Partner infinite marquee. one marquee per page (taste-skill §5). */
+.partner-marquee {
+  position: relative;
   margin: 24px 0;
-  background: var(--ink);
-  border: 1px solid var(--ink);
+  overflow: hidden;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.partner-track {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  white-space: nowrap;
+  animation: partner-scroll 24s linear infinite;
+  will-change: transform;
+}
+.partner-marquee:hover .partner-track {
+  animation-play-state: paused;
 }
 .partner-cell {
-  display: grid;
+  display: inline-grid;
   place-items: center;
+  min-width: 200px;
   min-height: 88px;
-  padding: 14px;
+  padding: 14px 28px;
   background: var(--paper);
   font-family: var(--display);
   font-weight: 700;
-  font-size: 14px;
+  font-size: 16px;
   text-align: center;
   letter-spacing: -0.01em;
+  border-right: 1px solid var(--ink);
   transition: background 220ms ease, color 220ms ease;
 }
 .partner-cell:hover { background: var(--lime); }
 .partner-cell sup { color: var(--lime); font-size: 1.2em; }
+
+@keyframes partner-scroll {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
 
 @media (max-width: 900px) {
   .split { grid-template-columns: 1fr; }
@@ -1185,10 +1218,122 @@ a { color: inherit; text-decoration: none; }
   }
   .we-grid { grid-template-rows: repeat(3, 160px); }
   .project-rail { grid-auto-columns: 86vw; }
-  .partner-grid { grid-template-columns: repeat(2, 1fr); }
+  .partner-cell { min-width: 160px; padding: 14px 20px; font-size: 14px; }
   .produce-tiles { grid-template-columns: repeat(2, 1fr); }
 }
 
+/* ============================================================
+   Scroll-progress hairline (native scroll-driven animation)
+   Justification: page-position feedback for long single-page scroll.
+   ============================================================ */
+.scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  z-index: 90;
+  height: 2px;
+  width: 100%;
+  background: var(--lime);
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  pointer-events: none;
+}
+@supports (animation-timeline: scroll()) {
+  .scroll-progress {
+    animation: progress-grow linear forwards;
+    animation-timeline: scroll(root block);
+  }
+}
+@keyframes progress-grow {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* ============================================================
+   Hero headline scramble (load-once)
+   Justification: storytelling. signals arrival, mirrors fish "still settling" frame.
+   ============================================================ */
+.scramble-line {
+  display: block;
+  overflow: hidden;
+  line-height: 1;
+}
+.scramble-text {
+  display: inline-block;
+  white-space: pre;
+}
+.scramble-text .ch {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+[data-scramble] .scramble-line:nth-child(1) .scramble-text { transition-delay: 0ms; }
+[data-scramble] .scramble-line:nth-child(2) .scramble-text { transition-delay: 80ms; }
+[data-scramble] .scramble-line:nth-child(3) .scramble-text { transition-delay: 160ms; }
+
+/* ============================================================
+   News row letter-by-letter reveal
+   Justification: news cadence. items "type in" as user enters the section.
+   ============================================================ */
+[data-letters] {
+  display: inline-block;
+  white-space: normal;
+}
+[data-letters] .ch {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(40%);
+  transition: opacity 380ms ease, transform 520ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+[data-letters] .ch.space { width: 0.28em; }
+.news-row.is-revealed [data-letters] .ch {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================================
+   Project card directional hover sweep
+   Justification: feedback. shows the user where the card "lit up" from.
+   ============================================================ */
+.project-card[data-sweep] {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.project-card[data-sweep]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    radial-gradient(
+      circle 280px at var(--sx, 50%) var(--sy, 50%),
+      rgba(52, 255, 0, 0.18),
+      transparent 60%
+    );
+  opacity: 0;
+  transition: opacity 320ms cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}
+.project-card[data-sweep]:hover::after {
+  opacity: 1;
+}
+.project-card[data-sweep] > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* ============================================================
+   Hero pixel proximity glow (driven by JS-set CSS vars)
+   ============================================================ */
+.hero-field .px.near {
+  filter: drop-shadow(0 0 6px rgba(52, 255, 0, 0.6));
+  z-index: 2;
+}
+
+/* ============================================================
+   Reduced motion (everything above MOTION > 3 collapses)
+   ============================================================ */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -1202,4 +1347,8 @@ a { color: inherit; text-decoration: none; }
     transform: none !important;
   }
   .hero-field .px { opacity: 1; transform: scale(1); }
+  .fish-img { animation: none; }
+  .partner-track { animation: none; }
+  [data-letters] .ch { opacity: 1; transform: none; }
+  .scramble-text .ch { opacity: 1; }
 }
