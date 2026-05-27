@@ -6,7 +6,8 @@
     <meta name="description" content="rainsday. Design, iOS apps, vibe code. Build for what's next.">
     <title>rainsday | Build for what's next.</title>
     <link rel="icon" href="../favicon.svg" type="image/svg+xml">
-    <link rel="preload" as="image" href="assets/hero-fish.png">
+    <link rel="preload" as="image" href="assets/hero-bg-poster.jpg">
+    <link rel="preload" as="video" href="assets/hero-bg.mp4" type="video/mp4">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -72,15 +73,16 @@
       <section class="hero" id="top" aria-labelledby="hero-title">
         <div class="hero-field" data-bento-field aria-hidden="true"></div>
 
-        <!-- White betta fish subject. living motion + cursor look-at -->
+        <!-- White betta fish hero. animated video subject + cursor look-at -->
         <div class="hero-portrait" data-fish data-tilt>
-          <img
+          <video
             class="fish-img"
-            src="assets/hero-fish.png"
-            alt="rainsday cover. White betta fish hero subject on ivory background."
+            src="assets/hero-bg.mp4"
+            poster="assets/hero-bg-poster.jpg"
+            autoplay muted loop playsinline preload="auto"
             width="1200" height="675"
-            loading="eager"
-          >
+            aria-label="rainsday cover. White betta fish swimming through the FISH wordmark."
+          ></video>
         </div>
 
         <!-- Headline + lede left -->

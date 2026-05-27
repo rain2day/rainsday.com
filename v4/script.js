@@ -4,6 +4,14 @@
   const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const coarse  = matchMedia("(hover: none), (pointer: coarse)").matches;
 
+  // Pause any autoplaying video under reduced-motion (poster still shows).
+  if (reduced) {
+    document.querySelectorAll("video[autoplay]").forEach((v) => {
+      v.removeAttribute("autoplay");
+      v.pause();
+    });
+  }
+
   /* ------------------------------------------------------------
    * 1. Custom cursor (dot + lerp ring)
    * ------------------------------------------------------------ */
