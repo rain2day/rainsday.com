@@ -3,373 +3,189 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta
-      name="description"
-      content="Resume of RaIN Cheng — Building Manager and independent iOS app maker in Hong Kong. Editorial Japanese aesthetic."
-    >
-    <title>履歴書 · RaIN 鄭 — rainsday.com</title>
+    <meta name="description" content="rainsday.com — design cover, edition 03. Cobalt mono single-page mockup.">
+    <title>rainsday.com — edition 03</title>
     <link rel="icon" href="../favicon.svg" type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Noto+Serif+JP:wght@400;500;600;700&family=Shippori+Mincho:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,500&family=JetBrains+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap"
     >
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
     <div class="cursor" aria-hidden="true">
       <span class="cursor-dot"></span>
+      <span class="cursor-ring"></span>
     </div>
 
-    <header class="site-header" aria-label="Primary">
-      <a class="brand" href="#top" aria-label="rainsday">
-        <span class="brand-mark">在</span>
-        <span class="brand-text">rainsday<span class="brand-dot">.</span>com</span>
-      </a>
-      <nav class="nav-links" aria-label="Sections">
-        <a href="#about"><em>一</em> About</a>
-        <a href="#career"><em>二</em> Career</a>
-        <a href="#works"><em>三</em> Works</a>
-        <a href="#skills"><em>四</em> Skills</a>
-        <a href="#interests"><em>五</em> Interests</a>
-      </nav>
-      <div class="header-end">
-        <a class="version-toggle" href="../" aria-label="View V1">
-          <span class="ver-label">V1</span>
-          <span class="ver-arrow">↗</span>
-        </a>
-        <a class="header-action" data-magnetic href="#contact">Contact</a>
-      </div>
-    </header>
+    <!-- =====================================================
+         FRAME: floating browser-window vibe like Behance ref
+         ===================================================== -->
+    <div class="frame" id="top">
 
-    <main id="top">
-      <!-- ====================================================
-           HERO
-           ==================================================== -->
-      <section class="hero" aria-labelledby="hero-title">
-        <video class="hero-video" autoplay muted loop playsinline poster="assets/hero-poster.svg" aria-hidden="true">
-          <source src="assets/hero-ink.mp4" type="video/mp4">
-        </video>
-        <div class="hero-veil" aria-hidden="true"></div>
-        <div class="hero-grain" aria-hidden="true"></div>
+      <!-- ========== Top nav strip ========== -->
+      <header class="nav" aria-label="Primary">
+        <div class="nav-left">
+          <a href="#top" class="nav-logo" aria-label="rainsday">
+            <span class="logo-dot"></span>
+            <span class="logo-text">rainsday</span>
+          </a>
+          <button class="nav-menu" aria-label="Menu" data-magnetic>
+            <span></span><span></span><span></span>
+          </button>
+        </div>
 
-        <div class="hero-frame">
-          <div class="hero-top">
-            <span class="hero-chip">履歴書 · 二〇二六</span>
-            <span class="hero-date">est. 1983 — present</span>
+        <div class="nav-center" aria-hidden="true">
+          <span class="nav-crumb">edition</span>
+          <span class="nav-crumb num">03</span>
+          <span class="nav-crumb">/</span>
+          <span class="nav-crumb">cobalt</span>
+        </div>
+
+        <div class="nav-right">
+          <a href="../" class="nav-version" aria-label="View V1">
+            <span>V1</span>
+            <span class="arrow">↗</span>
+          </a>
+          <button class="nav-icon" aria-label="Search">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6">
+              <circle cx="10.5" cy="10.5" r="6.5"/>
+              <line x1="20" y1="20" x2="15.2" y2="15.2"/>
+            </svg>
+          </button>
+          <a href="mailto:hello@rainsday.com" class="nav-cta" data-magnetic>
+            <span>contact</span>
+            <span class="arrow">→</span>
+          </a>
+        </div>
+      </header>
+
+      <!-- ========== Side rail: tiny version index ========== -->
+      <aside class="side-rail" aria-hidden="true">
+        <span class="rail-dot"></span>
+        <span>00</span>
+        <span>01</span>
+        <span>02</span>
+        <span class="active">03</span>
+        <span>04</span>
+        <span class="rail-line"></span>
+      </aside>
+
+      <!-- ========== Hero / cover layout ========== -->
+      <main class="cover" id="cover">
+        <!-- Animated cobalt subject right-side -->
+        <div class="subject" data-tilt aria-hidden="true">
+          <video class="subject-video" autoplay muted loop playsinline>
+            <source src="assets/cobalt-subject.mp4" type="video/mp4">
+          </video>
+          <div class="subject-rings" aria-hidden="true">
+            <span></span><span></span><span></span>
           </div>
-
-          <div class="hero-tate" aria-hidden="true">
-            <span>令</span><span>啲</span><span>嘢</span><span>work</span>
+          <div class="subject-frame" aria-hidden="true"></div>
+          <div class="subject-tag">
+            <span class="tag-row"><em>subject</em><span>/</span><strong>RAINSDAY · COBALT</strong></span>
+            <span class="tag-row"><em>medium</em><span>/</span><strong>remotion · web</strong></span>
+            <span class="tag-row"><em>year</em><span>/</span><strong>2026</strong></span>
           </div>
+        </div>
 
-          <h1 id="hero-title" class="hero-title" data-reveal-stagger>
-            <span class="reveal-line"><span class="line-en">things that</span></span>
-            <span class="reveal-line"><span class="line-en">work — <em>by</em></span></span>
-            <span class="reveal-line"><span class="line-name">RaIN<span class="kanji">鄭</span></span></span>
+        <!-- Left side: huge display name + meta -->
+        <div class="cover-copy">
+          <span class="eyebrow" data-reveal>
+            <span class="dot"></span>
+            <span>Edition 03 · Cobalt</span>
+          </span>
+
+          <h1 class="cover-title" data-reveal-stagger>
+            <span class="reveal-line"><span>RAINS-</span></span>
+            <span class="reveal-line"><span>DAY<sup>03</sup></span></span>
           </h1>
 
-          <p class="hero-lede" data-reveal>
-            Building Manager by day, independent iOS app maker by night. Working at the seam where careful interface design,
-            native craftsmanship, and quiet automation meet.
+          <p class="cover-lede" data-reveal>
+            A cover study in cobalt — bold modernist layout, animated subject,
+            and one accent color doing all the work. <em>by rainsday</em>.
           </p>
 
-          <div class="hero-foot">
-            <div class="hero-meta">
-              <span class="meta-label">所在地 · Based</span>
-              <span class="meta-value">Hong Kong</span>
-            </div>
-            <div class="hero-meta">
-              <span class="meta-label">分野 · Field</span>
-              <span class="meta-value">Design · iOS · Tools</span>
-            </div>
-            <div class="hero-meta">
-              <span class="meta-label">連絡 · Email</span>
-              <a class="meta-value link" href="mailto:hello@rainsday.com">hello@rainsday.com</a>
-            </div>
-          </div>
-
-          <div class="hero-scroll" aria-hidden="true">
-            <span>scroll</span>
-            <span class="scroll-rule"></span>
-            <span>下へ</span>
+          <div class="cover-actions">
+            <a class="button primary" data-magnetic href="#about">
+              <span>read the index</span>
+              <span class="btn-arrow">→</span>
+            </a>
+            <a class="button ghost" data-magnetic href="mailto:hello@rainsday.com">
+              <span>hello@rainsday.com</span>
+            </a>
           </div>
         </div>
-      </section>
 
-      <!-- ====================================================
-           一 · ABOUT (Genkō yōshi grid)
-           ==================================================== -->
-      <section class="section section-about" id="about" aria-labelledby="about-title">
-        <div class="section-rule" aria-hidden="true"></div>
-        <header class="section-head">
-          <div class="section-index"><span class="kanji-num">一</span><span class="latin-num">01</span></div>
-          <div class="section-titles">
-            <h2 id="about-title" class="section-title"><span class="jp">自己紹介</span><span class="en">About</span></h2>
-            <p class="section-tagline">A few honest sentences before the resume begins.</p>
+        <!-- Tiny floating side tags (Behance-style scatter) -->
+        <div class="float-tag tag-top-right" aria-hidden="true">
+          <span class="tag-num">N°</span>
+          <span class="tag-val">03</span>
+        </div>
+        <div class="float-tag tag-mid-left" aria-hidden="true">
+          <span class="tag-num">→</span>
+          <span class="tag-val">2026 / web · motion · cobalt</span>
+        </div>
+
+        <!-- Bottom meta strip -->
+        <footer class="meta-strip">
+          <div class="meta-item">
+            <span class="meta-key">index</span>
+            <span class="meta-val">03 / 04</span>
           </div>
-        </header>
+          <div class="meta-item">
+            <span class="meta-key">subject</span>
+            <span class="meta-val">RAINSDAY</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-key">studio</span>
+            <span class="meta-val">rainsday.com</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-key">contact</span>
+            <a class="meta-val link" href="mailto:hello@rainsday.com">hello@rainsday.com</a>
+          </div>
+        </footer>
 
-        <div class="about-grid">
-          <aside class="about-tate" aria-hidden="true">
-            <p class="tate-block">
-              鄭<br>と<br>申<br>し<br>ま<br>す<br>。<br>香<br>港<br>生<br>ま<br>れ<br>、<br>一<br>九<br>八<br>三<br>年<br>。
-            </p>
-          </aside>
+        <div class="scroll-hint" aria-hidden="true">
+          <span>scroll</span>
+          <span class="scroll-rule"></span>
+          <span>下</span>
+        </div>
+      </main>
 
-          <div class="about-prose">
+      <!-- ========== Below-the-fold: quiet about ribbon ========== -->
+      <section class="ribbon" id="about" aria-labelledby="ribbon-title">
+        <div class="ribbon-grid">
+          <div class="ribbon-num">— index</div>
+          <div class="ribbon-body">
+            <h2 id="ribbon-title" data-reveal>
+              <span class="ribbon-num-large">0<span>3</span></span>
+              <span class="ribbon-headline">
+                One cover, one colour, one quiet idea.
+                <em>The rest is empty room.</em>
+              </span>
+            </h2>
             <p data-reveal>
-              I am <strong>RaIN</strong>. Born in Hong Kong, 1983. By day I run buildings — a Building Manager
-              with an IT background. By night, and most weekends, I make iOS apps and small tools using a workflow I
-              call <em>Vibe Code</em>, with Claude Code as my pair.
-            </p>
-            <p data-reveal>
-              I am not a full-time developer. I'm the person who makes things <em>work</em>. Debugging,
-              automation, infrastructure, document craft — anything that turns a half-formed idea into something
-              you can show, share, or ship.
-            </p>
-            <p data-reveal>
-              What I value most is the kind of output you do not have to fix before you send it on. <em>Complete,
-              composed, and quietly insightful</em>. Anything less is half a sentence.
+              This edition is a layout study. No long copy, no career arc, no work grid —
+              just a name in cobalt and an animated subject doing its job in the corner.
+              For the full reading, see <a href="../">V1 ↗</a> or write to me directly.
             </p>
           </div>
         </div>
-      </section>
 
-      <!-- ====================================================
-           二 · CAREER timeline
-           ==================================================== -->
-      <section class="section section-career" id="career" aria-labelledby="career-title">
-        <div class="section-rule" aria-hidden="true"></div>
-        <header class="section-head">
-          <div class="section-index"><span class="kanji-num">二</span><span class="latin-num">02</span></div>
-          <div class="section-titles">
-            <h2 id="career-title" class="section-title"><span class="jp">経歴</span><span class="en">Career</span></h2>
-            <p class="section-tagline">Two decades of running things and building things in parallel.</p>
-          </div>
-        </header>
-
-        <div class="career-wrap">
-          <video class="career-brush" autoplay muted loop playsinline aria-hidden="true">
-            <source src="assets/brush-timeline.mp4" type="video/mp4">
-          </video>
-
-          <ol class="timeline">
-            <li class="timeline-node">
-              <span class="node-year">2025 —</span>
-              <span class="node-dot" aria-hidden="true"></span>
-              <div class="node-body">
-                <h3>Independent iOS dev <em>· side-by-side with day job</em></h3>
-                <p>Shipping Love Contract, expenseCal and other personal tools to the App Store. Workflow: SwiftUI,
-                Claude Code, ruthless polish.</p>
-              </div>
-            </li>
-            <li class="timeline-node">
-              <span class="node-year">2014 — present</span>
-              <span class="node-dot" aria-hidden="true"></span>
-              <div class="node-body">
-                <h3>Building Manager</h3>
-                <p>Operations, vendor coordination, tenant relations, infrastructure. The job that keeps a building
-                actually running and the residents quietly content.</p>
-              </div>
-            </li>
-            <li class="timeline-node">
-              <span class="node-year">2007 — 2014</span>
-              <span class="node-dot" aria-hidden="true"></span>
-              <div class="node-body">
-                <h3>IT &amp; Systems</h3>
-                <p>Network, automation, support and infrastructure across small and mid-size operations. The roots of
-                everything I still know about making systems hold together.</p>
-              </div>
-            </li>
-          </ol>
+        <div class="ribbon-foot">
+          <span>© 2026 · rainsday.com</span>
+          <span class="rule" aria-hidden="true"></span>
+          <span>Hong Kong</span>
+          <span class="rule" aria-hidden="true"></span>
+          <a href="../">return to V1 ↗</a>
         </div>
       </section>
 
-      <!-- ====================================================
-           三 · WORKS
-           ==================================================== -->
-      <section class="section section-works" id="works" aria-labelledby="works-title">
-        <div class="section-rule" aria-hidden="true"></div>
-        <header class="section-head">
-          <div class="section-index"><span class="kanji-num">三</span><span class="latin-num">03</span></div>
-          <div class="section-titles">
-            <h2 id="works-title" class="section-title"><span class="jp">制作物</span><span class="en">Selected Works</span></h2>
-            <p class="section-tagline">Apps, sites, and tools built mostly in evenings.</p>
-          </div>
-        </header>
-
-        <div class="works-grid">
-          <article class="work-card" data-tilt>
-            <div class="work-media"><span class="work-glyph">愛</span></div>
-            <div class="work-body">
-              <span class="work-meta">iOS · 2025</span>
-              <h3>Love Contract</h3>
-              <p>A small SwiftUI app for keeping a relationship's tiny promises — quiet, warm, deliberately not a habit tracker.</p>
-              <span class="work-link">App Store ↗</span>
-            </div>
-          </article>
-
-          <article class="work-card" data-tilt>
-            <div class="work-media"><span class="work-glyph">帳</span></div>
-            <div class="work-body">
-              <span class="work-meta">iOS + Web · 2025</span>
-              <h3>expenseCal</h3>
-              <p>Shared-expense calculator with net-settlement logic, multi-currency, and a focus on actually <em>reading</em> like a ledger.</p>
-              <span class="work-link">Case study ↗</span>
-            </div>
-          </article>
-
-          <article class="work-card" data-tilt>
-            <div class="work-media"><span class="work-glyph">時</span></div>
-            <div class="work-body">
-              <span class="work-meta">Tool · 2025</span>
-              <h3>Talent-Spot timesheet</h3>
-              <p>Monthly timesheet generator with auto PDF conversion, signature overlay, and Hong Kong public holiday handling.</p>
-              <span class="work-link">Internal tool</span>
-            </div>
-          </article>
-
-          <article class="work-card" data-tilt>
-            <div class="work-media"><span class="work-glyph">易</span></div>
-            <div class="work-body">
-              <span class="work-meta">Web · 2025</span>
-              <h3>iChing</h3>
-              <p>A quiet web reading of the 64 hexagrams. No streaks, no points, no notifications — just the text and the throw.</p>
-              <span class="work-link">Site ↗</span>
-            </div>
-          </article>
-
-          <article class="work-card" data-tilt>
-            <div class="work-media"><span class="work-glyph">宮</span></div>
-            <div class="work-body">
-              <span class="work-meta">Tool · 2025</span>
-              <h3>Mempalace</h3>
-              <p>Personal memory palace and entity graph. A long-running project to keep the thinking I do organised across years.</p>
-              <span class="work-link">Private</span>
-            </div>
-          </article>
-
-          <article class="work-card" data-tilt>
-            <div class="work-media"><span class="work-glyph">雨</span></div>
-            <div class="work-body">
-              <span class="work-meta">Portfolio · 2026</span>
-              <h3>rainsday.com</h3>
-              <p>This site, both versions. V1 is loud cyber; V2 is the quieter editorial reading you are inside of right now.</p>
-              <span class="work-link"><a href="../">View V1 ↗</a></span>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <!-- ====================================================
-           四 · SKILLS — between sections, a line transition video
-           ==================================================== -->
-      <div class="line-divider" aria-hidden="true">
-        <video autoplay muted loop playsinline>
-          <source src="assets/line-divider.mp4" type="video/mp4">
-        </video>
-      </div>
-
-      <section class="section section-skills" id="skills" aria-labelledby="skills-title">
-        <div class="section-rule" aria-hidden="true"></div>
-        <header class="section-head">
-          <div class="section-index"><span class="kanji-num">四</span><span class="latin-num">04</span></div>
-          <div class="section-titles">
-            <h2 id="skills-title" class="section-title"><span class="jp">技能</span><span class="en">Capabilities</span></h2>
-            <p class="section-tagline">Six lanes, all aimed at the same outcome.</p>
-          </div>
-        </header>
-
-        <video class="skills-pattern" autoplay muted loop playsinline aria-hidden="true">
-          <source src="assets/komon-pattern.mp4" type="video/mp4">
-        </video>
-
-        <dl class="skill-list">
-          <div class="skill-row">
-            <dt><span class="kanji-num small">壱</span> Interface Design</dt>
-            <dd>Design systems, marketing surfaces, and product UI with a bias toward typographic clarity and motion that earns its keep.</dd>
-          </div>
-          <div class="skill-row">
-            <dt><span class="kanji-num small">弐</span> Native iOS</dt>
-            <dd>SwiftUI flows, structured concurrency, animation, and the small App Store-ready polish that decides whether a launch lands.</dd>
-          </div>
-          <div class="skill-row">
-            <dt><span class="kanji-num small">参</span> Web</dt>
-            <dd>HTML / CSS / vanilla JS for editorial sites; React, Remotion, and small build pipelines where they pay back the complexity.</dd>
-          </div>
-          <div class="skill-row">
-            <dt><span class="kanji-num small">肆</span> Automation</dt>
-            <dd>Python, JavaScript, shell, and increasingly Claude Code. Anything routine I would rather script than repeat.</dd>
-          </div>
-          <div class="skill-row">
-            <dt><span class="kanji-num small">伍</span> Document Craft</dt>
-            <dd>Reports, decks, PDF forms, signed packets. A document should arrive complete, composed, and not need a second pass.</dd>
-          </div>
-          <div class="skill-row">
-            <dt><span class="kanji-num small">陸</span> Data Analysis</dt>
-            <dd>CSV, Excel, chat logs, mixed sources. I am after the pattern, not the summary.</dd>
-          </div>
-        </dl>
-      </section>
-
-      <!-- ====================================================
-           五 · INTERESTS
-           ==================================================== -->
-      <section class="section section-interests" id="interests" aria-labelledby="interests-title">
-        <div class="section-rule" aria-hidden="true"></div>
-        <header class="section-head">
-          <div class="section-index"><span class="kanji-num">五</span><span class="latin-num">05</span></div>
-          <div class="section-titles">
-            <h2 id="interests-title" class="section-title"><span class="jp">関心事</span><span class="en">Interests</span></h2>
-            <p class="section-tagline">The things that pay no salary and yet decide who I become.</p>
-          </div>
-        </header>
-
-        <ul class="interest-list">
-          <li><span class="interest-jp">自転車</span><span class="interest-en">Cycling — Solar 暗黑谷 group, slow long rides</span></li>
-          <li><span class="interest-jp">露営</span><span class="interest-en">Camping — wherever the gear and the family permit</span></li>
-          <li><span class="interest-jp">模型</span><span class="interest-en">Gunpla &amp; figures — patience, glue, paint</span></li>
-          <li><span class="interest-jp">投資</span><span class="interest-en">US equities — TSM · ASML · AVGO · MSFT · BRK.B · V · GOOG</span></li>
-          <li><span class="interest-jp">日本語</span><span class="interest-en">Japanese — N2, aiming at novels without a dictionary</span></li>
-          <li><span class="interest-jp">食</span><span class="interest-en">Food, travel, and small obsessive product research</span></li>
-        </ul>
-      </section>
-
-      <!-- ====================================================
-           CONTACT
-           ==================================================== -->
-      <section class="contact-section" id="contact" aria-labelledby="contact-title">
-        <div class="section-rule" aria-hidden="true"></div>
-        <div class="contact-head">
-          <span class="kanji-num large">了</span>
-          <h2 id="contact-title">
-            <span class="jp">連絡</span>
-            <span class="en">If you have a half-formed idea, an app you would like to make, or just a document you cannot face — write to me.</span>
-          </h2>
-        </div>
-        <div class="contact-actions">
-          <a class="button primary" data-magnetic href="mailto:hello@rainsday.com">
-            <span>hello@rainsday.com</span>
-            <span class="btn-arrow">→</span>
-          </a>
-          <p class="contact-postscript"><em>追伸 · P.S.</em> &nbsp; Cantonese 為主 · English fluent · 日本語 N2 練習中</p>
-        </div>
-      </section>
-    </main>
-
-    <footer class="site-foot" aria-label="Site footer">
-      <div class="foot-row">
-        <span>© 二〇二六 · rainsday<span class="brand-dot">.</span>com</span>
-        <span class="foot-rule" aria-hidden="true"></span>
-        <span>RaIN 鄭 · Hong Kong</span>
-      </div>
-      <div class="foot-row faint">
-        <span>履歴書 v2 · editorial reading</span>
-        <a href="../">return to V1 ↗</a>
-      </div>
-    </footer>
+    </div>
 
     <script src="script.js"></script>
   </body>
