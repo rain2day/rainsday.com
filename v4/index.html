@@ -71,19 +71,17 @@
            1. HERO. bento pixel field + fish subject + scramble headline
            ========================================================= -->
       <section class="hero" id="top" aria-labelledby="hero-title">
-        <div class="hero-field" data-bento-field aria-hidden="true"></div>
+        <!-- Full-bleed video bottom layer. -->
+        <video
+          class="hero-bg-video"
+          src="assets/hero-bg.mp4"
+          poster="assets/hero-bg-poster.jpg"
+          autoplay muted loop playsinline preload="auto"
+          aria-label="rainsday cover. White betta fish swimming through the FISH wordmark."
+        ></video>
 
-        <!-- White betta fish hero. animated video subject + cursor look-at -->
-        <div class="hero-portrait" data-fish data-tilt>
-          <video
-            class="fish-img"
-            src="assets/hero-bg.mp4"
-            poster="assets/hero-bg-poster.jpg"
-            autoplay muted loop playsinline preload="auto"
-            width="1200" height="675"
-            aria-label="rainsday cover. White betta fish swimming through the FISH wordmark."
-          ></video>
-        </div>
+        <!-- Lime + ink pixel field overlay (above video, below copy). -->
+        <div class="hero-field" data-bento-field aria-hidden="true"></div>
 
         <!-- Headline + lede left -->
         <div class="hero-copy">
