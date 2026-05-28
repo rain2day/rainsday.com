@@ -13,9 +13,17 @@
   --line: rgba(10, 10, 10, 0.08);
   --line-strong: rgba(10, 10, 10, 0.2);
 
-  --display: "Inter", "Helvetica Neue", system-ui, -apple-system, sans-serif;
+  --display: "Plus Jakarta Sans", "Helvetica Neue", system-ui, -apple-system, sans-serif;
   --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
   --max: 1320px;
+
+  /* Soft Structuralism premium curves */
+  --ease: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --radius-outer: 28px;
+  --radius-inner: calc(28px - 6px);
+  --shadow-soft: 0 1px 1px rgba(10, 10, 10, 0.04), 0 8px 30px rgba(10, 10, 10, 0.06);
+  --shadow-elev: 0 2px 2px rgba(10, 10, 10, 0.05), 0 22px 60px rgba(10, 10, 10, 0.1);
 
   color-scheme: light;
 }
@@ -44,7 +52,7 @@ a { color: inherit; text-decoration: none; }
 
 .skip-link {
   position: absolute;
-  top: -100px;
+  top: 12px;
   left: 12px;
   z-index: 100;
   padding: 10px 14px;
@@ -53,9 +61,10 @@ a { color: inherit; text-decoration: none; }
   font-family: var(--mono);
   font-size: 12px;
   border-radius: 4px;
-  transition: top 200ms ease;
+  transform: translateY(-160%);
+  transition: transform 220ms var(--ease);
 }
-.skip-link:focus { top: 12px; }
+.skip-link:focus { transform: translateY(0); }
 
 ::selection { background: var(--lime); color: var(--ink); }
 
@@ -88,8 +97,8 @@ a { color: inherit; text-decoration: none; }
   margin: -16px 0 0 -16px;
   border: 1px solid rgba(10, 10, 10, 0.8);
   border-radius: 999px;
-  transition: width 220ms ease, height 220ms ease, margin 220ms ease,
-    background 220ms ease, border-color 220ms ease;
+  transition: width 220ms var(--ease), height 220ms var(--ease), margin 220ms var(--ease),
+    background 220ms var(--ease), border-color 220ms var(--ease);
 }
 .cursor.is-pointer .cursor-ring {
   width: 60px; height: 60px;
@@ -140,7 +149,7 @@ a { color: inherit; text-decoration: none; }
   font-weight: 500;
   letter-spacing: 0.1em;
   cursor: none;
-  transition: background 200ms ease, color 200ms ease, border-color 200ms ease;
+  transition: background 200ms var(--ease), color 200ms var(--ease), border-color 200ms var(--ease);
 }
 .topbar-home { padding: 0 8px; }
 .topbar-home:hover,
@@ -256,7 +265,7 @@ a { color: inherit; text-decoration: none; }
   font-size: 14px;
   font-weight: 700;
   border: 1px solid var(--ink);
-  transition: transform 220ms ease, background 220ms ease, box-shadow 220ms ease;
+  transition: transform 220ms var(--ease), background 220ms var(--ease), box-shadow 220ms var(--ease);
   cursor: none;
 }
 .section-cta:hover,
@@ -279,7 +288,7 @@ a { color: inherit; text-decoration: none; }
   background: var(--ink);
   color: var(--lime);
   font-size: 14px;
-  transition: background 220ms ease, color 220ms ease;
+  transition: background 220ms var(--ease), color 220ms var(--ease);
 }
 .section-cta:hover .arrow,
 .we-cta:hover .arrow,
@@ -288,6 +297,17 @@ a { color: inherit; text-decoration: none; }
 .project-more:hover .arrow {
   background: var(--lime);
   color: var(--ink);
+  transform: translate(2px, -1px) scale(1.05);
+}
+
+/* §5.B magnetic active state. physical press simulation. */
+[data-magnetic]:active,
+.section-cta:active,
+.we-cta:active,
+.dual-cta:active,
+.pickup-cta:active,
+.project-more:active {
+  transform: scale(0.97);
 }
 
 .reveal-line {
@@ -306,15 +326,21 @@ a { color: inherit; text-decoration: none; }
 [data-reveal-stagger].is-revealed .reveal-line:nth-child(3) > span { transform: translateY(0); transition-delay: 220ms; }
 [data-reveal-stagger].is-revealed .reveal-line:nth-child(4) > span { transform: translateY(0); transition-delay: 330ms; }
 
+/* §5.C Premium scroll entry. heavy fade-up + blur, single 880ms ease. */
 [data-reveal] {
   opacity: 0;
-  transform: translateY(22px);
-  transition: opacity 720ms cubic-bezier(0.16, 1, 0.3, 1),
-              transform 720ms cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(60px);
+  filter: blur(6px);
+  transition:
+    opacity 880ms var(--ease),
+    transform 880ms var(--ease),
+    filter 880ms var(--ease);
+  will-change: transform, opacity, filter;
 }
 [data-reveal].is-revealed {
   opacity: 1;
   transform: translateY(0);
+  filter: blur(0);
 }
 
 [data-tilt] {
@@ -368,7 +394,7 @@ a { color: inherit; text-decoration: none; }
   opacity: 0;
   will-change: transform, opacity;
   transition: transform 700ms cubic-bezier(0.34, 1.56, 0.64, 1),
-              opacity 700ms ease;
+              opacity 700ms var(--ease);
 }
 .hero-field .px.is-in {
   transform: scale(1);
@@ -443,23 +469,50 @@ a { color: inherit; text-decoration: none; }
   color: var(--ink);
 }
 
+/* Pickup card. Double-Bezel shell + inner core. */
 .pickup-card {
   position: absolute;
   left: 28px; bottom: 28px;
   z-index: 5;
   display: grid;
   gap: 8px;
-  min-width: 240px;
-  padding: 18px;
+  min-width: 248px;
+  padding: 8px;
+  border-radius: var(--radius-outer);
+  background: rgba(10, 10, 10, 0.06);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    var(--shadow-elev);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  transition: transform 420ms var(--ease), box-shadow 420ms var(--ease);
+}
+.pickup-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid rgba(10, 10, 10, 0.08);
+  pointer-events: none;
+}
+.pickup-card > * {
+  position: relative;
+  z-index: 1;
+}
+.pickup-card-inner {
+  display: grid;
+  gap: 6px;
+  padding: 16px 18px 18px;
+  border-radius: var(--radius-inner);
   background: var(--paper);
-  border: 1px solid var(--ink);
-  box-shadow: 6px 6px 0 0 var(--ink);
-  transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 320ms ease;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 .pickup-card:hover {
-  transform: translate(-3px, -3px);
-  box-shadow: 9px 9px 0 0 var(--lime);
+  transform: translateY(-4px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    0 4px 4px rgba(10, 10, 10, 0.04),
+    0 32px 80px rgba(52, 255, 0, 0.18);
 }
 .pickup-tag {
   display: inline-flex;
@@ -513,7 +566,7 @@ a { color: inherit; text-decoration: none; }
    ============================================================ */
 .we-are {
   position: relative;
-  padding: 80px 28px;
+  padding: 112px 28px;
   background: var(--ink);
   color: var(--paper);
   overflow: clip;
@@ -571,7 +624,7 @@ a { color: inherit; text-decoration: none; }
   margin: 8px 0 18px;
   font-family: var(--display);
   font-size: clamp(4rem, 12vw, 11rem);
-  font-weight: 900;
+  font-weight: 800;
   line-height: 0.9;
   letter-spacing: -0.05em;
   color: var(--paper);
@@ -597,7 +650,7 @@ a { color: inherit; text-decoration: none; }
    3. PROJECT
    ============================================================ */
 .project {
-  padding: 80px 28px;
+  padding: 112px 28px;
   background: var(--paper);
 }
 .project-head {
@@ -629,38 +682,61 @@ a { color: inherit; text-decoration: none; }
 .project-rail::-webkit-scrollbar { height: 6px; }
 .project-rail::-webkit-scrollbar-thumb { background: var(--ink); }
 
+/* Project card. Double-Bezel: outer hairline shell + inner content core. */
 .project-card {
   position: relative;
   display: grid;
   grid-template-rows: auto 1fr;
-  background: var(--paper);
-  border: 1px solid var(--ink);
+  padding: 6px;
+  border-radius: var(--radius-outer);
+  background: rgba(10, 10, 10, 0.04);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    var(--shadow-soft);
   scroll-snap-align: start;
-  overflow: hidden;
-  transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 320ms ease;
+  transition: transform 420ms var(--ease), box-shadow 420ms var(--ease);
+  will-change: transform;
+}
+.project-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid rgba(10, 10, 10, 0.08);
+  pointer-events: none;
 }
 .project-card:hover {
-  transform: translate(-3px, -3px);
-  box-shadow: 9px 9px 0 0 var(--lime);
+  transform: translateY(-6px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    0 2px 2px rgba(10, 10, 10, 0.05),
+    0 40px 80px rgba(52, 255, 0, 0.18);
 }
 .project-shot {
+  position: relative;
+  z-index: 1;
   background: var(--mute);
   aspect-ratio: 16 / 10;
   overflow: hidden;
+  border-radius: var(--radius-inner) var(--radius-inner) 0 0;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 .project-shot img {
   width: 100%; height: 100%;
   object-fit: cover;
   filter: grayscale(0.15);
-  transition: transform 480ms ease;
+  transition: transform 480ms var(--ease);
 }
 .project-card:hover .project-shot img { transform: scale(1.04); }
 
 .project-body {
+  position: relative;
+  z-index: 1;
   display: grid;
   gap: 12px;
-  padding: 20px 22px 22px;
+  padding: 22px 22px 22px;
+  background: var(--paper);
+  border-radius: 0 0 var(--radius-inner) var(--radius-inner);
 }
 .project-tag {
   display: inline-flex;
@@ -698,7 +774,7 @@ a { color: inherit; text-decoration: none; }
   display: grid;
   grid-template-columns: 1fr 1.2fr;
   gap: 32px;
-  padding: 80px 28px;
+  padding: 112px 28px;
   background: var(--paper);
   max-width: var(--max);
   margin: 0 auto;
@@ -727,7 +803,7 @@ a { color: inherit; text-decoration: none; }
   transform: translate(-50%, -50%);
   font-family: var(--display);
   font-size: clamp(3.6rem, 10vw, 9rem);
-  font-weight: 900;
+  font-weight: 800;
   line-height: 0.9;
   letter-spacing: -0.05em;
   color: var(--ink);
@@ -777,7 +853,7 @@ a { color: inherit; text-decoration: none; }
    5. BRIDGE band
    ============================================================ */
 .bridge {
-  padding: 80px 28px;
+  padding: 112px 28px;
   text-align: center;
   background: var(--paper);
   border-top: 1px solid var(--line);
@@ -807,7 +883,7 @@ a { color: inherit; text-decoration: none; }
 }
 .split-card {
   position: relative;
-  padding: 60px 36px;
+  padding: 80px 40px;
   background: var(--paper);
   border-top: 1px solid var(--ink);
   border-bottom: 1px solid var(--ink);
@@ -834,7 +910,7 @@ a { color: inherit; text-decoration: none; }
   overflow: hidden;
   border: 1px solid var(--line);
 }
-.produce-tiles img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(0.2); transition: transform 380ms ease; }
+.produce-tiles img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(0.2); transition: transform 380ms var(--ease); }
 .produce-tiles figure:hover img { transform: scale(1.06); }
 
 /* Brand Partner infinite marquee. one marquee per page (taste-skill §5). */
@@ -871,7 +947,7 @@ a { color: inherit; text-decoration: none; }
   text-align: center;
   letter-spacing: -0.01em;
   border-right: 1px solid var(--ink);
-  transition: background 220ms ease, color 220ms ease;
+  transition: background 220ms var(--ease), color 220ms var(--ease);
 }
 .partner-cell:hover { background: var(--lime); }
 .partner-cell sup { color: var(--lime); font-size: 1.2em; }
@@ -890,7 +966,7 @@ a { color: inherit; text-decoration: none; }
    7. NEWS
    ============================================================ */
 .news {
-  padding: 80px 28px;
+  padding: 112px 28px;
   background: var(--paper);
   max-width: var(--max);
   margin: 0 auto;
@@ -919,11 +995,11 @@ a { color: inherit; text-decoration: none; }
   gap: 24px;
   align-items: center;
   padding: 22px 8px;
-  transition: padding 220ms ease, background 220ms ease;
+  transition: transform 320ms var(--ease), background 220ms var(--ease);
 }
 .news-row a:hover {
   background: var(--mute);
-  padding-left: 20px;
+  transform: translateX(12px);
 }
 .news-row a:hover .arrow {
   background: var(--lime);
@@ -948,7 +1024,7 @@ a { color: inherit; text-decoration: none; }
   width: 28px; height: 28px;
   background: var(--ink);
   color: var(--paper);
-  transition: background 200ms ease, color 200ms ease;
+  transition: background 200ms var(--ease), color 200ms var(--ease);
 }
 
 /* ============================================================
@@ -959,7 +1035,7 @@ a { color: inherit; text-decoration: none; }
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 24px;
-  padding: 80px 28px;
+  padding: 112px 28px;
   background: var(--lime);
   overflow: clip;
   isolation: isolate;
@@ -975,7 +1051,7 @@ a { color: inherit; text-decoration: none; }
 .dual-word {
   font-family: var(--display);
   font-size: clamp(8rem, 22vw, 22rem);
-  font-weight: 900;
+  font-weight: 800;
   line-height: 0.86;
   letter-spacing: -0.06em;
   color: var(--ink);
@@ -986,12 +1062,31 @@ a { color: inherit; text-decoration: none; }
 .dual-stage .dual-word:nth-child(odd) { justify-self: start; }
 .dual-stage .dual-word:nth-child(even) { justify-self: end; }
 
+/* Dual cards. Double-Bezel shell + inner core. */
 .dual-card {
   position: relative;
   z-index: 1;
+  padding: 8px;
+  border-radius: var(--radius-outer);
+  background: rgba(10, 10, 10, 0.05);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    var(--shadow-elev);
+}
+.dual-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid rgba(10, 10, 10, 0.1);
+  pointer-events: none;
+}
+.dual-card-inner {
+  position: relative;
   padding: 36px 32px 28px;
+  border-radius: var(--radius-inner);
   background: var(--paper);
-  border: 1px solid var(--ink);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 .dual-title {
   margin: 0 0 14px;
@@ -1075,13 +1170,15 @@ a { color: inherit; text-decoration: none; }
 .foot-nav a::after {
   content: "";
   position: absolute;
-  left: 0; right: 100%;
+  left: 0; right: 0;
   bottom: -2px;
   height: 2px;
   background: var(--lime);
-  transition: right 300ms ease;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 360ms var(--ease);
 }
-.foot-nav a:hover::after { right: 0; }
+.foot-nav a:hover::after { transform: scaleX(1); }
 
 .foot-sub a {
   font-family: var(--display);
@@ -1108,7 +1205,7 @@ a { color: inherit; text-decoration: none; }
   border: 1px solid var(--line-strong);
   border-radius: 999px;
   color: var(--ink);
-  transition: background 200ms ease, border-color 200ms ease, color 200ms ease;
+  transition: background 200ms var(--ease), border-color 200ms var(--ease), color 200ms var(--ease);
 }
 .foot-social a:hover {
   background: var(--ink);
@@ -1162,7 +1259,7 @@ a { color: inherit; text-decoration: none; }
   pointer-events: none;
   font-family: var(--display);
   font-size: clamp(8rem, 22vw, 22rem);
-  font-weight: 900;
+  font-weight: 800;
   letter-spacing: -0.06em;
   line-height: 0.86;
   text-align: center;
@@ -1262,7 +1359,7 @@ a { color: inherit; text-decoration: none; }
   display: inline-block;
   opacity: 0;
   transform: translateY(40%);
-  transition: opacity 380ms ease, transform 520ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 380ms var(--ease), transform 520ms cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, opacity;
 }
 [data-letters] .ch.space { width: 0.28em; }
