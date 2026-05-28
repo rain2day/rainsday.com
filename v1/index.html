@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="rainsday.com is the portfolio of a designer and app developer building polished interfaces, iOS apps, and experimental creative tools."
+    >
+    <title>rainsday.com | Design & App Development</title>
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+    <link rel="preload" as="image" href="assets/hero-rainsday.png">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <canvas id="bg-particles" aria-hidden="true"></canvas>
+    <div class="cursor" aria-hidden="true">
+      <span class="cursor-dot"></span>
+      <span class="cursor-ring"></span>
+    </div>
+
+    <div class="site-shell">
+      <header class="site-header" aria-label="Primary">
+        <a class="brand" href="#top" aria-label="rainsday home">
+          <span class="brand-mark">R</span>
+          <span>rainsday<span class="brand-dot">.</span>com</span>
+        </a>
+        <nav class="nav-links" aria-label="Sections">
+          <a href="#work">Work</a>
+          <a href="#mission">Mission</a>
+          <a href="#product">Product</a>
+          <a href="#campaign">Campaign</a>
+        </nav>
+        <div class="header-end">
+          <a class="version-toggle" href="../" aria-label="View current rainsday.com">
+            <span class="ver-label">Current</span>
+            <span class="ver-arrow">↗</span>
+          </a>
+          <a class="header-action" data-magnetic href="#contact">Let's talk</a>
+        </div>
+      </header>
+
+      <main id="top">
+        <section class="hero" aria-labelledby="hero-title">
+          <video class="hero-video" autoplay muted loop playsinline poster="assets/hero-rainsday.png" aria-hidden="true">
+            <source src="assets/hero-bg.mp4" type="video/mp4">
+          </video>
+          <img class="hero-image" src="assets/hero-rainsday.png" alt="A faceless robot-human fashion model in black and orange interface light">
+          <div class="hero-shade" aria-hidden="true"></div>
+          <div class="hero-grid" aria-hidden="true"></div>
+          <div class="side-rail" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <p class="hero-wordmark" aria-hidden="true">
+            <span class="word-letter">R</span><span class="word-letter">A</span><span class="word-letter">I</span><span class="word-letter">N</span><span class="word-letter">S</span><span class="word-letter">D</span><span class="word-letter">A</span><span class="word-letter">Y</span>
+          </p>
+
+          <div class="hero-content">
+            <p class="hero-eyebrow" data-reveal><span>◎</span> Portfolio · 2026</p>
+            <h1 id="hero-title" data-reveal-stagger>
+              <span class="reveal-line"><span>Design for apps,</span></span>
+              <span class="reveal-line"><span>systems, and</span></span>
+              <span class="reveal-line"><span>strange ideas.</span></span>
+            </h1>
+            <p data-reveal>
+              Personal portfolio for interface design, iOS app development, and experimental creative tools.
+            </p>
+            <div class="hero-actions" aria-label="Hero actions">
+              <a class="button primary" data-magnetic href="#work">View work <span class="btn-arrow">→</span></a>
+              <a class="button ghost" data-magnetic href="mailto:hello@rainsday.com">Email</a>
+            </div>
+          </div>
+
+          <aside class="hero-panel" aria-label="Contact by email" data-tilt>
+            <h2>Contact by Email</h2>
+            <p>For app design, product UI, web systems, and launch polish.</p>
+            <div class="panel-icons" aria-hidden="true">
+              <span>×</span>
+              <span>◎</span>
+              <span>⌘</span>
+            </div>
+            <a href="mailto:hello@rainsday.com" data-magnetic>Your Email <span>→</span></a>
+          </aside>
+
+          <div class="hero-footer" aria-hidden="true">
+            <span>UI</span>
+            <span class="divider">/</span>
+            <span>IOS</span>
+            <span class="divider">/</span>
+            <span>WEB</span>
+            <span class="divider">/</span>
+            <span>AI</span>
+            <span class="ticker">SCROLL ↓</span>
+          </div>
+        </section>
+
+        <section class="results-section" id="work" aria-labelledby="results-title">
+          <div class="results-panel">
+            <div class="results-topline">
+              <div class="support-note">
+                <span aria-hidden="true">◎</span>
+                <p>Design and app support from idea to launch.</p>
+              </div>
+              <p id="results-title" data-reveal>
+                A product-minded design practice for interfaces that need to feel distinctive,
+                useful, and ready to ship.
+              </p>
+            </div>
+
+            <div class="results-controls" aria-hidden="true">
+              <span>×</span>
+              <span>⌾</span>
+              <span>◇</span>
+            </div>
+
+            <div class="stat-grid" aria-label="Portfolio capabilities">
+              <article data-stat tabindex="0">
+                <strong>UI</strong>
+                <span>Interface direction</span>
+                <p class="stat-detail">Design systems, marketing surfaces, product UI that holds up under scrutiny.</p>
+              </article>
+              <article data-stat tabindex="0">
+                <strong>iOS</strong>
+                <span>Native app craft</span>
+                <p class="stat-detail">SwiftUI flows, animation, and shipping the App Store-ready polish.</p>
+              </article>
+              <article data-stat tabindex="0">
+                <strong>AI</strong>
+                <span>Creative tooling</span>
+                <p class="stat-detail">Prompt scaffolds, automation, and design pipelines that compound.</p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="cyber-section mission-section motion-context" id="mission" data-tone="amber" aria-labelledby="mission-title">
+          <div class="vertical-index" aria-hidden="true">001 · MISSION</div>
+          <div class="context-wave" aria-hidden="true">
+            <video autoplay muted loop playsinline preload="metadata">
+              <source src="assets/signal-mission.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="render-element render-suit" data-tilt data-float>
+            <img src="assets/render-suit.png" alt="Standalone transparent 3D render element of a glossy cyber techwear suit">
+          </div>
+          <div class="cyber-copy">
+            <span data-reveal>+ Mission</span>
+            <h2 id="mission-title" data-reveal-stagger>
+              <span class="reveal-line"><span>Make digital products</span></span>
+              <span class="reveal-line"><span>feel less ordinary.</span></span>
+            </h2>
+            <p data-reveal>
+              I work on the space between visual systems, native app behavior, and experimental tools.
+              The result should feel designed, not assembled from a template.
+            </p>
+            <a class="button ghost" data-magnetic href="#contact">Talk to me <span class="btn-arrow">→</span></a>
+          </div>
+          <p class="section-word" aria-hidden="true">ROAD</p>
+        </section>
+
+        <section class="cyber-section product-section motion-context" id="product" data-tone="ember" aria-labelledby="product-title">
+          <div class="vertical-index" aria-hidden="true">002 · PRODUCT</div>
+          <div class="context-wave" aria-hidden="true">
+            <video autoplay muted loop playsinline preload="metadata">
+              <source src="assets/signal-product.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="cyber-copy">
+            <span data-reveal>+ Product types</span>
+            <h2 id="product-title" data-reveal-stagger>
+              <span class="reveal-line"><span>Interfaces, apps,</span></span>
+              <span class="reveal-line"><span>launch systems,</span></span>
+              <span class="reveal-line"><span>AI tools.</span></span>
+            </h2>
+            <p data-reveal>
+              From compact iOS flows to full landing pages, from design audits to custom creative
+              workflows, each surface gets its own rhythm and visual language.
+            </p>
+          </div>
+          <div class="render-element render-core-element" data-tilt data-float>
+            <img src="assets/render-core.png" alt="Standalone transparent 3D render element of a floating orange AI interface core">
+          </div>
+          <ul class="offer-list" aria-label="Product types">
+            <li data-offer><span class="offer-num">01</span> Product UI</li>
+            <li data-offer><span class="offer-num">02</span> Native iOS</li>
+            <li data-offer><span class="offer-num">03</span> Web systems</li>
+            <li data-offer><span class="offer-num">04</span> AI workflows</li>
+          </ul>
+        </section>
+
+        <section class="campaign-section motion-context" id="campaign" data-tone="ash" aria-labelledby="campaign-title">
+          <div class="vertical-index" aria-hidden="true">003 · CAMPAIGN</div>
+          <div class="context-wave" aria-hidden="true">
+            <video autoplay muted loop playsinline preload="metadata">
+              <source src="assets/signal-campaign.mp4" type="video/mp4">
+            </video>
+          </div>
+          <p class="campaign-word" aria-hidden="true">RAD</p>
+          <div class="campaign-copy">
+            <span data-reveal>+ Campaigns</span>
+            <h2 id="campaign-title" data-reveal-stagger>
+              <span class="reveal-line"><span>Cyber visuals for</span></span>
+              <span class="reveal-line"><span>launches that need</span></span>
+              <span class="reveal-line"><span>a signal.</span></span>
+            </h2>
+            <p data-reveal>
+              A portfolio can be more than a grid of case cards. It can feel like a small world
+              built around taste, motion, and product intent.
+            </p>
+          </div>
+          <div class="render-element campaign-render-element" data-tilt>
+            <img src="assets/render-campaign.png" alt="Standalone transparent 3D render element of a chrome cyber model with floating interface panels">
+          </div>
+        </section>
+
+        <section class="gallery-section" aria-label="Drag to explore renders">
+          <div class="gallery-head">
+            <span class="gallery-eyebrow" data-reveal>+ Drag to explore</span>
+            <h2 data-reveal-stagger>
+              <span class="reveal-line"><span>Render shelf.</span></span>
+            </h2>
+          </div>
+          <div class="gallery-track" id="gallery" tabindex="0" aria-label="Drag horizontally to scroll renders">
+            <figure><img src="assets/cyber-core-orange.png" alt="Close-up portrait render of a cyber editorial female character in orange light"><figcaption>Portrait · Signal</figcaption></figure>
+            <figure><img src="assets/cyber-techwear-orange.png" alt="Full-body render of a futuristic black techwear female character on an amber runway"><figcaption>Techwear · Form</figcaption></figure>
+            <figure><img src="assets/cyber-campaign-orange.png" alt="Floating amber AI core object with chrome rings and dark glass surfaces"><figcaption>Core · Glass</figcaption></figure>
+            <figure><img src="assets/cyber-core.png" alt="Floating transparent interface artifact with orange abstract data panels"><figcaption>Interface · Object</figcaption></figure>
+            <figure><img src="assets/cyber-techwear.png" alt="Abstract rain and orange signal lines with glass droplets in a dark environment"><figcaption>Rain · Signal</figcaption></figure>
+            <figure><img src="assets/cyber-campaign.png" alt="Cyber campaign render of a female character interacting with orange geometric interface panels"><figcaption>Campaign · Control</figcaption></figure>
+          </div>
+          <p class="gallery-hint" aria-hidden="true">⇠ drag · scroll · swipe ⇢</p>
+        </section>
+
+        <section class="contact-section" id="contact" aria-labelledby="contact-title">
+          <div>
+            <h2 id="contact-title" data-reveal>Bring a product, a weird tool, or a half-formed idea.</h2>
+            <p data-reveal>I can help turn it into a page, an app, or a sharper prototype.</p>
+          </div>
+          <a class="button primary" data-magnetic href="mailto:hello@rainsday.com">hello@rainsday.com <span class="btn-arrow">→</span></a>
+        </section>
+      </main>
+
+      <footer class="site-foot" aria-label="Site footer">
+        <span>© rainsday.com · 2026</span>
+        <span class="foot-mark">◎</span>
+        <span>hello@rainsday.com</span>
+      </footer>
+    </div>
+
+    <button id="sound-toggle" class="sound-toggle" aria-pressed="false" aria-label="Toggle ambient sound" data-magnetic>
+      <span class="sound-bars" aria-hidden="true">
+        <i></i><i></i><i></i><i></i>
+      </span>
+      <span class="sound-label">SOUND</span>
+    </button>
+
+    <script src="script.js"></script>
+  </body>
+</html>
