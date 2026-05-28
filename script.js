@@ -4,6 +4,23 @@
   const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const coarse  = matchMedia("(hover: none), (pointer: coarse)").matches;
 
+  (() => {
+    const progress = document.querySelector(".scroll-progress");
+    const supportsScrollTimeline =
+      typeof CSS !== "undefined" &&
+      (CSS.supports?.("animation-timeline: scroll()") || CSS.supports?.("animation-timeline: scroll(root block)"));
+    if (!progress || supportsScrollTimeline) return;
+
+    const updateProgress = () => {
+      const max = document.documentElement.scrollHeight - innerHeight;
+      const ratio = max > 0 ? scrollY / max : 0;
+      progress.style.transform = `scaleX(${Math.max(0, Math.min(1, ratio))})`;
+    };
+    addEventListener("scroll", updateProgress, { passive: true });
+    addEventListener("resize", updateProgress, { passive: true });
+    updateProgress();
+  })();
+
   // Pause any autoplaying video under reduced-motion (poster still shows).
   if (reduced) {
     document.querySelectorAll("video[autoplay]").forEach((v) => {
@@ -389,13 +406,38 @@
   }
 
   /* ------------------------------------------------------------
-   * 9. Topbar hamburger
+   * 9. Topbar menu
    * ------------------------------------------------------------ */
   const menuBtn = document.querySelector(".topbar-menu");
   if (menuBtn) {
+    const menuPanel = document.getElementById(menuBtn.getAttribute("aria-controls"));
+    const setMenu = (open) => {
+      menuBtn.setAttribute("aria-expanded", String(open));
+      if (menuPanel) {
+        menuPanel.hidden = !open;
+        menuPanel.setAttribute("aria-hidden", String(!open));
+      }
+      document.body.classList.toggle("menu-open", open);
+    };
+
     menuBtn.addEventListener("click", () => {
       const open = menuBtn.getAttribute("aria-expanded") === "true";
-      menuBtn.setAttribute("aria-expanded", String(!open));
+      setMenu(!open);
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") setMenu(false);
+    });
+
+    document.addEventListener("click", (e) => {
+      const open = menuBtn.getAttribute("aria-expanded") === "true";
+      if (!open) return;
+      if (e.target.closest(".topbar-menu") || e.target.closest(".menu-panel")) return;
+      setMenu(false);
+    });
+
+    menuPanel?.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => setMenu(false));
     });
   }
 
