@@ -21,6 +21,27 @@
     updateProgress();
   })();
 
+  /* ------------------------------------------------------------
+   * Topbar tone inversion. When a [data-tone="dark"] section
+   * overlaps the topbar zone (top 80px), flip the brand-mark
+   * + wordmark + hamburger to light so they stay legible.
+   * ------------------------------------------------------------ */
+  (() => {
+    const topbar = document.querySelector(".topbar");
+    const darks = document.querySelectorAll("[data-tone='dark']");
+    if (!topbar || !darks.length) return;
+    const recompute = () => {
+      const onDark = [...darks].some((s) => {
+        const r = s.getBoundingClientRect();
+        return r.top < 80 && r.bottom > 0;
+      });
+      topbar.classList.toggle("is-on-dark", onDark);
+    };
+    addEventListener("scroll", recompute, { passive: true });
+    addEventListener("resize", recompute, { passive: true });
+    recompute();
+  })();
+
   // Pause any autoplaying video under reduced-motion (poster still shows).
   if (reduced) {
     document.querySelectorAll("video[autoplay]").forEach((v) => {

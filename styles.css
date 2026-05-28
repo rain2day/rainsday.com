@@ -199,6 +199,24 @@ a { color: inherit; text-decoration: none; }
   height: 100%;
   object-fit: contain;
   mix-blend-mode: multiply;
+  transition: filter 200ms var(--ease);
+}
+
+/* When the topbar overlaps a dark section, invert the brand-mark
+   + recolor the wordmark and hamburger so they stay legible. */
+.topbar.is-on-dark .brand-mark img {
+  filter: invert(1);
+  mix-blend-mode: screen;
+}
+.topbar.is-on-dark .brand,
+.topbar.is-on-dark .brand-word em {
+  color: var(--paper);
+}
+.topbar.is-on-dark .brand {
+  border-left-color: rgba(255, 255, 255, 0.16);
+}
+.topbar.is-on-dark .topbar-menu span {
+  background: var(--paper);
 }
 .brand-word em {
   font-style: normal;
