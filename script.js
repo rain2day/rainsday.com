@@ -30,8 +30,11 @@
   }
 
   /* ------------------------------------------------------------
-   * Hero video sequence. cycles through [data-hero-sequence] srcs
-   * in order on each `ended` event. Loops back to the first.
+   * Hero video sequence. Double-buffer cross-fade between two
+   * <video> elements so the gap between MP4s is invisible.
+   *   - Two stacked videos at the same position.
+   *   - Buffer always preloads the next clip while the other plays.
+   *   - On `ended`, opacity swap (220ms) and roles flip.
    * ------------------------------------------------------------ */
   (() => {
     const v = document.querySelector("video[data-hero-sequence]");
@@ -41,14 +44,54 @@
     catch { return; }
     if (!Array.isArray(srcs) || srcs.length < 2) return;
 
-    let i = 0;
-    v.addEventListener("ended", () => {
-      i = (i + 1) % srcs.length;
-      v.src = srcs[i];
-      v.load();
-      const p = v.play();
-      if (p && typeof p.catch === "function") p.catch(() => {});
+    // Clone the main video element for the buffer. Strip the sequence
+    // attribute so the JS only finds the primary one.
+    const buf = document.createElement("video");
+    buf.className = v.className;
+    buf.muted = true;
+    buf.playsInline = true;
+    buf.preload = "auto";
+    buf.setAttribute("aria-hidden", "true");
+    buf.style.opacity = "0";
+    [v, buf].forEach(el => {
+      el.style.transition = "opacity 240ms linear";
     });
+    v.parentElement.insertBefore(buf, v.nextSibling);
+
+    let activeIsMain = true;
+    let nextIndex = 1 % srcs.length;
+
+    // Prime the buffer with the next clip in the sequence.
+    buf.src = srcs[nextIndex];
+    buf.load();
+
+    const crossfade = () => {
+      const showing = activeIsMain ? v : buf;
+      const hidden  = activeIsMain ? buf : v;
+
+      // Start playback on the hidden one BEFORE fading it in.
+      hidden.currentTime = 0;
+      const p = hidden.play();
+      if (p && typeof p.catch === "function") p.catch(() => {});
+
+      // Opacity swap.
+      hidden.style.opacity = "1";
+      showing.style.opacity = "0";
+
+      // After the fade, pause the now-hidden one and queue the next src
+      // so it is fully buffered before the upcoming `ended` event.
+      setTimeout(() => {
+        showing.pause();
+        nextIndex = (nextIndex + 1) % srcs.length;
+        showing.src = srcs[nextIndex];
+        showing.load();
+      }, 260);
+
+      activeIsMain = !activeIsMain;
+    };
+
+    v.addEventListener("ended", crossfade);
+    buf.addEventListener("ended", crossfade);
   })();
 
   /* ------------------------------------------------------------

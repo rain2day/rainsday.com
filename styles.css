@@ -428,7 +428,8 @@ a { color: inherit; text-decoration: none; }
   gap: 32px;
   isolation: isolate;
   overflow: clip;
-  background: var(--paper);
+  /* Match the MP4 ivory bg so any swap-gap blends in. Sampled mp4 corners: #E9-#F5 grey. */
+  background: #eeeeee;
 }
 
 /* Full-bleed video. bottom layer of the hero stack. */
@@ -441,6 +442,9 @@ a { color: inherit; text-decoration: none; }
   object-fit: cover;
   object-position: center;
   pointer-events: none;
+  /* Same ivory bg on the element itself so even mid-swap (poster gap, blank frame)
+     the colour stays consistent and the hero doesn't flash white/black. */
+  background: #eeeeee;
   /* Slight desaturation lets the lime squares dominate. */
   filter: contrast(0.98) saturate(0.85);
 }
