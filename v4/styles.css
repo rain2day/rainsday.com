@@ -935,22 +935,30 @@ a { color: inherit; text-decoration: none; }
   animation-play-state: paused;
 }
 .partner-cell {
-  display: inline-grid;
-  place-items: center;
-  min-width: 200px;
-  min-height: 88px;
-  padding: 14px 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-width: 240px;
+  min-height: 96px;
+  padding: 14px 32px;
   background: var(--paper);
+  color: var(--ink);
   font-family: var(--display);
   font-weight: 700;
-  font-size: 16px;
-  text-align: center;
-  letter-spacing: -0.01em;
-  border-right: 1px solid var(--ink);
-  transition: background 220ms var(--ease), color 220ms var(--ease);
+  font-size: 15px;
+  letter-spacing: -0.005em;
+  white-space: nowrap;
+  border-right: 1px solid var(--line-strong);
+  transition: background 280ms var(--ease), color 280ms var(--ease);
 }
 .partner-cell:hover { background: var(--lime); }
-.partner-cell sup { color: var(--lime); font-size: 1.2em; }
+.partner-mark {
+  flex: 0 0 auto;
+  width: 22px; height: 22px;
+  color: var(--ink);
+}
+.partner-cell:hover .partner-mark { color: var(--ink); }
 
 @keyframes partner-scroll {
   from { transform: translate3d(0, 0, 0); }
