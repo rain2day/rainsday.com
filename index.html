@@ -30,7 +30,9 @@
     <meta name="twitter:image" content="https://rainsday.com/assets/og-image.png">
 
     <link rel="preload" as="image" href="assets/hero-bg-poster.jpg">
-    <link rel="preload" as="video" href="assets/hero-bg.mp4" type="video/mp4">
+    <link rel="preload" as="video" href="assets/hero-bg-1.mp4" type="video/mp4">
+    <link rel="prefetch" href="assets/hero-bg-2.mp4">
+    <link rel="prefetch" href="assets/hero-bg-3.mp4">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -83,12 +85,13 @@
            1. HERO. bento pixel field + fish subject + scramble headline
            ========================================================= -->
       <section class="hero" id="top" aria-labelledby="hero-title">
-        <!-- Full-bleed video bottom layer. -->
+        <!-- Full-bleed video bottom layer. JS rotates the source 1 → 2 → 3 → 1. -->
         <video
           class="hero-bg-video"
-          src="assets/hero-bg.mp4"
+          data-hero-sequence='["assets/hero-bg-1.mp4","assets/hero-bg-2.mp4","assets/hero-bg-3.mp4"]'
+          src="assets/hero-bg-1.mp4"
           poster="assets/hero-bg-poster.jpg"
-          autoplay muted loop playsinline preload="auto"
+          autoplay muted playsinline preload="auto"
           aria-label="rainsday cover. White betta fish swimming through the FISH wordmark."
         ></video>
 

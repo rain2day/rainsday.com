@@ -26,3 +26,6 @@ tmp/
 # Raw video exports left in root
 /_users_*.MP4
 /_users_*.mp4
+
+# Source video drops (transcoded into assets/, raws stay local)
+/FISH/

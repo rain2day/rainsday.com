@@ -13,6 +13,28 @@
   }
 
   /* ------------------------------------------------------------
+   * Hero video sequence. cycles through [data-hero-sequence] srcs
+   * in order on each `ended` event. Loops back to the first.
+   * ------------------------------------------------------------ */
+  (() => {
+    const v = document.querySelector("video[data-hero-sequence]");
+    if (!v || reduced) return;
+    let srcs;
+    try { srcs = JSON.parse(v.dataset.heroSequence); }
+    catch { return; }
+    if (!Array.isArray(srcs) || srcs.length < 2) return;
+
+    let i = 0;
+    v.addEventListener("ended", () => {
+      i = (i + 1) % srcs.length;
+      v.src = srcs[i];
+      v.load();
+      const p = v.play();
+      if (p && typeof p.catch === "function") p.catch(() => {});
+    });
+  })();
+
+  /* ------------------------------------------------------------
    * 1. Custom cursor (dot + lerp ring)
    * ------------------------------------------------------------ */
   const cursor = document.querySelector(".cursor");
