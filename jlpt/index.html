@@ -1689,6 +1689,118 @@
       animation: liftIn 420ms var(--ease);
     }
 
+    /* ============================================================
+       Declutter pass — one spacing rhythm, flatter cards,
+       calmer home. Overrides the panel/home rules above.
+       ============================================================ */
+    :root {
+      --space-xl: 30px;
+      --space-lg: 22px;
+    }
+
+    /* Even rhythm: home columns + stacked blocks share one gap */
+    .home-layout {
+      gap: var(--space-xl);
+      align-items: start;
+    }
+
+    .home-main > * + *,
+    .home-rail > * + * {
+      margin-top: var(--space-xl);
+    }
+
+    .panel {
+      padding: var(--space-lg);
+      margin-bottom: 0;
+    }
+
+    .panel-header {
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .panel-header h3 {
+      font-size: 1.18rem;
+    }
+
+    /* Hero stats: clean stacked numbers, tight label */
+    .hero-stat {
+      gap: 4px;
+      padding: 24px 0;
+    }
+
+    /* Category picker: replaces the removed .category-picker wrapper */
+    .category-grid {
+      max-height: none;
+      gap: 8px;
+    }
+
+    .category-toolbar {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+    }
+
+    /* Mode cards: a touch more air */
+    .mode-grid { gap: 12px; }
+    .mode-card { min-height: 112px; padding: 18px; }
+    .mode-card span { font-size: 0.85rem; }
+
+    /* "Other ways to practice": one light row replacing two panels */
+    .more-strip {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .more-link {
+      display: grid;
+      gap: 4px;
+      padding: 16px 18px;
+      text-align: left;
+      border: 1px solid rgba(21, 21, 21, 0.10);
+      border-radius: 14px;
+      background: #ffffff;
+      color: inherit;
+      cursor: pointer;
+      transition: transform 180ms var(--ease), border-color 180ms var(--ease), box-shadow 180ms var(--ease);
+    }
+
+    .more-link:hover {
+      transform: translateY(-2px);
+      border-color: var(--line-strong);
+      box-shadow: 0 12px 26px rgba(15, 23, 42, 0.07);
+    }
+
+    .more-link strong { font-size: 1rem; }
+    .more-link span { color: var(--ink-soft); font-size: 0.84rem; }
+
+    /* Flatten box-in-box: inner data items lose shadow, hairline fill */
+    .history-item,
+    .weak-item,
+    .summary-box,
+    .mistake-item,
+    .phase-item,
+    .word-item,
+    .chunk-item,
+    .collocation-card {
+      box-shadow: none;
+      border-color: rgba(21, 21, 21, 0.07);
+      background: #fafbfc;
+    }
+
+    /* Rail reads lighter than the main practice column */
+    .home-rail .panel {
+      box-shadow: 0 10px 26px rgba(15, 23, 42, 0.05);
+    }
+
+    /* Small inline button for panel actions */
+    .btn-sm {
+      min-height: 34px;
+      padding: 6px 14px;
+      font-size: 0.86rem;
+    }
+
     @media (max-width: 980px) {
       .topbar,
       .hero,
@@ -1709,6 +1821,18 @@
       .hero-panel {
         border-left: 0;
         border-top: 1px solid var(--line);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .mode-grid,
+      .more-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .home-main > * + *,
+      .home-rail > * + * {
+        margin-top: var(--space-lg);
       }
     }
 
@@ -1786,130 +1910,91 @@
             <p id="hero-description">用短題建立語感，再用錯題複盤迫自己講得出「點解呢個自然，其他答案唔自然」。</p>
             <div class="btn-row">
               <button class="btn btn-primary" data-mode="random20" type="button">開始 20 題</button>
-              <button class="btn btn-secondary" data-jump="scenario" type="button">場景文法</button>
-              <button class="btn btn-secondary" data-jump="vocab" type="button">語彙組合</button>
               <button class="btn btn-ghost" data-jump="bank" type="button">查文法索引</button>
             </div>
           </div>
           <div class="hero-panel" aria-label="Current level overview">
             <div class="hero-stat">
-              <div>
-                <strong id="hero-total">0</strong>
-                <span>題目總數。按分類、語感差異同錯題複盤整理。</span>
-              </div>
-              <div class="stamp">題庫</div>
+              <strong id="hero-total">0</strong>
+              <span>題庫總數</span>
             </div>
             <div class="hero-stat">
-              <div>
-                <strong id="hero-categories">0</strong>
-                <span>分類入口。想集中拆弱點時由這裏開始。</span>
-              </div>
-              <div class="stamp">分類</div>
+              <strong id="hero-categories">0</strong>
+              <span>文法分類</span>
             </div>
             <div class="hero-stat">
-              <div>
-                <strong id="hero-scenarios">2</strong>
-                <span>場景篇章。把文法放回對話、故事同輸出任務。</span>
-              </div>
-              <div class="stamp">場景</div>
+              <strong id="hero-scenarios">2</strong>
+              <span>場景篇章</span>
             </div>
           </div>
         </div>
 
         <div class="home-layout">
-          <div>
+          <div class="home-main">
             <section class="panel">
               <div class="panel-header">
-                <div>
-                  <h3>今日練習</h3>
-                  <p>按今日可用時間選入口，做完即刻有複盤。</p>
-                </div>
+                <h3>今日練習</h3>
               </div>
               <div class="mode-grid">
                 <button class="mode-card primary" data-mode="random20" type="button">
                   <strong>20 題節奏練</strong>
-                  <span>每日 warm-up。題量短，但足夠暴露語感盲點。</span>
+                  <span>每日 warm-up，快速暴露語感盲點。</span>
                 </button>
                 <button class="mode-card" data-mode="random50" type="button">
                   <strong>50 題穩定度</strong>
-                  <span>練耐性同穩定度，適合考前集中做一輪。</span>
+                  <span>練穩定度，適合考前集中做一輪。</span>
                 </button>
                 <button class="mode-card" data-mode="all" type="button">
                   <strong>全題庫巡回</strong>
-                  <span>完整覆蓋當前 level，適合週末清庫。</span>
+                  <span>完整覆蓋當前 level。</span>
                 </button>
                 <button class="mode-card" data-mode="weak" type="button">
                   <strong>弱點重做</strong>
-                  <span>根據本機紀錄抽常錯分類；未有紀錄時轉為隨機題。</span>
+                  <span>抽常錯分類；未有紀錄時轉隨機。</span>
                 </button>
               </div>
             </section>
 
             <section class="panel">
               <div class="panel-header">
-                <div>
-                  <h3>分類攻防</h3>
-                  <p>先揀主題，再做一組只針對該範圍的題。</p>
-                </div>
-                <button id="select-all-btn" class="btn btn-ghost" type="button">全選</button>
+                <h3>分類攻防</h3>
+                <button id="select-all-btn" class="btn btn-ghost btn-sm" type="button">全選</button>
               </div>
               <div id="category-list" class="category-grid"></div>
-              <div class="category-picker">
-                <div class="category-toolbar">
-                  <button id="start-category-btn" class="btn btn-primary" type="button">開始分類練習</button>
-                  <button id="clear-category-btn" class="btn btn-secondary" type="button">清除選擇</button>
-                  <span id="category-count" class="muted">未選分類</span>
-                </div>
+              <div class="category-toolbar">
+                <button id="start-category-btn" class="btn btn-primary" type="button">開始分類練習</button>
+                <button id="clear-category-btn" class="btn btn-ghost btn-sm" type="button">清除</button>
+                <span id="category-count" class="muted">未選分類</span>
               </div>
             </section>
+
+            <nav class="more-strip" aria-label="其他練習法">
+              <button class="more-link" data-jump="scenario" type="button">
+                <strong>場景文法</strong>
+                <span>對話・故事語境</span>
+              </button>
+              <button class="more-link" data-jump="vocab" type="button">
+                <strong>語彙組合</strong>
+                <span>詞＋搭配＋例句</span>
+              </button>
+              <button class="more-link" data-jump="listening" type="button">
+                <strong>聞き取り</strong>
+                <span>聽解 chunk</span>
+              </button>
+            </nav>
           </div>
 
-          <aside>
+          <aside class="home-rail">
             <section class="panel">
               <div class="panel-header">
-                <div>
-                  <h3>場景練習</h3>
-                  <p>把文法放入完整語境，讀完再做相關題。</p>
-                </div>
-              </div>
-              <div id="scenario-cards" class="scenario-grid"></div>
-            </section>
-
-            <section class="panel">
-              <div class="panel-header">
-                <div>
-                  <h3>語彙・耳練</h3>
-                  <p>補回生字、組合詞、聽解常見 chunk。</p>
-                </div>
-              </div>
-              <div class="scenario-grid">
-                <button class="scenario-card" data-jump="vocab" type="button">
-                  <strong>生字組合詞</strong>
-                  <span>用「詞 + 搭配 + 例句」記，不只背單字。</span>
-                </button>
-                <button class="scenario-card" data-jump="listening" type="button">
-                  <strong>聞き取り Chunk</strong>
-                  <span>短對話、關鍵詞、陷阱位，可用瀏覽器朗讀日文。</span>
-                </button>
-              </div>
-            </section>
-
-            <section class="panel">
-              <div class="panel-header">
-                <div>
-                  <h3>最近成績</h3>
-                  <p>只儲存在這部機的瀏覽器。</p>
-                </div>
+                <h3>最近成績</h3>
               </div>
               <div id="history-list" class="history-list"></div>
             </section>
 
             <section class="panel">
               <div class="panel-header">
-                <div>
-                  <h3>弱點雷達</h3>
-                  <p>錯題會按分類累積，方便下次直接重做。</p>
-                </div>
+                <h3>弱點雷達</h3>
               </div>
               <div id="weak-list" class="weak-list"></div>
             </section>
@@ -2054,7 +2139,7 @@
             <div>
               <p class="eyebrow">vocabulary system</p>
               <h2 id="vocab-title">語彙・組合詞</h2>
-              <p id="vocab-description">JLPT 不只考單字意思，更多時考「邊個動詞配邊個名詞」同句子語感。</p>
+              <p id="vocab-description">唔淨係背意思，重點係搭配同句子語感。</p>
             </div>
             <div class="btn-row">
               <button id="vocab-quiz-btn" class="btn btn-primary" type="button">用相關分類做題</button>
@@ -2064,10 +2149,7 @@
           <div id="vocab-grid" class="study-grid"></div>
           <section class="study-panel">
             <div class="panel-header">
-              <div>
-                <h3>組合詞攻防</h3>
-                <p>做閱讀同聽解時，先認得整個 phrase，速度會快好多。</p>
-              </div>
+              <h3>組合詞攻防</h3>
             </div>
             <div id="collocation-grid" class="collocation-grid"></div>
           </section>
@@ -2080,7 +2162,7 @@
             <div>
               <p class="eyebrow">listening chunks</p>
               <h2 id="listening-title">聞き取り Lab</h2>
-              <p id="listening-description">每題用短情境練「聽到甚麼 chunk → 排除甚麼陷阱 → 得出答案」。朗讀按鈕會用瀏覽器的日文 voice。</p>
+              <p id="listening-description">短情境練聽 chunk、排陷阱。朗讀用瀏覽器日文 voice。</p>
             </div>
             <div class="btn-row">
               <button id="listen-stop-btn" class="btn btn-secondary" type="button">停止朗讀</button>
@@ -2097,7 +2179,7 @@
             <div>
               <p class="eyebrow">grammar atlas</p>
               <h2>文法索引</h2>
-              <p>用文法、意思、分類或題目關鍵字搜尋。想查「〜ものの」同「〜くせに」的差別時，這裏會比逐題翻快好多。</p>
+              <p>用文法、意思、分類或關鍵字即時搜尋。</p>
             </div>
             <div class="btn-row">
               <button id="bank-random-btn" class="btn btn-primary" type="button">抽 20 題</button>
@@ -2528,7 +2610,6 @@
       document.getElementById("top-summary").textContent =
         `${state.level}：${pool.length} 題 · ${categories.length} 分類 · ${getVocabCount()} 語彙 · ${listeningContent[state.level].length} 段耳練`;
       renderCategoryPicker();
-      renderScenarioCards();
       renderHistory();
       renderWeakness();
       showScreen("home");
@@ -2549,18 +2630,6 @@
       const selectedCount = state.selectedCategories.size;
       document.getElementById("category-count").textContent =
         selectedCount ? `已選 ${selectedCount} 個分類` : "未選分類";
-    }
-
-    function renderScenarioCards() {
-      const node = document.getElementById("scenario-cards");
-      node.innerHTML = scenarioContent
-        .map((item) => `
-          <button class="scenario-card" data-scenario="${item.id}" type="button">
-            <strong>${escapeHtml(item.shortTitle)}</strong>
-            <span>${escapeHtml(item.description)}</span>
-          </button>
-        `)
-        .join("");
     }
 
     function renderHistory() {
@@ -3182,15 +3251,6 @@
       });
 
       document.getElementById("start-category-btn").addEventListener("click", startCategoryQuiz);
-
-      document.getElementById("scenario-cards").addEventListener("click", (event) => {
-        const target = event.target.closest(".scenario-card");
-        if (!target) {
-          return;
-        }
-        const scenario = scenarioContent.find((item) => item.id === target.dataset.scenario);
-        renderScenario(scenario);
-      });
 
       document.getElementById("scenario-switch-btn").addEventListener("click", switchScenario);
       document.getElementById("scenario-quiz-btn").addEventListener("click", () => startScenarioQuiz(state.activeScenario));
