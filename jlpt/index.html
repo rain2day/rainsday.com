@@ -1822,6 +1822,39 @@
       font-size: 0.86rem;
     }
 
+    /* Feedback card: structured, line-broken explanation */
+    .fb-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px 12px;
+      margin-bottom: 14px;
+    }
+
+    .fb-head h3 { margin: 0; }
+
+    .fb-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .fb-explain {
+      display: grid;
+      gap: 7px;
+    }
+
+    .fb-line {
+      margin: 0;
+      line-height: 1.7;
+    }
+
+    .fb-line.alt {
+      padding-left: 12px;
+      border-left: 2px solid var(--line-strong);
+      color: var(--ink-soft);
+    }
+
     @media (max-width: 980px) {
       .topbar,
       .hero,
@@ -2282,6 +2315,101 @@
           "用「〜どころか」寫一個反差強烈的句子。",
           "用「〜にしたがって」描述一個逐步變化。",
           "把一個正式策略句改寫成「〜に応じて」句型。"
+        ]
+      },
+      {
+        id: "line",
+        title: "週末、空いてる？",
+        shortTitle: "LINE 閒聊場景",
+        description: "美咲同健太喺 LINE 夾週末去新開嘅 café，講到加班、唔記得星期幾、整唔見銀包。重點係口語縮略、引用、隨口列舉同「啱啱先」嘅語感。",
+        relatedLevel: "N3",
+        grammar: [
+          { text: "〜って", phase: 1, note: "口語引用或帶出話題，等於 と・というのは。" },
+          { text: "〜っけ", phase: 1, note: "一時記唔起，問返自己或對方。" },
+          { text: "〜たばかり", phase: 1, note: "啱啱先做完，冇耐。" },
+          { text: "〜とか", phase: 2, note: "隨口舉例，唔限定淨係呢樣。" },
+          { text: "〜てしまう", phase: 2, note: "口語縮做 〜ちゃう，帶後悔或做晒。" },
+          { text: "〜みたいだ", phase: 2, note: "睇情況好似係…（推測）。" },
+          { text: "〜なんて", phase: 3, note: "帶意外或輕視語氣嘅「居然／之類」。" },
+          { text: "〜っぽい", phase: 3, note: "帶啲…feel／好似…咁。" }
+        ],
+        passage: [
+          { speaker: "美咲", text: "健太、今週末<mark>って</mark>空いてる？駅前に新しくできたカフェ、行かない？" },
+          { speaker: "健太", text: "行きたい！…あれ、今日<mark>って</mark>何曜日だ<mark>っけ</mark>？最近、残業<mark>とか</mark>で曜日の感覚なくて。" },
+          { speaker: "美咲", text: "金曜だよ（笑）。そのカフェ、オープンした<mark>ばかり</mark>で、まだ穴場<mark>みたい</mark>。" },
+          { speaker: "健太", text: "いいね。実はこの前、財布なくし<mark>ちゃって</mark>、カード再発行したばっかりなんだ。" },
+          { speaker: "美咲", text: "災難やん…。でも空いてる<mark>なんて</mark>最高じゃない？写真も映える<mark>っぽい</mark>よ。" },
+          { speaker: "健太", text: "決まりだね。土曜の11時、現地集合<mark>って</mark>ことで。今度こそ遅刻しないから（笑）。" }
+        ],
+        drills: [
+          "用「〜って」隨口引用一句你聽返嚟嘅嘢。",
+          "用「〜ちゃう／〜ちゃった」講一件唔小心做咗嘅事。",
+          "用「〜たばかり」講一樣你啱啱先開始或做完嘅嘢。",
+          "把「〜みたいだ」同「〜っぽい」各寫一句，感受推測 vs 帶 feel 嘅分別。"
+        ]
+      },
+      {
+        id: "service",
+        title: "いらっしゃいませ！",
+        shortTitle: "店舖接客場景",
+        description: "兼職店員阿部第一日落場，店長教佢用敬語應對客人——落單、收錢、帶位。重點係尊敬語、謙讓語同接客慣用句。",
+        relatedLevel: "N3",
+        grammar: [
+          { text: "お〜する", phase: 1, note: "謙讓語，放低自己嘅動作。" },
+          { text: "お〜になる", phase: 1, note: "尊敬語，抬高對方嘅動作。" },
+          { text: "〜させていただく", phase: 1, note: "「容我…」最客氣咁講自己做嘅嘢。" },
+          { text: "〜でございます", phase: 2, note: "です 嘅鄭重講法，店舖常用。" },
+          { text: "〜ていただけませんか", phase: 2, note: "好客氣咁請對方做某事。" },
+          { text: "お〜いただく", phase: 2, note: "客氣咁請／多謝對方做某事。" },
+          { text: "〜ことになっている", phase: 3, note: "規定／慣例係咁做。" },
+          { text: "〜かねます", phase: 3, note: "「恕難…」婉轉拒絕（〜かねる 的丁寧形）。" }
+        ],
+        passage: [
+          { speaker: "店長", text: "お客様がいらっしゃったら、まず笑顔で「いらっしゃいませ」。メニューは私が<mark>お持ちします</mark>からね。" },
+          { speaker: "阿部", text: "はい！…お客様がメニューを<mark>ご覧になって</mark>います。注文、伺ってきます。" },
+          { speaker: "阿部", text: "ご注文がお決まりでしたら、<mark>お伺いいたします</mark>。こちら、本日のおすすめ<mark>でございます</mark>。" },
+          { speaker: "阿部", text: "お会計を先に<mark>させていただいて</mark>もよろしいですか。1,000円<mark>お預かりいたします</mark>。" },
+          { speaker: "阿部", text: "恐れ入りますが、こちらにサインを<mark>していただけませんか</mark>。" },
+          { speaker: "店長", text: "上手だね。混んだら少々<mark>お待ちいただく</mark>こともあるし、まず禁煙席へご案内する<mark>ことになっている</mark>から覚えてね。" },
+          { speaker: "阿部", text: "はい！あ、相席は<mark>いたしかねます</mark>とお伝えすればいいですか？" }
+        ],
+        drills: [
+          "把「コーヒーを持ってくる」用「お〜します」變謙讓語。",
+          "把「お客様が来る／見る」用尊敬語（いらっしゃる／ご覧になる）講返。",
+          "用「〜させていただきます」客氣咁講你即將做嘅一件事。",
+          "用「〜かねます」婉轉拒絕一個無理嘅要求。"
+        ]
+      },
+      {
+        id: "news",
+        title: "商店街、復活の兆し",
+        shortTitle: "新聞報道場景",
+        description: "一篇地區新聞，報道老商店街靠年輕店主同 SNS 重新熱鬧返。重點係正式書面連接、立場對比、手段同變化趨勢。",
+        relatedLevel: "N2",
+        grammar: [
+          { text: "〜つつある", phase: 1, note: "正逐漸…緊（趨勢進行中）。" },
+          { text: "〜に対して", phase: 1, note: "對…／相對於…，帶對比或對象。" },
+          { text: "〜をきっかけに", phase: 1, note: "以…為契機，由此開始。" },
+          { text: "〜によって", phase: 1, note: "靠…（手段）／因…而（差異）。" },
+          { text: "〜に先立ち", phase: 2, note: "喺…之前，預先做準備。" },
+          { text: "〜を通じて", phase: 2, note: "透過…（媒介／全程）。" },
+          { text: "〜において", phase: 2, note: "喺…（場合／領域），正式講法。" },
+          { text: "〜末に", phase: 3, note: "經過一輪…之後，最終得出結果。" }
+        ],
+        passage: [
+          { text: "かつて活気を失い<mark>つつあった</mark>中央商店街が、いま再び注目を集めている。" },
+          { text: "変化のきっかけは一軒の古書店だった。店主の高齢化<mark>に対して</mark>、二十代の若者が事業を引き継いだのである。" },
+          { text: "彼は店の再開<mark>に先立ち</mark>、半年をかけて常連客の声を集めた。" },
+          { text: "そして SNS <mark>を通じて</mark>日々の様子を発信した<mark>ところ</mark>、遠方からの客も訪れるようになった。" },
+          { text: "この小さな成功<mark>をきっかけに</mark>、空き店舗には新しい店が次々と入り始めた。" },
+          { text: "地域経済<mark>において</mark>、こうした個人の挑戦が果たす役割は決して小さくない。" },
+          { text: "資金不足や反対の声に悩まされた<mark>末に</mark>、商店街は世代交代<mark>によって</mark>新たな一歩を踏み出した。" }
+        ],
+        drills: [
+          "用「〜つつある」描述一個正逐漸發生嘅社會變化。",
+          "用「〜に対して」寫一句帶對比嘅句子。",
+          "用「〜をきっかけに」講一件由某事引發嘅轉變。",
+          "把一個口語句改寫成「〜を通じて」「〜において」嘅正式書面語氣。"
         ]
       }
     ];
@@ -2894,12 +3022,35 @@
         state.currentIndex === state.quiz.length - 1 ? "查看結果" : "下一題";
     }
 
+    function formatExplain(text) {
+      if (!text) return [];
+      return text
+        .replace(/。/g, "。\n")
+        .replace(/[、，](?=「)/g, "\n")
+        .split("\n")
+        .map((s) => s.trim().replace(/^[、，]/, ""))
+        .filter(Boolean);
+    }
+
     function renderFeedback(q, isCorrect) {
       const stack = document.getElementById("feedback-stack");
+      const lines = formatExplain(q.explain);
+      const tags = [
+        q.grammar ? `<span class="tag grammar">${escapeHtml(q.grammar)}</span>` : "",
+        q.meaning ? `<span class="tag meaning">${escapeHtml(q.meaning)}</span>` : ""
+      ].join("");
+      const body = lines.length
+        ? lines
+            .map((line) => `<p class="fb-line${line.startsWith("「") ? " alt" : ""}">${escapeHtml(line)}</p>`)
+            .join("")
+        : `<p class="fb-line">這題沒有補充解釋。</p>`;
       stack.innerHTML = `
         <section class="feedback-card">
-          <h3 class="${isCorrect ? "status-good" : "status-bad"}">${isCorrect ? "正解" : "再看一次語境"}</h3>
-          <p>${escapeHtml(q.explain || "這題沒有補充解釋。")}</p>
+          <div class="fb-head">
+            <h3 class="${isCorrect ? "status-good" : "status-bad"}">${isCorrect ? "正解" : "再睇一次語境"}</h3>
+            ${tags ? `<div class="fb-tags">${tags}</div>` : ""}
+          </div>
+          <div class="fb-explain">${body}</div>
         </section>
       `;
     }
