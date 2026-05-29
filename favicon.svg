@@ -1,8 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" stroke="#0a0a0a" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" stroke="#0a0a0a" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
   <!-- Cloud body -->
   <path d="M9 18 A 4 4 0 0 1 11 11 A 5 5 0 0 1 20 11 A 4 4 0 0 1 23 18 Z"/>
   <!-- Swoosh / tail through the rain -->
-  <path d="M18 14 Q 22 18, 15 22" stroke-width="1.6"/>
+  <path d="M18 14 Q 22 18, 15 22" stroke-width="2.4"/>
   <!-- Three diagonal rain lines -->
   <line x1="8"  y1="22" x2="11" y2="28"/>
   <line x1="12" y1="22" x2="15" y2="28"/>
