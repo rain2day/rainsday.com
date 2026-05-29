@@ -25,11 +25,15 @@ creative tools. Live at **https://rainsday.com**.
 │   ├── index.html
 │   ├── styles.css          # wide-card landscape cover, menu/social/resource index
 │   └── script.js           # cursor, pointer light, magnetic CTA
+├── jlpt/                   # JLPT Grammar Lab (rainsday.com/jlpt/)
+│   ├── index.html
+│   └── jlpt-data.js
 ├── remotion/               # Remotion compositions (see remotion/README.md)
 └── CNAME                   # Custom domain for GitHub Pages
 ```
 
-Versions cross-link in their headers (`V1 ↗` / `V2 ↗` / `V3 ↗`).
+Versions cross-link in their headers (`V1 ↗` / `V2 ↗` / `V3 ↗`). The JLPT
+lab is a standalone study tool and can be opened directly at `/jlpt/`.
 
 ## Local preview
 
