@@ -3,33 +3,31 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="rainsday is a Hong Kong design and technology studio building polished iOS apps, websites, automation systems, and brand tools.">
+    <meta name="description" content="A Hong Kong design and technology studio. Edition 05: scroll into a real-time black hole — iOS apps, web tools, automation, brand systems.">
     <meta name="robots" content="index,follow">
-    <meta name="theme-color" content="#ffffff">
+    <meta name="theme-color" content="#06070f">
     <link rel="canonical" href="https://rainsday.com/">
-    <title>rainsday | Hong Kong design and technology studio</title>
+    <title>rainsday — build for what's next | Hong Kong design &amp; technology studio</title>
 
-    <!-- Favicons -->
-    <link rel="icon" href="favicon.svg?v=4" type="image/svg+xml">
-    <link rel="icon" href="favicon.ico?v=4" sizes="any">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png?v=4">
+    <link rel="icon" href="favicon.svg?v=5" type="image/svg+xml">
+    <link rel="icon" href="favicon.ico?v=5" sizes="any">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png?v=5">
 
-    <!-- OpenGraph / link preview -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://rainsday.com/">
-    <meta property="og:title" content="rainsday | Hong Kong design and technology studio">
-    <meta property="og:description" content="Polished iOS apps, websites, automation systems, and brand tools from Hong Kong.">
-    <meta property="og:image" content="https://rainsday.com/assets/og-image.png">
+    <meta property="og:title" content="rainsday — build for what's next | Hong Kong design &amp; technology studio">
+    <meta property="og:description" content="A Hong Kong design and technology studio. Edition 05: scroll into a real-time black hole — iOS apps, web tools, automation, brand systems.">
+    <meta property="og:image" content="https://rainsday.com/assets/og-journey.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="rainsday. cloud and rain mark.">
+    <meta property="og:image:alt" content="rainsday Edition 05: The Descent, a black-hole scrollytelling journey.">
     <meta property="og:site_name" content="rainsday">
 
-    <!-- Twitter card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="rainsday | Hong Kong design and technology studio">
-    <meta name="twitter:description" content="Polished iOS apps, websites, automation systems, and brand tools from Hong Kong.">
-    <meta name="twitter:image" content="https://rainsday.com/assets/og-image.png">
+    <meta name="twitter:title" content="rainsday — build for what's next | Hong Kong design &amp; technology studio">
+    <meta name="twitter:description" content="A Hong Kong design and technology studio. Edition 05: scroll into a real-time black hole.">
+    <meta name="twitter:image" content="https://rainsday.com/assets/og-journey.png">
+
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -45,706 +43,344 @@
       }
     </script>
 
-    <link rel="preload" as="image" href="assets/hero-bg-poster.jpg">
-    <link rel="prefetch" href="assets/hero-bg-1.mp4" type="video/mp4">
-    <link rel="prefetch" href="assets/hero-bg-2.mp4">
-    <link rel="prefetch" href="assets/hero-bg-3.mp4">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap"
     >
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="journey.css">
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.182.0/examples/jsm/"
+        }
+      }
+    </script>
   </head>
-  <body class="v4">
-    <a class="skip-link" href="#main">Skip to content</a>
+  <body class="journey-experience">
+    <a class="skip-link" href="#act-5">Skip to contact</a>
 
-    <!-- Scroll-progress hairline (CSS animation-timeline: scroll(root block)) -->
-    <div class="scroll-progress" aria-hidden="true"></div>
+    <canvas
+      id="journey-canvas"
+      class="journey-canvas"
+      data-journey-canvas
+      aria-hidden="true"
+    ></canvas>
 
-    <div class="cursor" aria-hidden="true">
-      <span class="cursor-dot"></span>
-      <span class="cursor-ring"></span>
+    <div class="journey-fallback" data-journey-fallback aria-hidden="true">
+      <span class="fallback-core"></span>
+      <span class="fallback-ring"></span>
+      <span class="fallback-ray fallback-ray--one"></span>
+      <span class="fallback-ray fallback-ray--two"></span>
     </div>
 
-    <!-- =========================================================
-         TOP NAV (tiny, muscat-style)
-         ========================================================= -->
-    <header class="topbar" aria-label="Primary">
-      <div class="topbar-left">
-        <a href="#top" class="topbar-home" aria-label="Home">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-            <path d="M3 11.5 12 3l9 8.5"></path>
-            <path d="M5 10v10h14V10"></path>
-          </svg>
-        </a>
-        <a class="topbar-lang" href="#contact" aria-label="Jump to contact">
-          <span>MAIL</span>
-        </a>
+    <header class="journey-hud" aria-label="rainsday descent telemetry">
+      <div class="hud-frame" aria-hidden="true">
+        <span></span><span></span><span></span><span></span>
       </div>
-      <div class="topbar-right">
-        <a class="brand" href="#top" aria-label="rainsday home">
-          <span class="brand-mark" aria-hidden="true">
-            <img src="assets/logo-mark.svg" alt="" width="40" height="27">
-          </span>
-          <span class="brand-word">rainsday <em>Group</em></span>
-        </a>
-        <button class="topbar-menu" aria-label="Menu" aria-expanded="false" aria-controls="site-menu" data-magnetic>
-          <span></span><span></span><span></span>
-        </button>
+
+      <div class="hud-zone hud-zone--brand">
+        <a class="hud-wordmark" href="/" aria-label="rainsday home">rainsday</a>
+        <span class="hud-tag">EDITION 05 — THE DESCENT</span>
       </div>
-      <nav class="menu-panel" id="site-menu" aria-label="Menu" aria-hidden="true" hidden>
-        <div class="menu-panel-inner">
-          <a href="#we-are">We are</a>
-          <a href="#project">Selected work</a>
-          <a href="#people">Approach</a>
-          <a href="#produce">Business</a>
-          <a href="#news">News</a>
-          <a href="#contact">Contact</a>
+
+      <button class="hud-menu-button" type="button" aria-expanded="false" aria-controls="journey-menu" data-menu-open>
+        MENU
+      </button>
+
+      <dl class="hud-readouts" aria-label="Live camera readouts">
+        <div>
+          <dt>DISTANCE</dt>
+          <dd data-hud-distance>4.3×10⁸ km</dd>
         </div>
-      </nav>
+        <div>
+          <dt>DILATION</dt>
+          <dd data-hud-dilation>×1.015</dd>
+        </div>
+        <div>
+          <dt>VELOCITY</dt>
+          <dd data-hud-velocity>0.17 c</dd>
+        </div>
+      </dl>
+
+      <div class="hud-progress">
+        <p data-hud-act>ACT 00 — DEPARTURE</p>
+        <span class="progress-track" aria-hidden="true"><span data-hud-progress></span></span>
+      </div>
+
+      <p class="scroll-hint" data-scroll-hint>SCROLL TO BEGIN THE DESCENT ↓</p>
     </header>
 
-    <main id="main">
-      <!-- =========================================================
-           1. HERO. bento pixel field + fish subject + scramble headline
-           ========================================================= -->
-      <section class="hero" id="top" aria-labelledby="hero-title">
-        <!-- Full-bleed video bottom layer. JS rotates the source 1 → 2 → 3 → 1. -->
-        <video
-          class="hero-bg-video"
-          data-hero-sequence='["assets/hero-bg-1.mp4","assets/hero-bg-2.mp4","assets/hero-bg-3.mp4"]'
-          src="assets/hero-bg-1.mp4"
-          poster="assets/hero-bg-poster.jpg"
-          autoplay muted playsinline preload="auto"
-          aria-label="rainsday cover. White betta fish swimming through the FISH wordmark."
-        ></video>
+    <nav class="journey-menu" id="journey-menu" data-menu-overlay aria-label="Journey menu" hidden>
+      <div class="menu-shell" role="dialog" aria-modal="true" aria-labelledby="menu-title">
+        <div class="menu-topline">
+          <p id="menu-title">THE DESCENT</p>
+          <button type="button" data-menu-close>Close</button>
+        </div>
+        <div class="menu-links">
+          <a href="#act-0">DEPARTURE</a>
+          <a href="#act-1">THE APPROACH</a>
+          <a href="#act-2">IN ORBIT</a>
+          <a href="#act-3">TIME DILATION</a>
+          <a href="#act-4">EVENT HORIZON</a>
+          <a href="#act-5">ESCAPE</a>
+        </div>
+        <div class="menu-secondary">
+          <a href="black-hole/">LAB 01</a>
+          <a href="v4/">ARCHIVE 04</a>
+          <a href="mailto:hello@rainsday.com">MAIL</a>
+        </div>
+      </div>
+    </nav>
 
-        <!-- Lime + ink pixel field overlay (above video, below copy). -->
-        <div class="hero-field" data-bento-field aria-hidden="true"></div>
-
-        <!-- Headline + lede left -->
-        <div class="hero-copy">
-          <h1 id="hero-title" class="hero-title" data-scramble>
-            <span class="scramble-line"><span class="scramble-text">Build for</span></span>
-            <span class="scramble-line"><span class="scramble-text">what's</span></span>
-            <span class="scramble-line"><span class="scramble-text">next.</span></span>
-          </h1>
-
-          <div class="hero-lede" data-reveal>
-            <p>
-              <span class="lede-eyebrow">rainsday GROUP</span>
-              A Hong Kong studio for iOS, web, automation, and brand systems.
-              We turn rough ideas into working product with the craft to make
-              them feel inevitable.
-            </p>
-            <p class="hero-by">
-              <span>Direction</span>
-              <strong>rainsday</strong>
-            </p>
+    <main class="journey-story" id="main" data-journey-story>
+      <section class="act act--departure" id="act-0" data-act="0" data-act-name="DEPARTURE" style="--span: 120vh" aria-labelledby="act-0-title">
+        <div class="act-pin">
+          <div class="act-copy act-copy--hero" data-act-copy>
+            <p class="kicker">RAINSDAY — EDITION 05</p>
+            <h1 id="act-0-title">Build for what's next.</h1>
+            <p class="lead">A Hong Kong studio for iOS, web, automation and brand systems. This year, we built a black hole. Scroll to fall in.</p>
           </div>
         </div>
+      </section>
 
-        <!-- Bottom-left Pick Up card. Double-Bezel shell + inner core -->
-        <a class="pickup-card" href="#project" data-tilt>
-          <div class="pickup-card-inner">
-            <div class="pickup-tag">
-              <span class="dot"></span>
-              <span>Pick Up</span>
+      <section class="act act--approach" id="act-1" data-act="1" data-act-name="THE APPROACH" style="--span: 160vh" aria-labelledby="act-1-title">
+        <div class="act-pin">
+          <div class="act-copy act-copy--left" data-act-copy>
+            <p class="kicker">01 — THE APPROACH</p>
+            <h2 id="act-1-title">We are rainsday.</h2>
+            <p>Small studio, heavy pull. We take rough ideas and compress them until they shine — iOS apps, web tools, automation, brand systems. Polished until they feel inevitable.</p>
+            <p class="accent-line">設計から実装、運用まで、一貫して。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="act act--orbit" id="act-2" data-act="2" data-act-name="IN ORBIT" style="--span: 540vh" aria-labelledby="act-2-title">
+        <div class="act-pin">
+          <div class="orbit-layout" data-act-copy>
+            <div class="orbit-intro">
+              <p class="kicker">02 — IN ORBIT</p>
+              <h2 id="act-2-title">Work in stable orbit.</h2>
+              <p class="lead">Six missions in orbit. Five live, one inbound.</p>
             </div>
-            <div class="pickup-kicker">Featured</div>
-            <h3 class="pickup-title">iOS · vibe code · app systems</h3>
-            <div class="pickup-cta">
-              <span>See the work</span>
-              <span class="arrow">↳</span>
+
+            <div class="orbit-cards" data-orbit-cards>
+              <article class="orbit-card is-active" data-orbit-card data-side="right">
+                <span class="mission-ghost" aria-hidden="true">01</span>
+                <figure class="mission-media">
+                  <span class="satellite-badge">SAT-01</span>
+                  <img src="assets/project-hong-kong-feels-like-mascot.png" alt="香港體感 mascot for Hong Kong feels-like weather.">
+                </figure>
+                <div class="orbit-card-copy">
+                  <div class="mission-meta">
+                    <span class="mission-status-dot" aria-hidden="true"></span>
+                    <p class="project-tag">NEW · APP STORE 公開中</p>
+                  </div>
+                  <h3>香港體感</h3>
+                  <p class="mission-summary">See how hard Hong Kong feels today — eighteen-district heat, AQHI, widgets.</p>
+                  <p class="mission-spec">STATUS LIVE · iOS · APP STORE</p>
+                  <a href="https://apps.apple.com/hk/app/%E9%A6%99%E6%B8%AF%E9%AB%94%E6%84%9F/id6774880789">Open App Store ↳</a>
+                </div>
+              </article>
+
+              <article class="orbit-card" data-orbit-card data-side="left">
+                <span class="mission-ghost" aria-hidden="true">02</span>
+                <figure class="mission-media mission-media--mark">
+                  <span class="satellite-badge">SAT-02</span>
+                  <svg class="project-mark project-mark--wildfrog" viewBox="0 0 240 240" aria-hidden="true" focusable="false">
+                    <path d="M18 176 78 78l70 98H18Z" fill="#34ff00"></path>
+                    <path d="M82 176 150 58l72 118H82Z" fill="#34ff00"></path>
+                    <path d="M150 58 171 92h-42l21-34Z" fill="#07100d"></path>
+                  </svg>
+                </figure>
+                <div class="orbit-card-copy">
+                  <div class="mission-meta">
+                    <span class="mission-status-dot" aria-hidden="true"></span>
+                    <p class="project-tag">SUBMITTED · APP REVIEW 2026</p>
+                  </div>
+                  <h3>WildFrog 野青蛙</h3>
+                  <p class="mission-summary">GPS summit check-ins for Hong Kong's 330 peaks — collectible certificates, equippable titles, live trail tracking.</p>
+                  <p class="mission-spec">STATUS IN REVIEW · iOS · 330 PEAKS</p>
+                  <a href="mailto:hello@rainsday.com?subject=WildFrog">Ask about it ↳</a>
+                </div>
+              </article>
+
+              <article class="orbit-card" data-orbit-card data-side="right">
+                <span class="mission-ghost" aria-hidden="true">03</span>
+                <figure class="mission-media">
+                  <span class="satellite-badge">SAT-03</span>
+                  <img src="assets/project-expensecal-appstore.jpg" alt="expenseCal App Store preview.">
+                </figure>
+                <div class="orbit-card-copy">
+                  <div class="mission-meta">
+                    <span class="mission-status-dot" aria-hidden="true"></span>
+                    <p class="project-tag">APP STORE 公開中</p>
+                  </div>
+                  <h3>expenseCal</h3>
+                  <p class="mission-summary">Travel expenses and friend splits — multi-currency, net settlement, now live.</p>
+                  <p class="mission-spec">STATUS LIVE · iOS · MULTI-CURRENCY</p>
+                  <a href="https://apps.apple.com/hk/app/expensecal/id6769398965">Open App Store ↳</a>
+                </div>
+              </article>
+
+              <article class="orbit-card" data-orbit-card data-side="left">
+                <span class="mission-ghost" aria-hidden="true">04</span>
+                <figure class="mission-media">
+                  <span class="satellite-badge">SAT-04</span>
+                  <img src="assets/project-2.jpg" alt="Love Contract launch edition visual.">
+                </figure>
+                <div class="orbit-card-copy">
+                  <div class="mission-meta">
+                    <span class="mission-status-dot" aria-hidden="true"></span>
+                    <p class="project-tag">LAUNCH EDITION</p>
+                  </div>
+                  <h3>Love Contract</h3>
+                  <p class="mission-summary">Small daily promises, kept on schedule.</p>
+                  <p class="mission-spec">LAUNCH EDITION · iOS</p>
+                  <a href="mailto:hello@rainsday.com?subject=Love%20Contract%20case%20study">Ask about it ↳</a>
+                </div>
+              </article>
+
+              <article class="orbit-card" data-orbit-card data-side="right">
+                <span class="mission-ghost" aria-hidden="true">05</span>
+                <figure class="mission-media">
+                  <span class="satellite-badge">SAT-05</span>
+                  <img src="assets/project-jlpt.jpg" alt="RaIN JLPT Grammar Lab web app.">
+                </figure>
+                <div class="orbit-card-copy">
+                  <div class="mission-meta">
+                    <span class="mission-status-dot" aria-hidden="true"></span>
+                    <p class="project-tag">日本語学習ラボ</p>
+                  </div>
+                  <h3>RaIN JLPT Grammar Lab</h3>
+                  <p class="mission-summary">310 grammar drills with memory, N3/N2, weak-point practice.</p>
+                  <p class="mission-spec">STATUS LIVE · WEB · 310 DRILLS</p>
+                  <a href="jlpt/">Open lab ↳</a>
+                </div>
+              </article>
+
+              <article class="orbit-card" data-orbit-card data-side="left">
+                <span class="mission-ghost" aria-hidden="true">06</span>
+                <figure class="mission-media">
+                  <span class="satellite-badge">SAT-06</span>
+                  <img src="assets/project-4.jpg" alt="Research and longform output visual.">
+                </figure>
+                <div class="orbit-card-copy">
+                  <div class="mission-meta">
+                    <span class="mission-status-dot" aria-hidden="true"></span>
+                    <p class="project-tag">リサーチ &amp; 文書</p>
+                  </div>
+                  <h3>Research &amp; longform</h3>
+                  <p class="mission-summary">CSV, chat-log and Excel analysis with a designer's output. Reports that ship.</p>
+                  <p class="mission-spec">ON REQUEST · DOCS</p>
+                  <a href="mailto:hello@rainsday.com?subject=research%20case%20study">Ask about it ↳</a>
+                </div>
+              </article>
             </div>
           </div>
-        </a>
-      </section>
-
-      <!-- =========================================================
-           2. WE ARE
-           ========================================================= -->
-      <section class="we-are" id="we-are" data-tone="dark" aria-labelledby="we-title">
-        <div class="we-grid" aria-hidden="true">
-          <figure class="we-tile" data-reveal style="--col:1;--row:1"><img src="assets/about-tile-1.jpg" alt=""></figure>
-          <figure class="we-tile" data-reveal style="--col:2;--row:1"><img src="assets/about-tile-2.jpg" alt=""></figure>
-          <figure class="we-tile" data-reveal style="--col:4;--row:1"><img src="assets/about-tile-3.jpg" alt=""></figure>
-          <figure class="we-tile" data-reveal style="--col:1;--row:2"><img src="assets/about-tile-4.jpg" alt=""></figure>
-          <figure class="we-tile" data-reveal style="--col:4;--row:2"><img src="assets/about-tile-5.jpg" alt=""></figure>
-          <figure class="we-tile" data-reveal style="--col:2;--row:3"><img src="assets/about-tile-6.jpg" alt=""></figure>
-        </div>
-
-        <div class="we-overlay">
-          <p class="we-kicker" data-reveal>We are</p>
-          <h2 id="we-title" class="we-display" data-reveal-stagger>
-            <span class="reveal-line"><span>rainsday</span></span>
-          </h2>
-          <p class="we-body" data-reveal>
-            「Build for what's next.」を掲げ、design・iOS・automation を武器に、
-            polished な product と shipping tools を作り続ける Hong Kong studio です。
-          </p>
-          <a class="we-cta" href="#project" data-magnetic>
-            <span>Selected work</span>
-            <span class="arrow">↳</span>
-          </a>
         </div>
       </section>
 
-      <!-- =========================================================
-           3. PROJECT. case rail with directional hover sweep
-           ========================================================= -->
-      <section class="project" id="project" aria-labelledby="project-title">
-        <header class="project-head">
-          <p class="kicker" data-reveal>
-            <span class="square"></span>
-            <span>Selected work</span>
-          </p>
-          <h2 id="project-title" class="section-title" data-reveal-stagger>
-            <span class="reveal-line"><span>Project</span></span>
-          </h2>
-          <p class="section-body" data-reveal>
-            これまでに手がけてきたプロジェクト。<br>
-            Selected iOS apps, vibe-coded tools, and design systems
-            shipped under the rainsday name. Small teams, high polish, no dead decks.
-          </p>
-          <a class="section-cta" href="#contact" data-magnetic>
-            <span>Start a project</span>
-            <span class="arrow">↳</span>
-          </a>
-        </header>
-
-        <div class="project-rail" data-rail>
-          <article class="project-card project-card--featured" data-tilt data-sweep>
-            <div class="project-shot project-shot--mascot">
-              <img src="assets/project-hong-kong-feels-like-mascot.png" alt="香港體感 sweating sun mascot holding a small fan.">
-            </div>
-            <div class="project-body">
-              <div class="project-tag">
-                <span class="square"></span>
-                <span>New App Store 公開中</span>
-              </div>
-              <h3 class="project-headline">
-                香港體感. See how hard Hong Kong feels today.
-              </h3>
-              <p class="project-lede">
-                A native iPhone weather app for eighteen-district heat,
-                humidity, wind, AQHI, map hotspots, widgets, and local
-                notification thresholds.
-              </p>
-              <a class="project-more" href="https://apps.apple.com/hk/app/%E9%A6%99%E6%B8%AF%E9%AB%94%E6%84%9F/id6774880789" target="_blank" rel="noopener" data-magnetic>
-                <span>Open App Store</span><span class="arrow">↳</span>
-              </a>
-            </div>
-          </article>
-
-          <article class="project-card" data-tilt data-sweep>
-            <div class="project-shot">
-              <img src="assets/project-expensecal-appstore.jpg" alt="expenseCal. Travel expense and friend splitting iPhone app, live on the App Store.">
-            </div>
-            <div class="project-body">
-              <div class="project-tag">
-                <span class="square"></span>
-                <span>App Store 公開中</span>
-              </div>
-              <h3 class="project-headline">
-                expenseCal. Travel expenses and friend splits, now live.
-              </h3>
-              <p class="project-lede">
-                A native iPhone finance app for trip costs, shared
-                purchases, requests, multi-currency tracking, and clear
-                final settlements. Available now on the App Store.
-              </p>
-              <a class="project-more" href="https://apps.apple.com/hk/app/expensecal/id6769398965" target="_blank" rel="noopener" data-magnetic>
-                <span>Open App Store</span><span class="arrow">↳</span>
-              </a>
-            </div>
-          </article>
-
-          <article class="project-card" data-tilt data-sweep>
-            <div class="project-shot">
-              <img src="assets/project-2.jpg" alt="Love Contract. Relationship promise tracker iOS app.">
-            </div>
-            <div class="project-body">
-              <div class="project-tag">
-                <span class="square"></span>
-                <span>M&amp;Aの取り組み</span>
-              </div>
-              <h3 class="project-headline">
-                Love Contract. Small daily promises, kept on schedule.
-              </h3>
-              <p class="project-lede">
-                A native iOS contract-style relationship app. Built
-                with Vibe Code over weekends, polished for the launch
-                edition.
-              </p>
-              <a class="project-more" href="mailto:hello@rainsday.com?subject=Love%20Contract%20case%20study" data-magnetic>
-                <span>Ask about it</span><span class="arrow">↳</span>
-              </a>
-            </div>
-          </article>
-
-          <article class="project-card" data-tilt data-sweep>
-            <div class="project-shot">
-              <img src="assets/project-jlpt.jpg" alt="RaIN JLPT Grammar Lab. Japanese grammar quiz web app for N3 and N2 study.">
-            </div>
-            <div class="project-body">
-              <div class="project-tag">
-                <span class="square"></span>
-                <span>日本語学習ラボ</span>
-              </div>
-              <h3 class="project-headline">
-                RaIN JLPT Grammar Lab. N3/N2 grammar drills with memory.
-              </h3>
-              <p class="project-lede">
-                A standalone browser study tool with 310 grammar prompts,
-                level switching, mistake history, and weak-point practice
-                for focused Japanese revision.
-              </p>
-              <a class="project-more" href="jlpt/" data-magnetic>
-                <span>Open lab</span><span class="arrow">↳</span>
-              </a>
-            </div>
-          </article>
-
-          <article class="project-card" data-tilt data-sweep>
-            <div class="project-shot">
-              <img src="assets/project-4.jpg" alt="rainsday writing. Research and analysis longform.">
-            </div>
-            <div class="project-body">
-              <div class="project-tag">
-                <span class="square"></span>
-                <span>リサーチ &amp; 文書</span>
-              </div>
-              <h3 class="project-headline">
-                Research and longform. Turn data into a decision.
-              </h3>
-              <p class="project-lede">
-                CSV / chat-log / Excel analysis with a designer's
-                output sensibility. Reports that ship-ready, not
-                summaries that get re-edited.
-              </p>
-              <a class="project-more" href="mailto:hello@rainsday.com?subject=research%20and%20longform%20case%20study" data-magnetic>
-                <span>Ask about it</span><span class="arrow">↳</span>
-              </a>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <!-- =========================================================
-           4. PEOPLE
-           ========================================================= -->
-      <section class="people" id="people" aria-labelledby="people-title">
-        <div class="people-copy">
-          <p class="kicker" data-reveal>
-            <span class="square"></span>
-            <span>Approach</span>
-          </p>
-          <h2 id="people-title" class="section-title" data-reveal-stagger>
-            <span class="reveal-line"><span>People</span></span>
-          </h2>
-          <p class="section-body" data-reveal>
-            rainsday は、設計から実装、運用までを通しで手掛ける studio。<br>
-            小さな habit と shipping discipline。その積み重ねが、
-            毎回の product を確実に届ける土台になります。
-          </p>
-          <a class="section-cta" href="#produce" data-magnetic>
-            <span>How we work</span>
-            <span class="arrow">↳</span>
-          </a>
-        </div>
-
-        <div class="people-stage" aria-hidden="true">
-          <div class="people-grid"></div>
-
-          <h3 class="people-wordmark" data-reveal-stagger>
-            <span class="reveal-line"><span>rains</span></span>
-            <span class="reveal-line"><span>day</span></span>
-          </h3>
-
-          <a class="people-tag people-tag--design" href="#we-are" data-magnetic data-bento-tag>
-            <img src="assets/people-bento-1.jpg" alt="">
-            <span class="people-tag-label">DESIGN</span>
-          </a>
-          <a class="people-tag people-tag--ios" href="#project" data-magnetic data-bento-tag>
-            <img src="assets/people-bento-2.jpg" alt="">
-            <span class="people-tag-label">iOS</span>
-          </a>
-          <a class="people-tag people-tag--vibe" href="#project" data-magnetic data-bento-tag>
-            <img src="assets/people-bento-3.jpg" alt="">
-            <span class="people-tag-label">VIBE&nbsp;CODE</span>
-          </a>
-          <a class="people-tag people-tag--auto" href="#project" data-magnetic data-bento-tag>
-            <img src="assets/people-bento-4.jpg" alt="">
-            <span class="people-tag-label">AUTOMATION</span>
-          </a>
-        </div>
-      </section>
-
-      <!-- =========================================================
-           5. BUSINESS BRIDGE BAND
-           ========================================================= -->
-      <section class="bridge" aria-label="Business intro">
-        <p class="kicker" data-reveal>
-          <span class="square"></span>
-          <span>Business</span>
-        </p>
-        <h2 class="bridge-headline" data-reveal-stagger>
-          <span class="reveal-line"><span>rainsday の主力事業について</span></span>
-          <span class="reveal-line"><span>ご紹介します。</span></span>
-        </h2>
-        <a class="section-cta" href="#produce" data-magnetic>
-          <span>Explore services</span>
-          <span class="arrow">↳</span>
-        </a>
-      </section>
-
-      <!-- =========================================================
-           6. BRAND PRODUCE + BRAND PARTNER (split)
-              Partner is now an infinite marquee (one marquee per page).
-           ========================================================= -->
-      <section class="split" id="produce">
-        <article class="split-card produce" aria-labelledby="produce-title">
-          <header class="split-head">
-            <p class="kicker"><span class="square"></span><span>Business 01</span></p>
-            <h3 id="produce-title" class="split-title" data-reveal-stagger>
-              <span class="reveal-line"><span>Brand Produce</span></span>
-            </h3>
-          </header>
-          <div class="produce-tiles">
-            <figure data-tilt><img src="assets/produce-1.jpg" alt="rainsday product still 01"></figure>
-            <figure data-tilt><img src="assets/produce-2.jpg" alt="rainsday product still 02"></figure>
-            <figure data-tilt><img src="assets/produce-3.jpg" alt="rainsday product still 03"></figure>
+      <section class="act act--dilation" id="act-3" data-act="3" data-act-name="TIME DILATION" style="--span: 140vh" aria-labelledby="act-3-title">
+        <div class="act-pin">
+          <div class="act-copy act-copy--right" data-act-copy>
+            <p class="kicker">03 — TIME DILATION</p>
+            <h2 id="act-3-title">Near the horizon, time runs slow.</h2>
+            <p>That's where we work. Deep in the gravity well of a problem — small habits, shipping discipline, craft that compounds. One hour here is a launch out there.</p>
+            <ul class="field-rules" aria-label="Field rules">
+              <li data-field-rule>01 — SHIP FIRST. POLISH EVERY ORBIT AFTER.</li>
+              <li data-field-rule>02 — AI IS THE STAFF. DIRECTION IS MINE.</li>
+              <li data-field-rule>03 — EVIDENCE BEATS PLANS.</li>
+              <li data-field-rule>04 — MATCH THE REFERENCE. APPROXIMATION ISN'T DESIGN.</li>
+            </ul>
+            <p class="readout-callout">×1.31 AND CLIMBING</p>
           </div>
-          <a class="section-cta" href="#contact" data-magnetic>
-            <span>Book a build</span>
-            <span class="arrow">↳</span>
-          </a>
-        </article>
-
-        <article class="split-card partner" aria-labelledby="partner-title">
-          <header class="split-head">
-            <p class="kicker"><span class="square"></span><span>Business 02</span></p>
-            <h3 id="partner-title" class="split-title" data-reveal-stagger>
-              <span class="reveal-line"><span>Brand Partner</span></span>
-            </h3>
-          </header>
-
-          <div class="partner-marquee" aria-label="Brand partner roster" data-marquee>
-            <div class="partner-track">
-              <!-- Set A. Custom monograms, unified line-weight family. -->
-              <span class="partner-cell">
-                <svg class="partner-mark" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
-                  <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/>
-                  <path d="M5 6 L18 19" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-                  <circle cx="12" cy="12" r="2" fill="currentColor"/>
-                </svg>
-                <span>Kintsugi Lab</span>
-              </span>
-              <span class="partner-cell">
-                <svg class="partner-mark" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
-                  <path d="M12 3 C 8 9, 6 13, 6 16 a 6 6 0 0 0 12 0 c 0 -3 -2 -7 -6 -13 Z" fill="currentColor"/>
-                </svg>
-                <span>Petrichor</span>
-              </span>
-              <span class="partner-cell">
-                <svg class="partner-mark" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
-                  <circle cx="12" cy="12" r="7" fill="currentColor"/>
-                  <path d="M9 8 Q 12 12, 15 16" fill="none" stroke="var(--paper)" stroke-width="1.5" stroke-linecap="round"/>
-                </svg>
-                <span>Holdfast Coffee</span>
-              </span>
-              <span class="partner-cell">
-                <svg class="partner-mark" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
-                  <path d="M3 16 A 9 9 0 0 1 21 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-                  <path d="M6 16 A 6 6 0 0 1 18 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-                  <circle cx="12" cy="16" r="1.6" fill="currentColor"/>
-                </svg>
-                <span>Lumen Atlas</span>
-              </span>
-              <span class="partner-cell">
-                <svg class="partner-mark" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
-                  <path d="M5 19 L19 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-                  <circle cx="5" cy="5" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/>
-                  <circle cx="19" cy="19" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/>
-                </svg>
-                <span>Marlow &amp; Co.</span>
-              </span>
-              <span class="partner-cell">
-                <svg class="partner-mark" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
-                  <path d="M2 14 Q 6 8, 10 14 T 18 14 T 26 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-                  <path d="M2 10 Q 6 4, 10 10 T 18 10 T 26 10" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" opacity="0.5"/>
-                </svg>
-                <span>Driftwood Apps</span>
-              </span>
-              <span class="partner-cell">
-                <svg class="partner-mark" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
-                  <path d="M3 20 L12 4 L21 20 Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
-                  <line x1="12" y1="9" x2="12" y2="20" stroke="currentColor" stroke-width="1.6"/>
-                </svg>
-                <span>Sundial</span>
-              </span>
-              <span class="partner-cell">
-                <svg class="partner-mark" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
-                  <rect x="4" y="3" width="6" height="18" fill="currentColor"/>
-                  <rect x="14" y="3" width="6" height="18" fill="none" stroke="currentColor" stroke-width="1.6"/>
-                  <line x1="14" y1="9" x2="20" y2="9" stroke="currentColor" stroke-width="1.6"/>
-                </svg>
-                <span>Cobalt Press</span>
-              </span>
-              <!-- Set B. duplicate for seamless loop -->
-              <span class="partner-cell" aria-hidden="true">
-                <svg class="partner-mark" viewBox="0 0 24 24" width="22" height="22">
-                  <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/>
-                  <path d="M5 6 L18 19" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-                  <circle cx="12" cy="12" r="2" fill="currentColor"/>
-                </svg>
-                <span>Kintsugi Lab</span>
-              </span>
-              <span class="partner-cell" aria-hidden="true">
-                <svg class="partner-mark" viewBox="0 0 24 24" width="22" height="22">
-                  <path d="M12 3 C 8 9, 6 13, 6 16 a 6 6 0 0 0 12 0 c 0 -3 -2 -7 -6 -13 Z" fill="currentColor"/>
-                </svg>
-                <span>Petrichor</span>
-              </span>
-              <span class="partner-cell" aria-hidden="true">
-                <svg class="partner-mark" viewBox="0 0 24 24" width="22" height="22">
-                  <circle cx="12" cy="12" r="7" fill="currentColor"/>
-                  <path d="M9 8 Q 12 12, 15 16" fill="none" stroke="var(--paper)" stroke-width="1.5" stroke-linecap="round"/>
-                </svg>
-                <span>Holdfast Coffee</span>
-              </span>
-              <span class="partner-cell" aria-hidden="true">
-                <svg class="partner-mark" viewBox="0 0 24 24" width="22" height="22">
-                  <path d="M3 16 A 9 9 0 0 1 21 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-                  <path d="M6 16 A 6 6 0 0 1 18 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-                  <circle cx="12" cy="16" r="1.6" fill="currentColor"/>
-                </svg>
-                <span>Lumen Atlas</span>
-              </span>
-              <span class="partner-cell" aria-hidden="true">
-                <svg class="partner-mark" viewBox="0 0 24 24" width="22" height="22">
-                  <path d="M5 19 L19 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-                  <circle cx="5" cy="5" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/>
-                  <circle cx="19" cy="19" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/>
-                </svg>
-                <span>Marlow &amp; Co.</span>
-              </span>
-              <span class="partner-cell" aria-hidden="true">
-                <svg class="partner-mark" viewBox="0 0 24 24" width="22" height="22">
-                  <path d="M2 14 Q 6 8, 10 14 T 18 14 T 26 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-                  <path d="M2 10 Q 6 4, 10 10 T 18 10 T 26 10" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" opacity="0.5"/>
-                </svg>
-                <span>Driftwood Apps</span>
-              </span>
-              <span class="partner-cell" aria-hidden="true">
-                <svg class="partner-mark" viewBox="0 0 24 24" width="22" height="22">
-                  <path d="M3 20 L12 4 L21 20 Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
-                  <line x1="12" y1="9" x2="12" y2="20" stroke="currentColor" stroke-width="1.6"/>
-                </svg>
-                <span>Sundial</span>
-              </span>
-              <span class="partner-cell" aria-hidden="true">
-                <svg class="partner-mark" viewBox="0 0 24 24" width="22" height="22">
-                  <rect x="4" y="3" width="6" height="18" fill="currentColor"/>
-                  <rect x="14" y="3" width="6" height="18" fill="none" stroke="currentColor" stroke-width="1.6"/>
-                  <line x1="14" y1="9" x2="20" y2="9" stroke="currentColor" stroke-width="1.6"/>
-                </svg>
-                <span>Cobalt Press</span>
-              </span>
-            </div>
-          </div>
-
-          <a class="section-cta" href="#contact" data-magnetic>
-            <span>Partner with us</span>
-            <span class="arrow">↳</span>
-          </a>
-        </article>
-      </section>
-
-      <!-- =========================================================
-           7. NEWS. letter-by-letter reveal on enter
-           ========================================================= -->
-      <section class="news" id="news" aria-labelledby="news-title">
-        <header class="news-head">
-          <h2 id="news-title" class="section-title" data-reveal-stagger>
-            <span class="reveal-line"><span>News</span></span>
-          </h2>
-          <a class="section-cta" href="#contact" data-magnetic>
-            <span>Send a brief</span>
-            <span class="arrow">↳</span>
-          </a>
-        </header>
-
-        <ol class="news-list">
-          <li class="news-row" data-reveal>
-            <a href="#contact">
-              <span class="news-title" data-letters>
-                expenseCal 1.5: net settlement and pair batches now generally available
-              </span>
-              <span class="news-foot">
-                <time datetime="2026-05-26">2026.05.26</time>
-                <span class="arrow">↳</span>
-              </span>
-            </a>
-          </li>
-          <li class="news-row" data-reveal>
-            <a href="https://apps.apple.com/hk/app/%E9%A6%99%E6%B8%AF%E9%AB%94%E6%84%9F/id6774880789" target="_blank" rel="noopener">
-              <span class="news-title" data-letters>
-                香港體感 1.0: eighteen-district feels-like heat app now live on the App Store
-              </span>
-              <span class="news-foot">
-                <time datetime="2026-06-04">2026.06.04</time>
-                <span class="arrow">↳</span>
-              </span>
-            </a>
-          </li>
-          <li class="news-row" data-reveal>
-            <a href="#project">
-              <span class="news-title" data-letters>
-                rainsday.com edition 04: a layout study in lime and ink
-              </span>
-              <span class="news-foot">
-                <time datetime="2026-05-27">2026.05.27</time>
-                <span class="arrow">↳</span>
-              </span>
-            </a>
-          </li>
-          <li class="news-row" data-reveal>
-            <a href="#produce">
-              <span class="news-title" data-letters>
-                vibe code: three Claude Code skills written this month
-              </span>
-              <span class="news-foot">
-                <time datetime="2026-05-22">2026.05.22</time>
-                <span class="arrow">↳</span>
-              </span>
-            </a>
-          </li>
-          <li class="news-row" data-reveal>
-            <a href="#contact">
-              <span class="news-title" data-letters>
-                Love Contract: App Store submission, polish pass complete
-              </span>
-              <span class="news-foot">
-                <time datetime="2026-05-18">2026.05.18</time>
-                <span class="arrow">↳</span>
-              </span>
-            </a>
-          </li>
-        </ol>
-      </section>
-
-      <!-- =========================================================
-           8. DUAL
-           ========================================================= -->
-      <section class="dual" id="contact" aria-label="Studio and contact">
-        <div class="dual-stage" aria-hidden="true">
-          <span class="dual-word">RAINS</span>
-          <span class="dual-word">DAY</span>
-          <span class="dual-word">RAINS</span>
-          <span class="dual-word">DAY</span>
         </div>
+      </section>
 
-        <article class="dual-card" aria-labelledby="studio-title">
-          <div class="dual-card-inner">
-            <h3 id="studio-title" class="dual-title">Studio</h3>
-            <p class="kicker"><span class="square dark"></span><span>About rainsday</span></p>
-            <p class="dual-body">
-              rainsday は香港を拠点とする design &amp; technology studio。<br>
-              iOS、web、automation、document systems、brand。<br>
-              「to ship」を品質の基準として、設計から運用まで一貫して
-              手掛けています。
-            </p>
-            <a class="dual-cta" href="#we-are" data-magnetic>
-              <span>Studio notes</span>
-              <span class="arrow">↳</span>
+      <section class="act act--horizon" id="act-4" data-act="4" data-act-name="EVENT HORIZON" style="--span: 160vh" aria-labelledby="act-4-title">
+        <div class="act-pin">
+          <div class="log-panel" data-act-copy>
+            <div class="log-head">
+              <p class="kicker">04 — EVENT HORIZON</p>
+              <h2 id="act-4-title">Transmission log.</h2>
+            </div>
+            <ul class="transmission-list">
+              <li><a href="black-hole/">2026.06.12 — LAB 01: a real-time black hole with true gravitational lensing</a></li>
+              <li><span>2026.06.12 — expenseCal: eight cloud functions live; 195 web + 122 rules tests green</span></li>
+              <li><span>2026.06.11 — WildFrog 1.0 submitted to App Store review</span></li>
+              <li><span>2026.06.10 — expenseCal iOS functional audit: submit-ready</span></li>
+              <li><span>2026.06.09 — WildFrog: 330 collectible peak titles, honest GPS check-in</span></li>
+              <li><span>2026.06.06 — 香港體感: feels-like formula rebuilt on apparent temperature</span></li>
+              <li><a href="https://github.com/rain2day/codex-pet-meter">2026.06.06 — codex-pet-meter v0.3.0 open-sourced on GitHub</a></li>
+              <li><a href="https://apps.apple.com/hk/app/%E9%A6%99%E6%B8%AF%E9%AB%94%E6%84%9F/id6774880789">2026.06.04 — 香港體感 1.0 live on the App Store</a></li>
+              <li><a href="v4/">2026.05.27 — edition 04 archived</a></li>
+              <li><span>2026.05.26 — expenseCal 1.5: net settlement and pair batches GA</span></li>
+              <li><span>2026.05.22 — vibe code: three Claude Code skills shipped</span></li>
+            </ul>
+            <a class="lab-card" href="black-hole/">
+              <span>TAKE THE CONTROLS</span>
+              <strong>Fly it yourself — full cockpit, real geodesics, time dilation you can read.</strong>
+              <em>Enter Lab 01 ↳</em>
             </a>
+            <p class="caution-line">⚠ 1.5 rs TO PHOTON SPHERE</p>
           </div>
-        </article>
+        </div>
+      </section>
 
-        <article class="dual-card" aria-labelledby="contact-title">
-          <div class="dual-card-inner">
-            <h3 id="contact-title" class="dual-title">Contact</h3>
-            <p class="kicker"><span class="square dark"></span><span>Work together</span></p>
-            <p class="dual-body">
-              新規 commission、partnership、advisory engagement。<br>
-              プロジェクト概要と希望スケジュールをご記入の上、<br>
-              下記メールアドレスまでご連絡ください。1営業日以内に
-              ご返信いたします。
-            </p>
-            <a class="dual-cta" href="mailto:hello@rainsday.com" data-magnetic>
-              <span>hello@rainsday.com</span>
-              <span class="arrow">↳</span>
-            </a>
+      <section class="act act--escape" id="act-5" data-act="5" data-act-name="ESCAPE" style="--span: 140vh" aria-labelledby="act-5-title">
+        <div class="act-pin">
+          <div class="act-copy act-copy--contact" data-act-copy>
+            <p class="kicker">05 — ESCAPE VELOCITY</p>
+            <h2 id="act-5-title">Let's build what's next.</h2>
+            <p>New commissions, partnerships, advisory. Send a brief — we reply within one business day.</p>
+            <a class="magnetic-cta" href="mailto:hello@rainsday.com" data-magnetic>hello@rainsday.com</a>
+            <div class="secondary-links">
+              <a href="https://github.com/rainsday">GitHub ↳</a>
+              <a href="https://github.com/rain2day/codex-pet-meter">codex-pet-meter ↳</a>
+              <a href="black-hole/">Lab 01 ↳</a>
+              <a href="v4/">Archive 04 ↳</a>
+            </div>
+            <p class="footer-line">© 2026 rainsday — Hong Kong · powered by Schwarzschild geodesics · 重力</p>
           </div>
-        </article>
+        </div>
       </section>
     </main>
 
-    <!-- =========================================================
-         FOOTER
-         ========================================================= -->
-    <footer class="foot" aria-label="Site footer">
-      <div class="foot-top">
-        <div class="foot-brand">
-          <a class="brand brand--foot" href="#top">
-            <span class="brand-mark" aria-hidden="true">
-              <img src="assets/logo-mark.svg" alt="" width="40" height="27">
-            </span>
-            <span class="brand-word">rainsday <em>Group</em></span>
-          </a>
-          <p class="foot-tag">Build for what's next.</p>
+    <noscript>
+      <style>
+        .journey-canvas,
+        .journey-hud,
+        .journey-menu {
+          display: none !important;
+        }
 
-          <div class="foot-addr">
-            <p class="foot-addr-label">Studio</p>
-            <p>
-              Hong Kong<br>
-              hello@rainsday.com
-            </p>
-            <a class="foot-map" href="https://maps.google.com/?q=Hong+Kong" target="_blank" rel="noopener">
-              <span class="arrow">↳</span><span>Google Map</span>
-            </a>
-          </div>
-        </div>
+        body {
+          background:
+            radial-gradient(circle at 50% 15%, rgba(52, 255, 0, 0.16), transparent 26rem),
+            radial-gradient(circle at 50% 50%, #12142a 0, #06070f 52%, #020205 100%) !important;
+        }
 
-        <nav class="foot-nav" aria-label="Footer">
-          <a href="#we-are">We are</a>
-          <a href="#project">Project</a>
-          <a href="#people">People</a>
-          <a href="#produce">Business</a>
-        </nav>
+        .act {
+          min-height: auto !important;
+        }
 
-        <nav class="foot-sub" aria-label="Footer secondary">
-          <a href="#news">News</a>
-          <a href="#we-are">Studio</a>
-          <a href="mailto:hello@rainsday.com">Contact</a>
-        </nav>
+        .act-pin {
+          position: static !important;
+          min-height: auto !important;
+          height: auto !important;
+          padding: 7rem 1.25rem !important;
+        }
 
-        <div class="foot-social">
-          <span>Connect</span>
-          <a href="mailto:hello@rainsday.com" aria-label="Email rainsday"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg></a>
-          <a href="https://github.com/rainsday" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.15-1.11-1.46-1.11-1.46-.91-.62.07-.61.07-.61 1 .07 1.53 1.04 1.53 1.04.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.95 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.03A9.56 9.56 0 0 1 12 6.8c.85 0 1.7.11 2.5.34 1.91-1.3 2.75-1.03 2.75-1.03.55 1.38.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.85-2.34 4.7-4.57 4.95.36.31.68.92.68 1.85V21c0 .26.18.58.69.48A10 10 0 0 0 12 2"/></svg></a>
-          <a href="https://rainsday.com/" aria-label="rainsday home"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 11.5 12 3l9 8.5"/><path d="M5 10v10h14V10"/></svg></a>
-        </div>
-      </div>
+        [data-act-copy] {
+          opacity: 1 !important;
+          transform: none !important;
+        }
+      </style>
+    </noscript>
 
-      <div class="foot-bottom">
-        <span>© 2026 rainsday.com Inc.</span>
-        <span class="rule" aria-hidden="true"></span>
-        <a href="mailto:hello@rainsday.com?subject=Privacy%20request" class="foot-link">Privacy</a>
-        <span class="rule" aria-hidden="true"></span>
-        <a href="mailto:hello@rainsday.com" class="foot-link contact-cta" data-magnetic>
-          <span>Contact</span>
-          <span class="arrow">↳</span>
-        </a>
-      </div>
-
-      <p class="foot-megaword" aria-hidden="true">rainsday</p>
-    </footer>
-
-    <script src="script.js" defer></script>
+    <script src="journey.js" defer></script>
   </body>
 </html>

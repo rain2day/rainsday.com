@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A real-time Schwarzschild black-hole gravitational-lensing simulation from rainsday Lab: bent starlight, a Doppler-boosted accretion disk, photon ring, and live relativistic readouts.">
+    <meta name="robots" content="index,follow">
+    <meta name="theme-color" content="#000000">
+    <link rel="canonical" href="https://rainsday.com/black-hole/">
+    <title>Black hole — a real-time gravitational lensing simulation | rainsday</title>
+
+    <!-- Favicons -->
+    <link rel="icon" href="../favicon.svg?v=4" type="image/svg+xml">
+    <link rel="icon" href="../favicon.ico?v=4" sizes="any">
+    <link rel="apple-touch-icon" href="../apple-touch-icon.png?v=4">
+
+    <!-- OpenGraph / link preview -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://rainsday.com/black-hole/">
+    <meta property="og:title" content="Black hole — a real-time gravitational lensing simulation | rainsday">
+    <meta property="og:description" content="A ray-marched Schwarzschild simulation with bent starlight, a Doppler-boosted accretion disk, photon ring, and live relativistic HUD.">
+    <meta property="og:image" content="https://rainsday.com/black-hole/og-cover.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Black-hole gravitational-lensing simulation from rainsday Lab.">
+    <meta property="og:site_name" content="rainsday">
+
+    <!-- Twitter card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Black hole — a real-time gravitational lensing simulation | rainsday">
+    <meta name="twitter:description" content="Bent starlight, lensed disk arcs, Doppler beaming, and live Schwarzschild readouts in the browser.">
+    <meta name="twitter:image" content="https://rainsday.com/black-hole/og-cover.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap"
+    >
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="black-hole.css">
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.182.0/examples/jsm/"
+        }
+      }
+    </script>
+  </head>
+  <body class="v4 black-hole-experience">
+    <a class="skip-link" href="#simulation">Skip to simulation</a>
+
+    <!-- =========================================================
+         RAINSday LAB 01. full-screen gravitational lensing surface
+         ========================================================= -->
+    <main id="main">
+      <section class="black-hole-lab" id="simulation" data-black-hole-scene aria-labelledby="black-hole-title">
+        <canvas
+          id="black-hole-canvas"
+          tabindex="0"
+          aria-label="Interactive black-hole gravitational-lensing simulation. Drag to orbit, scroll to fall closer."
+        ></canvas>
+
+        <div class="black-hole-fallback" data-black-hole-fallback hidden aria-hidden="true">
+          <div class="fallback-system" aria-hidden="true">
+            <span class="fallback-disc"></span>
+            <span class="fallback-ring"></span>
+            <span class="fallback-core"></span>
+            <span class="fallback-star fallback-star--one"></span>
+            <span class="fallback-star fallback-star--two"></span>
+            <span class="fallback-star fallback-star--three"></span>
+          </div>
+          <p data-bh-fallback-copy>WebGL did not start. Reload the page to try the live lensing renderer.</p>
+        </div>
+
+        <div class="black-hole-topline">
+          <a class="black-hole-back" href="../" aria-label="Back to rainsday home">↳ rainsday</a>
+          <p class="black-hole-kicker"><span class="square"></span><span>LAB 01 — BLACK HOLE</span></p>
+        </div>
+
+        <div class="black-hole-title-overlay" data-bh-title-overlay>
+          <p class="black-hole-title-kicker">rainsday lab 01 · 重力</p>
+          <h1 id="black-hole-title">Black hole</h1>
+          <p>A real-time gravitational-lensing simulation — rainsday lab 01 · 重力</p>
+        </div>
+
+        <aside class="black-hole-readouts" aria-label="Live Schwarzschild telemetry">
+          <div class="readout-row">
+            <span><span class="bh-label-full">RADIAL DISTANCE</span><span class="bh-label-short" aria-hidden="true">DISTANCE</span></span>
+            <strong data-bh-radius>11.0 rs · 1.40×10⁸ km</strong>
+          </div>
+          <div class="readout-row">
+            <span><span class="bh-label-full">TIME DILATION</span><span class="bh-label-short" aria-hidden="true">DILATION</span></span>
+            <strong data-bh-time>×1.049</strong>
+          </div>
+          <div class="readout-row">
+            <span><span class="bh-label-full">ESCAPE VELOCITY</span><span class="bh-label-short" aria-hidden="true">ESC. VEL</span></span>
+            <strong data-bh-escape>0.30 c</strong>
+          </div>
+        </aside>
+
+        <aside class="black-hole-controls" aria-label="Simulation controls">
+          <p class="black-hole-hint" data-bh-hint>DRAG TO ORBIT · SCROLL TO FALL CLOSER</p>
+          <div class="control-row">
+            <button type="button" data-bh-quality>QUALITY AUTO</button>
+            <button type="button" data-bh-pause>PAUSE</button>
+            <button type="button" data-bh-reset>RESET VIEW</button>
+          </div>
+          <div class="control-meta" aria-label="Renderer status">
+            <span data-bh-status>loading renderer</span>
+            <span data-bh-fps>-- FPS</span>
+            <span data-bh-scale>scale 1.00</span>
+          </div>
+        </aside>
+
+        <p class="black-hole-physics-line">
+          SCHWARZSCHILD GEODESICS · KEPLERIAN DISK · DOPPLER BEAMING · SGR A* 4.30×10⁶ M☉
+        </p>
+      </section>
+    </main>
+
+    <noscript>
+      <div class="black-hole-noscript">
+        This real-time gravitational-lensing simulation needs JavaScript and WebGL.
+      </div>
+    </noscript>
+
+    <script src="black-hole.js" defer></script>
+  </body>
+</html>

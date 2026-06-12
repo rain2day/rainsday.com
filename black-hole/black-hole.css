@@ -1,0 +1,607 @@
+/* =============================================================
+   Black hole — rainsday Lab 01
+   Full-screen ray-marched gravitational-lensing renderer
+   ============================================================= */
+
+:root {
+  --cosmic: #000000;
+  --space: #06070f;
+  --panel: rgba(4, 5, 8, 0.62);
+  --panel-strong: rgba(4, 5, 8, 0.82);
+  --panel-line: rgba(255, 255, 255, 0.16);
+  --warm: #ffb15d;
+  --ice: #dfe8ff;
+}
+
+html,
+body.black-hole-experience {
+  min-height: 100%;
+  overflow: hidden;
+  background: var(--cosmic);
+}
+
+body.black-hole-experience {
+  margin: 0;
+  color: var(--paper);
+  color-scheme: dark;
+}
+
+.black-hole-lab {
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+  min-height: 620px;
+  overflow: hidden;
+  background: var(--space);
+  isolation: isolate;
+}
+
+#black-hole-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: var(--space);
+  outline: none;
+  touch-action: none;
+}
+
+#black-hole-canvas:focus-visible {
+  box-shadow: inset 0 0 0 2px var(--lime);
+}
+
+.black-hole-lab::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.48), transparent 28%, transparent 72%, rgba(0, 0, 0, 0.56)),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.42), transparent 24%, transparent 70%, rgba(0, 0, 0, 0.66));
+}
+
+.black-hole-fallback {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255, 177, 93, 0.16), transparent 36%),
+    var(--space);
+}
+
+.black-hole-fallback[hidden] {
+  display: none !important;
+}
+
+.fallback-system {
+  position: relative;
+  width: min(78vw, 760px);
+  aspect-ratio: 1;
+}
+
+.fallback-disc,
+.fallback-ring,
+.fallback-core,
+.fallback-star {
+  position: absolute;
+  display: block;
+  border-radius: 999px;
+}
+
+.fallback-disc {
+  inset: 18%;
+  background:
+    radial-gradient(circle, transparent 0 21%, rgba(0, 0, 0, 0.94) 22% 28%, transparent 29%),
+    conic-gradient(from -18deg, transparent 0 12%, #fff4d8 17%, #ff9f42 29%, transparent 42%, transparent 56%, #ffe6b5 64%, #9a2e11 76%, transparent 88%);
+  filter: blur(0.7px) drop-shadow(0 0 78px rgba(255, 159, 66, 0.36));
+  transform: rotateX(69deg) rotateZ(-9deg);
+}
+
+.fallback-ring {
+  inset: 36%;
+  border: 2px solid rgba(255, 236, 196, 0.72);
+  box-shadow: 0 0 24px rgba(255, 210, 140, 0.8);
+}
+
+.fallback-core {
+  inset: 39%;
+  background: #000;
+  box-shadow:
+    0 0 0 18px rgba(0, 0, 0, 0.52),
+    0 0 100px rgba(255, 177, 93, 0.28);
+}
+
+.fallback-star {
+  width: 3px;
+  height: 3px;
+  background: #fff;
+  box-shadow: 0 0 14px currentColor;
+}
+
+.fallback-star--one { top: 21%; left: 76%; color: #dfe8ff; }
+.fallback-star--two { top: 68%; left: 16%; color: #fff4d8; }
+.fallback-star--three { top: 34%; left: 27%; color: #ffb15d; }
+
+.black-hole-fallback p,
+.black-hole-noscript {
+  position: absolute;
+  left: 50%;
+  bottom: 34px;
+  width: min(480px, calc(100vw - 40px));
+  margin: 0;
+  transform: translateX(-50%);
+  font-family: var(--mono);
+  font-size: 11px;
+  line-height: 1.6;
+  letter-spacing: 0.08em;
+  text-align: center;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.black-hole-noscript {
+  z-index: 10;
+  padding: 14px 18px;
+  border: 1px solid var(--panel-line);
+  background: var(--panel-strong);
+}
+
+.black-hole-topline,
+.black-hole-readouts,
+.black-hole-controls,
+.black-hole-physics-line,
+.black-hole-title-overlay {
+  position: absolute;
+  z-index: 5;
+}
+
+.black-hole-topline {
+  top: 24px;
+  left: 28px;
+  display: grid;
+  gap: 14px;
+  pointer-events: auto;
+}
+
+.black-hole-back {
+  width: max-content;
+  color: var(--paper);
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 180ms var(--ease);
+}
+
+.black-hole-back:hover,
+.black-hole-back:focus-visible {
+  color: var(--lime);
+}
+
+.black-hole-kicker {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: max-content;
+  padding: 5px 8px;
+  background: var(--lime);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.black-hole-kicker .square {
+  width: 7px;
+  height: 7px;
+  background: currentColor;
+}
+
+.black-hole-title-overlay {
+  left: clamp(24px, 7vw, 112px);
+  top: 50%;
+  max-width: min(780px, calc(100vw - 48px));
+  transform: translateY(-50%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 800ms var(--ease), transform 900ms var(--ease);
+}
+
+.black-hole-title-overlay.is-visible {
+  opacity: 1;
+  transform: translateY(calc(-50% - 10px));
+}
+
+.black-hole-title-overlay h1 {
+  margin: 0;
+  font-family: var(--display);
+  font-size: clamp(5.4rem, 12vw, 13.5rem);
+  font-weight: 800;
+  line-height: 0.78;
+  letter-spacing: 0;
+  color: var(--paper);
+  text-shadow: 0 34px 96px rgba(0, 0, 0, 0.72);
+}
+
+.black-hole-title-overlay p {
+  margin: 18px 0 0;
+  max-width: 520px;
+  font-size: clamp(15px, 1.5vw, 20px);
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.74);
+}
+
+.black-hole-title-overlay .black-hole-title-kicker {
+  margin: 0 0 14px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--lime);
+}
+
+.black-hole-readouts {
+  left: 28px;
+  bottom: 28px;
+  width: min(390px, calc(50vw - 44px));
+  display: grid;
+  gap: 1px;
+  border: 1px solid var(--panel-line);
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.34);
+  backdrop-filter: blur(18px) saturate(130%);
+  -webkit-backdrop-filter: blur(18px) saturate(130%);
+}
+
+.readout-row {
+  display: grid;
+  grid-template-columns: minmax(128px, 0.88fr) minmax(0, 1.12fr);
+  gap: 14px;
+  align-items: center;
+  min-height: 52px;
+  padding: 12px 14px;
+  background: var(--panel);
+}
+
+.readout-row span,
+.control-meta,
+.black-hole-hint,
+.black-hole-physics-line {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.readout-row span {
+  color: rgba(255, 255, 255, 0.48);
+}
+
+.bh-label-short {
+  display: none;
+}
+
+.readout-row strong {
+  min-width: 0;
+  color: var(--paper);
+  font-family: var(--mono);
+  font-size: clamp(13px, 1.4vw, 17px);
+  font-weight: 700;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.black-hole-controls {
+  right: 28px;
+  bottom: 28px;
+  width: min(474px, calc(50vw - 44px));
+  display: grid;
+  gap: 10px;
+  pointer-events: auto;
+}
+
+.black-hole-hint {
+  justify-self: end;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.62);
+  transition: opacity 500ms var(--ease);
+}
+
+.black-hole-hint.is-muted {
+  opacity: 0;
+}
+
+.control-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  padding: 8px;
+  border: 1px solid var(--panel-line);
+  background: var(--panel);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.34);
+  backdrop-filter: blur(18px) saturate(130%);
+  -webkit-backdrop-filter: blur(18px) saturate(130%);
+}
+
+.black-hole-controls button {
+  min-width: 0;
+  min-height: 42px;
+  padding: 0 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--paper);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    background 180ms var(--ease),
+    border-color 180ms var(--ease),
+    color 180ms var(--ease);
+}
+
+.black-hole-controls button:hover,
+.black-hole-controls button:focus-visible {
+  border-color: var(--lime);
+  background: var(--lime);
+  color: var(--ink);
+}
+
+.control-meta {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.control-meta [data-bh-status] {
+  color: var(--lime);
+}
+
+.black-hole-physics-line {
+  left: 50%;
+  bottom: 16px;
+  width: min(680px, calc(100vw - 56px));
+  margin: 0;
+  transform: translateX(-50%);
+  text-align: center;
+  color: rgba(255, 255, 255, 0.34);
+  pointer-events: none;
+}
+
+@media (max-width: 900px) {
+  .black-hole-lab {
+    min-height: 100dvh;
+  }
+
+  .black-hole-topline {
+    top: 18px;
+    left: 18px;
+  }
+
+  .black-hole-title-overlay {
+    left: 18px;
+    top: 41%;
+  }
+
+  .black-hole-readouts,
+  .black-hole-controls {
+    left: 18px;
+    right: 18px;
+    width: auto;
+  }
+
+  .black-hole-controls {
+    bottom: 18px;
+  }
+
+  .black-hole-readouts {
+    bottom: 172px;
+  }
+
+  .black-hole-physics-line {
+    bottom: 146px;
+    width: calc(100vw - 36px);
+  }
+}
+
+@media (max-width: 620px) {
+  .black-hole-title-overlay h1 {
+    font-size: clamp(4.3rem, 22vw, 7.2rem);
+  }
+
+  .black-hole-title-overlay p:not(.black-hole-title-kicker) {
+    max-width: 330px;
+    font-size: 14px;
+  }
+
+  .black-hole-readouts {
+    bottom: 188px;
+  }
+
+  .readout-row {
+    grid-template-columns: 1fr;
+    gap: 6px;
+    min-height: 0;
+    padding: 10px 12px;
+  }
+
+  .readout-row strong {
+    white-space: normal;
+  }
+
+  .control-row {
+    grid-template-columns: 1fr;
+  }
+
+  .black-hole-controls button {
+    min-height: 38px;
+  }
+
+  .control-meta,
+  .black-hole-hint {
+    justify-content: flex-start;
+    justify-self: start;
+    font-size: 9px;
+  }
+
+  .black-hole-physics-line {
+    bottom: 164px;
+    font-size: 8px;
+    line-height: 1.45;
+  }
+}
+
+@media (max-width: 720px) {
+  .black-hole-title-overlay {
+    top: 38%;
+    max-width: calc(100vw - 36px);
+  }
+
+  .black-hole-title-overlay h1 {
+    font-size: clamp(3.4rem, 18vw, 6.8rem);
+    white-space: nowrap;
+  }
+
+  .black-hole-readouts {
+    left: 12px;
+    right: 12px;
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 82px);
+    width: auto;
+    max-height: 56px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    padding: 6px 8px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(10, 10, 10, 0.55);
+    backdrop-filter: blur(18px) saturate(130%);
+    -webkit-backdrop-filter: blur(18px) saturate(130%);
+  }
+
+  .readout-row {
+    flex: 0.52 1 0;
+    min-width: 0;
+    min-height: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    align-content: center;
+    gap: 3px;
+    padding: 0 6px;
+    background: transparent;
+  }
+
+  .readout-row + .readout-row {
+    border-left: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .readout-row:first-child {
+    flex-grow: 1.95;
+    padding-left: 0;
+  }
+
+  .readout-row:last-child {
+    padding-right: 0;
+  }
+
+  .readout-row span {
+    min-width: 0;
+    overflow: hidden;
+    color: rgba(255, 255, 255, 0.48);
+    font-size: 9px;
+    line-height: 1;
+    letter-spacing: 0.07em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .bh-label-full {
+    display: none;
+  }
+
+  .bh-label-short {
+    display: inline;
+  }
+
+  .readout-row strong {
+    min-width: 0;
+    overflow: hidden;
+    font-size: clamp(12px, 3vw, 13px);
+    line-height: 1.12;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .black-hole-controls {
+    left: 12px;
+    right: 12px;
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 12px);
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+  }
+
+  .black-hole-hint,
+  .black-hole-physics-line {
+    display: none;
+  }
+
+  .control-row {
+    display: flex;
+    justify-content: flex-end;
+    gap: 6px;
+    width: max-content;
+    max-width: 100%;
+    padding: 6px;
+  }
+
+  .black-hole-controls button {
+    flex: 0 1 auto;
+    min-height: 34px;
+    height: 34px;
+    min-width: 0;
+    padding: 0 8px;
+    font-size: 10px;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .control-meta {
+    justify-content: flex-end;
+    gap: 8px;
+    font-size: 9px;
+  }
+
+  .control-meta [data-bh-fps],
+  .control-meta [data-bh-scale] {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .black-hole-title-overlay,
+  .black-hole-hint,
+  .black-hole-controls button,
+  .black-hole-back {
+    transition: none;
+  }
+}
