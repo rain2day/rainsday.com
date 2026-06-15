@@ -27,6 +27,19 @@
   <meta name="twitter:description" content="題庫、場景、語彙、耳練同錯題複盤，一個乾淨 flow。">
   <meta name="twitter:image" content="https://rainsday.com/jlpt/og-cover.png?v=20260529">
   <script src="./jlpt-data.js?v=20260529-audit1"></script>
+  <script>
+    (() => {
+      try {
+        const saved = localStorage.getItem("jlpt_theme_v1");
+        const prefersDark = window.matchMedia?.("(prefers-color-scheme: dark)").matches;
+        const theme = saved || (prefersDark ? "dark" : "light");
+        document.documentElement.dataset.theme = theme;
+        document.documentElement.style.colorScheme = theme;
+      } catch {
+        document.documentElement.dataset.theme = "light";
+      }
+    })();
+  </script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Kosugi+Maru&family=Noto+Serif+JP:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Sans+TC:wght@400;500;700;900&family=Outfit:wght@400;500;600;700;800&display=swap');
 
@@ -1717,10 +1730,33 @@
     :root {
       --space-xl: 30px;
       --space-lg: 22px;
+      --page-gutter: clamp(14px, 3vw, 56px);
+    }
+
+    .app-shell {
+      width: calc(100% - (var(--page-gutter) * 2));
+      max-width: none;
+    }
+
+    .topbar {
+      grid-template-columns: minmax(240px, 1fr) auto;
+    }
+
+    .top-actions {
+      min-width: 0;
+    }
+
+    .hero {
+      grid-template-columns: minmax(520px, 1.35fr) minmax(300px, 0.65fr);
+    }
+
+    .hero h2 {
+      max-width: min(960px, 100%);
     }
 
     /* Even rhythm: home columns + stacked blocks share one gap */
     .home-layout {
+      grid-template-columns: minmax(560px, 1.25fr) minmax(330px, 0.75fr);
       gap: var(--space-xl);
       align-items: start;
     }
@@ -1770,7 +1806,7 @@
     /* "Other ways to practice": one light row replacing two panels */
     .more-strip {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
       gap: 12px;
     }
 
@@ -1853,6 +1889,278 @@
       padding-left: 12px;
       border-left: 2px solid var(--line-strong);
       color: var(--ink-soft);
+    }
+
+    .quiz-layout {
+      grid-template-columns: minmax(0, 1fr) minmax(280px, clamp(290px, 24vw, 380px));
+    }
+
+    .grammar-grid {
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+
+    .study-grid,
+    .listening-grid {
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    }
+
+    .collocation-grid {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    .theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      min-width: 44px;
+      border: 1px solid rgba(21, 21, 21, 0.10);
+      border-radius: 999px;
+      background: #ffffff;
+      color: var(--ink);
+      cursor: pointer;
+      font: inherit;
+      font-weight: 900;
+      transition:
+        transform 180ms var(--ease),
+        border-color 180ms var(--ease),
+        background 180ms var(--ease),
+        color 180ms var(--ease),
+        box-shadow 180ms var(--ease);
+    }
+
+    .theme-toggle:hover {
+      transform: translateY(-1px);
+      border-color: var(--line-strong);
+      box-shadow: 0 12px 26px rgba(15, 23, 42, 0.07);
+    }
+
+    .theme-toggle:focus-visible {
+      outline: 3px solid color-mix(in srgb, var(--indigo) 34%, transparent);
+      outline-offset: 3px;
+    }
+
+    .theme-toggle-icon {
+      display: inline-grid;
+      place-items: center;
+      width: 1.1em;
+      line-height: 1;
+    }
+
+    html[data-theme="dark"] {
+      color-scheme: dark;
+      --paper: #0e1117;
+      --paper-deep: #171b23;
+      --ink: #f4f6fb;
+      --ink-soft: #a8b0bf;
+      --ink-muted: #70798a;
+      --surface: #151922;
+      --surface-strong: #1b202b;
+      --line: #2a303d;
+      --line-strong: #3b4658;
+      --vermillion: #ff7d66;
+      --vermillion-soft: #3a1d1a;
+      --indigo: #9fc1ff;
+      --indigo-soft: #17243a;
+      --sage: #78d7a0;
+      --sage-soft: #173323;
+      --gold: #e3b85d;
+      --gold-soft: #352817;
+      --bad: #ff8794;
+      --bad-soft: #3a171e;
+      --shadow: 0 28px 80px rgba(0, 0, 0, 0.42);
+      --shadow-soft: 0 16px 42px rgba(0, 0, 0, 0.28);
+    }
+
+    html[data-theme="dark"] body {
+      background:
+        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.026) 1px, transparent 1px),
+        #0e1117;
+      color: var(--ink);
+    }
+
+    html[data-theme="dark"] body::before {
+      background:
+        radial-gradient(circle at 8% 12%, rgba(255, 125, 102, 0.10), transparent 30%),
+        radial-gradient(circle at 88% 0%, rgba(159, 193, 255, 0.12), transparent 34%),
+        linear-gradient(180deg, rgba(0, 0, 0, 0.12), transparent 36%);
+    }
+
+    html[data-theme="dark"] .topbar {
+      border-color: rgba(255, 255, 255, 0.10);
+      background: rgba(20, 24, 32, 0.86);
+      box-shadow: 0 20px 54px rgba(0, 0, 0, 0.36);
+    }
+
+    html[data-theme="dark"] .brand-mark,
+    html[data-theme="dark"] .level-tab.active,
+    html[data-theme="dark"] .view-tab.active,
+    html[data-theme="dark"] .btn-primary,
+    html[data-theme="dark"] .mode-card.primary,
+    html[data-theme="dark"] .category-chip.active {
+      color: #0f131a;
+      background: #f4f6fb;
+      border-color: #f4f6fb;
+    }
+
+    html[data-theme="dark"] .level-tabs,
+    html[data-theme="dark"] .view-tabs {
+      border-color: rgba(255, 255, 255, 0.10);
+      background: #111722;
+    }
+
+    html[data-theme="dark"] .level-tab,
+    html[data-theme="dark"] .view-tab {
+      color: var(--ink-soft);
+    }
+
+    html[data-theme="dark"] .hero {
+      border-color: rgba(255, 255, 255, 0.10);
+      background:
+        radial-gradient(circle at 78% 22%, rgba(255, 125, 102, 0.10), transparent 34%),
+        linear-gradient(135deg, #151922 0%, #111722 55%, #0c1017 100%);
+    }
+
+    html[data-theme="dark"] .hero-copy p:not(.eyebrow),
+    html[data-theme="dark"] .reader-head p,
+    html[data-theme="dark"] .bank-head p,
+    html[data-theme="dark"] .study-head p {
+      color: var(--ink-soft);
+    }
+
+    html[data-theme="dark"] .hero-panel {
+      background: rgba(13, 16, 23, 0.36);
+      border-color: var(--line);
+    }
+
+    html[data-theme="dark"] .panel,
+    html[data-theme="dark"] .quiz-card,
+    html[data-theme="dark"] .feedback-card,
+    html[data-theme="dark"] .results-card,
+    html[data-theme="dark"] .scenario-reader,
+    html[data-theme="dark"] .grammar-bank,
+    html[data-theme="dark"] .study-shell,
+    html[data-theme="dark"] .study-card,
+    html[data-theme="dark"] .study-panel,
+    html[data-theme="dark"] .listening-card,
+    html[data-theme="dark"] .progress-panel {
+      border-color: rgba(255, 255, 255, 0.09);
+      background: rgba(21, 25, 34, 0.94);
+      box-shadow: var(--shadow-soft);
+    }
+
+    html[data-theme="dark"] .mode-card,
+    html[data-theme="dark"] .scenario-card,
+    html[data-theme="dark"] .category-chip,
+    html[data-theme="dark"] .btn,
+    html[data-theme="dark"] .option,
+    html[data-theme="dark"] .grammar-item,
+    html[data-theme="dark"] .more-link,
+    html[data-theme="dark"] .theme-toggle {
+      border-color: rgba(255, 255, 255, 0.10);
+      background: #151922;
+      color: var(--ink);
+    }
+
+    html[data-theme="dark"] .btn-secondary,
+    html[data-theme="dark"] .btn-ghost {
+      color: var(--indigo);
+      background: #17243a;
+      border-color: #283a59;
+    }
+
+    html[data-theme="dark"] .tag,
+    html[data-theme="dark"] .grammar-chip,
+    html[data-theme="dark"] .listen-tag {
+      color: var(--ink-soft);
+      background: #202632;
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+
+    html[data-theme="dark"] .tag.grammar,
+    html[data-theme="dark"] .listen-tag {
+      color: var(--indigo);
+      background: var(--indigo-soft);
+    }
+
+    html[data-theme="dark"] .tag.meaning {
+      color: var(--sage);
+      background: var(--sage-soft);
+    }
+
+    html[data-theme="dark"] .option,
+    html[data-theme="dark"] .summary-box,
+    html[data-theme="dark"] .history-item,
+    html[data-theme="dark"] .weak-item,
+    html[data-theme="dark"] .mistake-item,
+    html[data-theme="dark"] .phase-item,
+    html[data-theme="dark"] .dialogue-line,
+    html[data-theme="dark"] .story-block,
+    html[data-theme="dark"] .word-item,
+    html[data-theme="dark"] .chunk-item,
+    html[data-theme="dark"] .collocation-card,
+    html[data-theme="dark"] .listen-script {
+      border-color: rgba(255, 255, 255, 0.09);
+      background: #111722;
+    }
+
+    html[data-theme="dark"] .option.correct {
+      border-color: color-mix(in srgb, var(--sage) 50%, var(--line));
+      background: var(--sage-soft);
+    }
+
+    html[data-theme="dark"] .option.wrong {
+      border-color: color-mix(in srgb, var(--bad) 55%, var(--line));
+      background: var(--bad-soft);
+    }
+
+    html[data-theme="dark"] .option-index {
+      border-color: var(--line-strong);
+      background: #0e1117;
+      color: var(--ink-soft);
+    }
+
+    html[data-theme="dark"] .option.correct .option-index {
+      color: #0f131a;
+      background: var(--sage);
+      border-color: var(--sage);
+    }
+
+    html[data-theme="dark"] .option.wrong .option-index {
+      color: #0f131a;
+      background: var(--bad);
+      border-color: var(--bad);
+    }
+
+    html[data-theme="dark"] .progress-bar {
+      background: #252c38;
+    }
+
+    html[data-theme="dark"] .progress-bar > div {
+      background: #f4f6fb;
+    }
+
+    html[data-theme="dark"] .search-input {
+      border-color: rgba(255, 255, 255, 0.12);
+      background: #111722;
+      color: var(--ink);
+    }
+
+    html[data-theme="dark"] .search-input:focus {
+      border-color: var(--indigo);
+      box-shadow: 0 0 0 3px rgba(159, 193, 255, 0.20);
+    }
+
+    html[data-theme="dark"] .mark,
+    html[data-theme="dark"] .grammar-item mark {
+      color: #ffe6a6;
+      background: rgba(227, 184, 93, 0.18);
+    }
+
+    html[data-theme="dark"] .rank-stamp {
+      color: var(--ink);
+      background: #111722;
     }
 
     @media (max-width: 980px) {
@@ -1945,6 +2253,9 @@
           <button class="level-tab active" data-level="N3" type="button">N3</button>
           <button class="level-tab" data-level="N2" type="button">N2</button>
         </div>
+        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="切換深色模式" aria-pressed="false" title="切換深色模式">
+          <span id="theme-toggle-icon" class="theme-toggle-icon" aria-hidden="true">☾</span>
+        </button>
         <nav class="view-tabs" aria-label="App view">
           <button class="view-tab active" data-view="home" type="button">練習</button>
           <button class="view-tab" data-view="scenario" type="button">場景</button>
@@ -2666,6 +2977,7 @@
     const optionLetters = ["A", "B", "C", "D"];
     const historyKey = "jlpt_quiz_history_v3";
     const weaknessKey = "jlpt_quiz_weakness_v1";
+    const themeKey = "jlpt_theme_v1";
 
     const state = {
       level: "N3",
@@ -3352,7 +3664,39 @@
         .replaceAll("'", "&#39;");
     }
 
+    function getActiveTheme() {
+      return document.documentElement.dataset.theme === "dark" ? "dark" : "light";
+    }
+
+    function applyTheme(theme, shouldPersist = true) {
+      const nextTheme = theme === "dark" ? "dark" : "light";
+      document.documentElement.dataset.theme = nextTheme;
+      document.documentElement.style.colorScheme = nextTheme;
+
+      const toggle = document.getElementById("theme-toggle");
+      const icon = document.getElementById("theme-toggle-icon");
+      if (toggle && icon) {
+        const isDark = nextTheme === "dark";
+        toggle.setAttribute("aria-pressed", String(isDark));
+        toggle.setAttribute("aria-label", isDark ? "切換淺色模式" : "切換深色模式");
+        toggle.title = isDark ? "切換淺色模式" : "切換深色模式";
+        icon.textContent = isDark ? "☀" : "☾";
+      }
+
+      if (shouldPersist) {
+        try {
+          localStorage.setItem(themeKey, nextTheme);
+        } catch {
+          /* Theme persistence is optional; the UI still updates. */
+        }
+      }
+    }
+
     function bindEvents() {
+      document.getElementById("theme-toggle").addEventListener("click", () => {
+        applyTheme(getActiveTheme() === "dark" ? "light" : "dark");
+      });
+
       document.querySelectorAll(".level-tab").forEach((btn) => {
         btn.addEventListener("click", () => {
           const activeScreen = document.querySelector(".screen.active")?.id || "screen-home";
@@ -3485,6 +3829,7 @@
         return;
       }
       bindEvents();
+      applyTheme(getActiveTheme(), false);
       renderHome();
     }
 
