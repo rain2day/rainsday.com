@@ -2200,15 +2200,87 @@
 
     @media (max-width: 640px) {
       .app-shell {
-        width: min(100% - 18px, 1240px);
+        width: calc(100% - 16px);
+        padding-top: 8px;
       }
 
       .topbar {
-        border-radius: 20px;
+        top: 6px;
+        display: grid;
+        grid-template-columns: 34px minmax(0, 1fr);
+        gap: 6px;
+        align-items: center;
+        padding: 8px;
+        border-radius: 16px;
+      }
+
+      .brand {
+        min-width: 0;
+        width: 34px;
+      }
+
+      .brand-mark {
+        width: 34px;
+        height: 34px;
+        font-size: 0.95rem;
+      }
+
+      .brand h1 {
+        position: absolute;
+        overflow: hidden;
+        width: 1px;
+        height: 1px;
+        clip: rect(0 0 0 0);
+        white-space: nowrap;
+      }
+
+      .brand p {
+        display: none;
+      }
+
+      .top-actions {
+        display: grid;
+        grid-template-columns: minmax(78px, 0.68fr) 36px minmax(0, 1.5fr);
+        width: 100%;
+        gap: 6px;
+        align-items: center;
+      }
+
+      .level-tabs,
+      .view-tabs {
+        width: auto;
+        min-width: 0;
+        justify-content: flex-start;
+        gap: 2px;
+        padding: 3px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+
+      .level-tabs::-webkit-scrollbar,
+      .view-tabs::-webkit-scrollbar {
+        display: none;
+      }
+
+      .level-tab,
+      .view-tab {
+        flex: 0 0 auto;
+        min-height: 30px;
+        padding: 6px 10px;
+        font-size: 0.86rem;
+      }
+
+      .theme-toggle {
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
+        min-height: 36px;
+        padding: 0;
       }
 
       .hero {
-        margin-top: 24px;
+        margin-top: 18px;
       }
 
       .hero h2 {
