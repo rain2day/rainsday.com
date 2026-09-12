@@ -16,6 +16,8 @@ Thumbs.db
 
 # Local preview / browser test artifacts
 .playwright-mcp/
+.playwright-cli/
+output/playwright/
 .tmp-preview/
 tmp/
 

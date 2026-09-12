@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="A Hong Kong design and technology studio. Edition 05: scroll into a real-time black hole — iOS apps, web tools, automation, brand systems.">
     <meta name="robots" content="index,follow">
-    <meta name="theme-color" content="#06070f">
+    <meta name="theme-color" content="#090c0d">
     <link rel="canonical" href="https://rainsday.com/">
     <title>rainsday — build for what's next | Hong Kong design &amp; technology studio</title>
 
-    <link rel="icon" href="favicon.svg?v=5" type="image/svg+xml">
+    <link rel="icon" href="favicon.svg?v=rain-cloud-20260912" type="image/svg+xml">
     <link rel="icon" href="favicon.ico?v=5" sizes="any">
     <link rel="apple-touch-icon" href="apple-touch-icon.png?v=5">
 
@@ -49,7 +49,7 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap"
     >
-    <link rel="stylesheet" href="journey.css">
+    <link rel="stylesheet" href="journey.css?v=20260912">
     <script type="importmap">
       {
         "imports": {
@@ -59,8 +59,8 @@
       }
     </script>
   </head>
-  <body class="journey-experience">
-    <a class="skip-link" href="#act-5">Skip to contact</a>
+  <body class="journey-experience journey-static">
+    <a class="skip-link" href="#act-2">Skip to selected work</a>
 
     <canvas
       id="journey-canvas"
@@ -76,18 +76,26 @@
       <span class="fallback-ray fallback-ray--two"></span>
     </div>
 
+    <div class="scene-vignette" aria-hidden="true"></div>
+
     <header class="journey-hud" aria-label="rainsday descent telemetry">
       <div class="hud-frame" aria-hidden="true">
         <span></span><span></span><span></span><span></span>
       </div>
 
       <div class="hud-zone hud-zone--brand">
-        <a class="hud-wordmark" href="/" aria-label="rainsday home">rainsday</a>
-        <span class="hud-tag">EDITION 05 — THE DESCENT</span>
+        <a class="hud-wordmark" href="/" aria-label="rainsday home"><img class="brand-cloud" src="assets/logo-mark.svg" alt="" width="72" height="48" aria-hidden="true">rainsday<span class="wordmark-period">.</span></a>
+        <span class="hud-tag">INDEPENDENT DESIGN &amp; TECHNOLOGY<br><span>HONG KONG</span></span>
       </div>
 
-      <button class="hud-menu-button" type="button" aria-expanded="false" aria-controls="journey-menu" data-menu-open>
-        MENU
+      <nav class="hud-direct-nav" aria-label="Primary navigation">
+        <a href="#act-2">Work <span data-project-total>09</span></a>
+        <a href="#act-1">Studio</a>
+        <a href="black-hole/">Lab ↗</a>
+      </nav>
+
+      <button class="hud-menu-button" type="button" aria-expanded="false" aria-controls="journey-menu" aria-label="Menu" data-menu-open>
+        <span>Menu</span><span class="menu-glyph" aria-hidden="true"><i></i><i></i></span>
       </button>
 
       <dl class="hud-readouts" aria-label="Live camera readouts">
@@ -110,22 +118,30 @@
         <span class="progress-track" aria-hidden="true"><span data-hud-progress></span></span>
       </div>
 
-      <p class="scroll-hint" data-scroll-hint>SCROLL TO BEGIN THE DESCENT ↓</p>
+      <nav class="chapter-nav" aria-label="Journey chapters">
+        <a href="#act-0" aria-label="Departure" aria-current="step"><span>00</span><i></i></a>
+        <a href="#act-1" aria-label="Studio"><span>01</span><i></i></a>
+        <a href="#act-2" aria-label="Selected work"><span>02</span><i></i></a>
+        <a href="#act-3" aria-label="Our practice"><span>03</span><i></i></a>
+        <a href="#act-4" aria-label="Journal"><span>04</span><i></i></a>
+        <a href="#act-5" aria-label="Contact"><span>05</span><i></i></a>
+      </nav>
+      <p class="scroll-hint" data-scroll-hint><span class="scroll-line" aria-hidden="true"></span>SCROLL TO EXPLORE</p>
     </header>
 
     <nav class="journey-menu" id="journey-menu" data-menu-overlay aria-label="Journey menu" hidden>
       <div class="menu-shell" role="dialog" aria-modal="true" aria-labelledby="menu-title">
         <div class="menu-topline">
-          <p id="menu-title">THE DESCENT</p>
+          <p id="menu-title">RAINSDAY — THE DESCENT</p>
           <button type="button" data-menu-close>Close</button>
         </div>
         <div class="menu-links">
-          <a href="#act-0">DEPARTURE</a>
-          <a href="#act-1">THE APPROACH</a>
-          <a href="#act-2">IN ORBIT</a>
-          <a href="#act-3">TIME DILATION</a>
-          <a href="#act-4">EVENT HORIZON</a>
-          <a href="#act-5">ESCAPE</a>
+          <a href="#act-0"><span>00</span>Departure<em>↗</em></a>
+          <a href="#act-1"><span>01</span>The studio<em>↗</em></a>
+          <a href="#act-2"><span>02</span>Selected work<em>↗</em></a>
+          <a href="#act-3"><span>03</span>Our practice<em>↗</em></a>
+          <a href="#act-4"><span>04</span>Journal<em>↗</em></a>
+          <a href="#act-5"><span>05</span>Get in touch<em>↗</em></a>
         </div>
         <div class="menu-secondary">
           <a href="black-hole/">LAB 01</a>
@@ -139,9 +155,15 @@
       <section class="act act--departure" id="act-0" data-act="0" data-act-name="DEPARTURE" style="--span: 120vh" aria-labelledby="act-0-title">
         <div class="act-pin">
           <div class="act-copy act-copy--hero" data-act-copy>
-            <p class="kicker">RAINSDAY — EDITION 05</p>
-            <h1 id="act-0-title">Build for what's next.</h1>
-            <p class="lead">A Hong Kong studio for iOS, web, automation and brand systems. This year, we built a black hole. Scroll to fall in.</p>
+            <p class="kicker"><span class="signal-dot" aria-hidden="true"></span>A SMALL STUDIO. AN OPEN UNIVERSE.</p>
+            <h1 id="act-0-title"><span>Build for</span><span class="display-serif">what's next.</span></h1>
+            <p class="lead">A Hong Kong studio turning curious ideas into<br class="desktop-break"> considered apps, websites and digital experiences.</p>
+            <a class="explore-link" href="#act-2">Explore the work <span aria-hidden="true">↘</span></a>
+            <div class="hero-note">
+              <span class="note-index">FIG. 05 / THE DESCENT</span>
+              <p>A little curiosity.<br>An entirely different orbit.</p>
+              <a href="black-hole/">Explore the experiment <span aria-hidden="true">↗</span></a>
+            </div>
           </div>
         </div>
       </section>
@@ -150,132 +172,207 @@
         <div class="act-pin">
           <div class="act-copy act-copy--left" data-act-copy>
             <p class="kicker">01 — THE APPROACH</p>
-            <h2 id="act-1-title">We are rainsday.</h2>
+            <h2 id="act-1-title">Small studio.<br> <span class="display-serif">Heavy pull.</span></h2>
             <p>Small studio, heavy pull. We take rough ideas and compress them until they shine — iOS apps, web tools, automation, brand systems. Polished until they feel inevitable.</p>
             <p class="accent-line">設計から実装、運用まで、一貫して。</p>
+            <ul class="studio-disciplines" aria-label="Studio disciplines">
+              <li><span>01</span>iOS apps</li><li><span>02</span>Web experiences</li>
+              <li><span>03</span>Automation</li><li><span>04</span>Brand systems</li>
+            </ul>
           </div>
         </div>
       </section>
 
-      <section class="act act--orbit" id="act-2" data-act="2" data-act-name="IN ORBIT" style="--span: 540vh" aria-labelledby="act-2-title">
+      <section class="act act--orbit" id="act-2" data-act="2" data-act-name="IN ORBIT" style="--span: 810vh" aria-labelledby="act-2-title">
         <div class="act-pin">
           <div class="orbit-layout" data-act-copy>
             <div class="orbit-intro">
               <p class="kicker">02 — IN ORBIT</p>
-              <h2 id="act-2-title">Work in stable orbit.</h2>
-              <p class="lead">Six missions in orbit. Five live, one inbound.</p>
+              <h2 id="act-2-title">A few things<br> <span class="display-serif">in our orbit.</span></h2>
+              <p class="lead">Useful tools. Playful experiments.<br>Made with a point of view.<br><span class="collection-date">Updated September 2026</span></p>
+              <div class="orbit-controls" aria-label="Choose a project">
+                <div class="orbit-control-topline">
+                  <p><span data-project-current>01</span><span class="count-divider"> / </span><span data-project-total>09</span></p>
+                  <div class="orbit-arrows">
+                    <button type="button" data-project-prev aria-label="Previous project">←</button>
+                    <button type="button" data-project-next aria-label="Next project">→</button>
+                  </div>
+                </div>
+                <div class="project-steps" style="--project-count: 9">
+                  <button type="button" data-project-index="0" aria-label="Show KOI Keyboard" aria-pressed="true">01</button>
+                  <button type="button" data-project-index="1" aria-label="Show BCanteen" aria-pressed="false">02</button>
+                  <button type="button" data-project-index="2" aria-label="Show 山野蛙 WildFrog" aria-pressed="false">03</button>
+                  <button type="button" data-project-index="3" aria-label="Show 公道計算器 expenseCal" aria-pressed="false">04</button>
+                  <button type="button" data-project-index="4" aria-label="Show 香港體感" aria-pressed="false">05</button>
+                  <button type="button" data-project-index="5" aria-label="Show Quest 學習天地" aria-pressed="false">06</button>
+                  <button type="button" data-project-index="6" aria-label="Show Love Contract" aria-pressed="false">07</button>
+                  <button type="button" data-project-index="7" aria-label="Show RaIN JLPT Grammar Lab" aria-pressed="false">08</button>
+                  <button type="button" data-project-index="8" aria-label="Show Research and longform" aria-pressed="false">09</button>
+                </div>
+              </div>
             </div>
 
             <div class="orbit-cards" data-orbit-cards>
               <article class="orbit-card is-active" data-orbit-card data-side="right">
                 <span class="mission-ghost" aria-hidden="true">01</span>
-                <figure class="mission-media">
-                  <span class="satellite-badge">SAT-01</span>
-                  <img src="assets/project-hong-kong-feels-like-mascot.png" alt="香港體感 mascot for Hong Kong feels-like weather.">
+                <figure class="mission-media mission-media--koi">
+                    <img src="assets/projects/koi-themes.webp" alt="KOI 隱翹・霓主題，近期原生鍵盤淺色及深色預覽。" loading="lazy" decoding="async">
                 </figure>
                 <div class="orbit-card-copy">
                   <div class="mission-meta">
                     <span class="mission-status-dot" aria-hidden="true"></span>
-                    <p class="project-tag">NEW · APP STORE 公開中</p>
+                    <p class="project-tag">IN TESTING · HONG KONG</p>
                   </div>
-                  <h3>香港體感</h3>
-                  <p class="mission-summary">See how hard Hong Kong feels today — eighteen-district heat, AQHI, widgets.</p>
-                  <p class="mission-spec">STATUS LIVE · iOS · APP STORE</p>
-                  <a href="https://apps.apple.com/hk/app/%E9%A6%99%E6%B8%AF%E9%AB%94%E6%84%9F/id6774880789">Open App Store ↳</a>
+                  <h3>KOI Keyboard</h3>
+                  <p class="mission-summary">Five Chinese input modes, English in the same flow. Tap, glide, write by hand — with a keyboard that feels like yours.</p>
+                  <p class="mission-spec">iOS · CANTONESE-FIRST · CUSTOM THEMES</p>
+                  <div class="project-links"><a href="https://koi.rainsday.com/">Explore KOI ↳</a></div>
                 </div>
               </article>
 
               <article class="orbit-card" data-orbit-card data-side="left">
                 <span class="mission-ghost" aria-hidden="true">02</span>
-                <figure class="mission-media mission-media--mark">
-                  <span class="satellite-badge">SAT-02</span>
-                  <svg class="project-mark project-mark--wildfrog" viewBox="0 0 240 240" aria-hidden="true" focusable="false">
-                    <path d="M18 176 78 78l70 98H18Z" fill="#34ff00"></path>
-                    <path d="M82 176 150 58l72 118H82Z" fill="#34ff00"></path>
-                    <path d="M150 58 171 92h-42l21-34Z" fill="#07100d"></path>
-                  </svg>
+                <figure class="mission-media mission-media--bcanteen mission-media--screens">
+                    <div class="media-wordmark" aria-hidden="true"><span>BCanteen</span><strong>食咗啲咩？</strong><small>A little conversation.<br>A daily food journal.</small></div>
+                    <img src="assets/projects/bcanteen-preview.webp" alt="BCanteen 開發中畫面：廣東話對話與雞肉飯、三文魚及乳酪餐點建議。" loading="lazy" decoding="async">
                 </figure>
                 <div class="orbit-card-copy">
                   <div class="mission-meta">
                     <span class="mission-status-dot" aria-hidden="true"></span>
-                    <p class="project-tag">SUBMITTED · APP REVIEW 2026</p>
+                    <p class="project-tag">IN DEVELOPMENT · FOOD JOURNAL</p>
                   </div>
-                  <h3>WildFrog 野青蛙</h3>
-                  <p class="mission-summary">GPS summit check-ins for Hong Kong's 330 peaks — collectible certificates, equippable titles, live trail tracking.</p>
-                  <p class="mission-spec">STATUS IN REVIEW · iOS · 330 PEAKS</p>
-                  <a href="mailto:hello@rainsday.com?subject=WildFrog">Ask about it ↳</a>
+                  <h3>BCanteen</h3>
+                  <p class="mission-summary">Tell Bao what you ate, in your own words. A Cantonese food journal that brings meals, portions and nutrition into one conversation.</p>
+                  <p class="mission-spec">iOS · CONVERSATIONAL FOOD LOG</p>
+                  <div class="project-links"><a href="mailto:hello@rainsday.com?subject=BCanteen">About this project ↳</a></div>
                 </div>
               </article>
 
               <article class="orbit-card" data-orbit-card data-side="right">
                 <span class="mission-ghost" aria-hidden="true">03</span>
-                <figure class="mission-media">
-                  <span class="satellite-badge">SAT-03</span>
-                  <img src="assets/project-expensecal-appstore.jpg" alt="expenseCal App Store preview.">
+                <figure class="mission-media mission-media--wildfrog mission-media--screens">
+                    <img src="assets/projects/wildfrog-1.jpg" alt="山野蛙 App Store 畫面：山峰總覽與香港山峰地圖。" loading="lazy" decoding="async">
+                    <img src="assets/projects/wildfrog-2.jpg" alt="山野蛙 App Store 畫面：登峰紀錄與山峰資訊。" loading="lazy" decoding="async">
                 </figure>
                 <div class="orbit-card-copy">
                   <div class="mission-meta">
                     <span class="mission-status-dot" aria-hidden="true"></span>
-                    <p class="project-tag">APP STORE 公開中</p>
+                    <p class="project-tag">APP STORE · WILDFROG</p>
                   </div>
-                  <h3>expenseCal</h3>
-                  <p class="mission-summary">Travel expenses and friend splits — multi-currency, net settlement, now live.</p>
-                  <p class="mission-spec">STATUS LIVE · iOS · MULTI-CURRENCY</p>
-                  <a href="https://apps.apple.com/hk/app/expensecal/id6769398965">Open App Store ↳</a>
+                  <h3>山野蛙 · WildFrog</h3>
+                  <p class="mission-summary">Hong Kong&#x27;s 330 peaks, one trail at a time. GPS check-ins, summit certificates and a growing collection of mountain memories.</p>
+                  <p class="mission-spec">iOS · 330 PEAKS · v1.0.9</p>
+                  <div class="project-links"><a href="https://apps.apple.com/hk/app/id6778885865">Open App Store ↳</a></div>
                 </div>
               </article>
 
               <article class="orbit-card" data-orbit-card data-side="left">
                 <span class="mission-ghost" aria-hidden="true">04</span>
-                <figure class="mission-media">
-                  <span class="satellite-badge">SAT-04</span>
-                  <img src="assets/project-2.jpg" alt="Love Contract launch edition visual.">
+                <figure class="mission-media mission-media--expense mission-media--screens">
+                    <img src="assets/projects/expense-1.jpg" alt="公道計算器最新 App Store 宣傳圖：旅費公數首頁。" loading="lazy" decoding="async">
+                    <img src="assets/projects/expense-2.jpg" alt="公道計算器最新 App Store 宣傳圖：支出分析。" loading="lazy" decoding="async">
                 </figure>
                 <div class="orbit-card-copy">
                   <div class="mission-meta">
                     <span class="mission-status-dot" aria-hidden="true"></span>
-                    <p class="project-tag">LAUNCH EDITION</p>
+                    <p class="project-tag">iOS / ANDROID / WEB · EXPENSECAL</p>
                   </div>
-                  <h3>Love Contract</h3>
-                  <p class="mission-summary">Small daily promises, kept on schedule.</p>
-                  <p class="mission-spec">LAUNCH EDITION · iOS</p>
-                  <a href="mailto:hello@rainsday.com?subject=Love%20Contract%20case%20study">Ask about it ↳</a>
+                  <h3>公道計算器</h3>
+                  <p class="mission-summary">Keep group trips fair. Shared funds, multi-currency expenses, shopping lists and clear settlements — together in one place.</p>
+                  <p class="mission-spec">GROUP EXPENSES · MULTI-CURRENCY</p>
+                  <div class="project-links"><a href="https://apps.apple.com/hk/app/expensecal/id6769398965">App Store ↳</a>
+                    <a href="https://play.google.com/store/apps/details?id=com.rainsdayjp.expensecal">Google Play ↳</a>
+                    <a href="https://expensecal.rainsday.com/">Web app ↳</a></div>
                 </div>
               </article>
 
               <article class="orbit-card" data-orbit-card data-side="right">
                 <span class="mission-ghost" aria-hidden="true">05</span>
-                <figure class="mission-media">
-                  <span class="satellite-badge">SAT-05</span>
-                  <img src="assets/project-jlpt.jpg" alt="RaIN JLPT Grammar Lab web app.">
+                <figure class="mission-media mission-media--weather mission-media--screens">
+                    <img src="assets/projects/hk-1.jpg" alt="香港體感 App Store 宣傳圖：十八區體感溫度與天氣首頁。" loading="lazy" decoding="async">
+                    <img src="assets/projects/hk-2.jpg" alt="香港體感 App Store 宣傳圖：地區熱力地圖。" loading="lazy" decoding="async">
                 </figure>
                 <div class="orbit-card-copy">
                   <div class="mission-meta">
                     <span class="mission-status-dot" aria-hidden="true"></span>
-                    <p class="project-tag">日本語学習ラボ</p>
+                    <p class="project-tag">APP STORE · HONG KONG WEATHER</p>
                   </div>
-                  <h3>RaIN JLPT Grammar Lab</h3>
-                  <p class="mission-summary">310 grammar drills with memory, N3/N2, weak-point practice.</p>
-                  <p class="mission-spec">STATUS LIVE · WEB · 310 DRILLS</p>
-                  <a href="jlpt/">Open lab ↳</a>
+                  <h3>香港體感</h3>
+                  <p class="mission-summary">How does Hong Kong feel today? Eighteen-district heat, air quality, a live heat map and a little character for every kind of weather.</p>
+                  <p class="mission-spec">iOS · 18 DISTRICTS · v1.5</p>
+                  <div class="project-links"><a href="https://apps.apple.com/hk/app/%E9%A6%99%E6%B8%AF%E9%AB%94%E6%84%9F/id6774880789">Open App Store ↳</a></div>
                 </div>
               </article>
 
               <article class="orbit-card" data-orbit-card data-side="left">
                 <span class="mission-ghost" aria-hidden="true">06</span>
-                <figure class="mission-media">
-                  <span class="satellite-badge">SAT-06</span>
-                  <img src="assets/project-4.jpg" alt="Research and longform output visual.">
+                <figure class="mission-media mission-media--quest">
+                    <img src="assets/projects/quest.webp" alt="Quest 學習天地正式分享圖：學趣魚仔及五個學習科目。" loading="lazy" decoding="async">
                 </figure>
                 <div class="orbit-card-copy">
                   <div class="mission-meta">
                     <span class="mission-status-dot" aria-hidden="true"></span>
-                    <p class="project-tag">リサーチ &amp; 文書</p>
+                    <p class="project-tag">LIVE WEB · AUBREY PROJECT</p>
+                  </div>
+                  <h3>Quest 學習天地</h3>
+                  <p class="mission-summary">Five subjects, one little learning world. Illustrated flashcards, focused practice and quick quizzes make room for a little progress every day.</p>
+                  <p class="mission-spec">WEB · 中文 / ENGLISH / MATH / SCIENCE / HUMANITIES</p>
+                  <div class="project-links"><a href="https://rain2day.github.io/education/">Start learning ↳</a></div>
+                </div>
+              </article>
+
+              <article class="orbit-card" data-orbit-card data-side="right">
+                <span class="mission-ghost" aria-hidden="true">07</span>
+                <figure class="mission-media mission-media--concept">
+                    <img src="assets/project-2.jpg" alt="Love Contract 早期介面概念圖。" loading="lazy" decoding="async">
+                </figure>
+                <div class="orbit-card-copy">
+                  <div class="mission-meta">
+                    <span class="mission-status-dot" aria-hidden="true"></span>
+                    <p class="project-tag">ARCHIVE · APP CONCEPT</p>
+                  </div>
+                  <h3>Love Contract</h3>
+                  <p class="mission-summary">An early exploration of shared agreements, clear consent and making expectations visible.</p>
+                  <p class="mission-spec">iOS CONCEPT · RELATIONSHIPS</p>
+                  <div class="project-links"><a href="mailto:hello@rainsday.com?subject=Love%20Contract%20case%20study">Ask about it ↳</a></div>
+                </div>
+              </article>
+
+              <article class="orbit-card" data-orbit-card data-side="left">
+                <span class="mission-ghost" aria-hidden="true">08</span>
+                <figure class="mission-media mission-media--jlpt">
+                    <img src="assets/projects/jlpt-current.webp" alt="2026 年 9 月擷取的 RaIN JLPT Grammar Lab 現行練習首頁。" loading="lazy" decoding="async">
+                </figure>
+                <div class="orbit-card-copy">
+                  <div class="mission-meta">
+                    <span class="mission-status-dot" aria-hidden="true"></span>
+                    <p class="project-tag">LIVE WEB · 日本語学習ラボ</p>
+                  </div>
+                  <h3>RaIN JLPT Grammar Lab</h3>
+                  <p class="mission-summary">310 N3 and N2 grammar drills, plus vocabulary, listening and focused practice for the points that need another look.</p>
+                  <p class="mission-spec">WEB · N3 / N2 · 310 DRILLS</p>
+                  <div class="project-links"><a href="jlpt/">Open lab ↳</a></div>
+                </div>
+              </article>
+
+              <article class="orbit-card" data-orbit-card data-side="right">
+                <span class="mission-ghost" aria-hidden="true">09</span>
+                <figure class="mission-media mission-media--research">
+                    <div class="research-cover" aria-label="Research workflow: sources, findings, decisions">
+                      <span>FIELD NOTES / RaIN</span>
+                      <strong>From information<br>to <em>understanding.</em></strong>
+                      <p>SOURCES <span>→</span> FINDINGS <span>→</span> DECISIONS</p>
+                    </div>
+                </figure>
+                <div class="orbit-card-copy">
+                  <div class="mission-meta">
+                    <span class="mission-status-dot" aria-hidden="true"></span>
+                    <p class="project-tag">RESEARCH &amp; DOCUMENTS</p>
                   </div>
                   <h3>Research &amp; longform</h3>
-                  <p class="mission-summary">CSV, chat-log and Excel analysis with a designer's output. Reports that ship.</p>
-                  <p class="mission-spec">ON REQUEST · DOCS</p>
-                  <a href="mailto:hello@rainsday.com?subject=research%20case%20study">Ask about it ↳</a>
+                  <p class="mission-summary">CSV, chat-log and Excel analysis with a designer&#x27;s output. Sources, findings and a clear next step.</p>
+                  <p class="mission-spec">ON REQUEST · RESEARCH / REPORTS</p>
+                  <div class="project-links"><a href="mailto:hello@rainsday.com?subject=research%20case%20study">Ask about it ↳</a></div>
                 </div>
               </article>
             </div>
@@ -287,7 +384,7 @@
         <div class="act-pin">
           <div class="act-copy act-copy--right" data-act-copy>
             <p class="kicker">03 — TIME DILATION</p>
-            <h2 id="act-3-title">Near the horizon, time runs slow.</h2>
+            <h2 id="act-3-title">Good things<br> <span class="display-serif">take gravity.</span></h2>
             <p>That's where we work. Deep in the gravity well of a problem — small habits, shipping discipline, craft that compounds. One hour here is a launch out there.</p>
             <ul class="field-rules" aria-label="Field rules">
               <li data-field-rule>01 — SHIP FIRST. POLISH EVERY ORBIT AFTER.</li>
@@ -305,20 +402,25 @@
           <div class="log-panel" data-act-copy>
             <div class="log-head">
               <p class="kicker">04 — EVENT HORIZON</p>
-              <h2 id="act-4-title">Transmission log.</h2>
+              <h2 id="act-4-title">Notes from<br> <span class="display-serif">the field.</span></h2>
             </div>
-            <ul class="transmission-list">
-              <li><a href="black-hole/">2026.06.12 — LAB 01: a real-time black hole with true gravitational lensing</a></li>
-              <li><span>2026.06.12 — expenseCal: eight cloud functions live; 195 web + 122 rules tests green</span></li>
-              <li><span>2026.06.11 — WildFrog 1.0 submitted to App Store review</span></li>
-              <li><span>2026.06.10 — expenseCal iOS functional audit: submit-ready</span></li>
-              <li><span>2026.06.09 — WildFrog: 330 collectible peak titles, honest GPS check-in</span></li>
-              <li><span>2026.06.06 — 香港體感: feels-like formula rebuilt on apparent temperature</span></li>
-              <li><a href="https://github.com/rain2day/codex-pet-meter">2026.06.06 — codex-pet-meter v0.3.0 open-sourced on GitHub</a></li>
-              <li><a href="https://apps.apple.com/hk/app/%E9%A6%99%E6%B8%AF%E9%AB%94%E6%84%9F/id6774880789">2026.06.04 — 香港體感 1.0 live on the App Store</a></li>
-              <li><a href="v4/">2026.05.27 — edition 04 archived</a></li>
-              <li><span>2026.05.26 — expenseCal 1.5: net settlement and pair batches GA</span></li>
-              <li><span>2026.05.22 — vibe code: three Claude Code skills shipped</span></li>
+            <ul class="transmission-list" tabindex="0" aria-label="Studio journal">
+              <li><span><time datetime="2026-09-12">2026.09.12</time><span class="transmission-text">BCanteen: a Cantonese food journal, with image-led meal suggestions in development</span></span></li>
+              <li><a href="https://koi.rainsday.com/"><time datetime="2026-09-10">2026.09.10</time><span class="transmission-text">KOI: new light and dark keyboard themes, now in testing</span></a></li>
+              <li><a href="https://apps.apple.com/hk/app/expensecal/id6769398965"><time datetime="2026-09-07">2026.09.07</time><span class="transmission-text">公道計算器 / expenseCal 1.2.13 is live on the App Store</span></a></li>
+              <li><a href="https://apps.apple.com/hk/app/id6778885865"><time datetime="2026-09-06">2026.09.06</time><span class="transmission-text">山野蛙 / WildFrog 1.0.9 is live — keep collecting those peaks</span></a></li>
+              <li><a href="https://apps.apple.com/hk/app/%E9%A6%99%E6%B8%AF%E9%AB%94%E6%84%9F/id6774880789"><time datetime="2026-06-26">2026.06.26</time><span class="transmission-text">香港體感 1.5 is live on the App Store</span></a></li>
+              <li><a href="black-hole/"><time datetime="2026-06-12">2026.06.12</time><span class="transmission-text">LAB 01: a real-time black hole with true gravitational lensing</span></a></li>
+              <li><span><time datetime="2026-06-12">2026.06.12</time><span class="transmission-text">expenseCal: eight cloud functions live; 195 web + 122 rules tests green</span></span></li>
+              <li><span><time datetime="2026-06-11">2026.06.11</time><span class="transmission-text">WildFrog 1.0 submitted to App Store review</span></span></li>
+              <li><span><time datetime="2026-06-10">2026.06.10</time><span class="transmission-text">expenseCal iOS functional audit: submit-ready</span></span></li>
+              <li><span><time datetime="2026-06-09">2026.06.09</time><span class="transmission-text">WildFrog: 330 collectible peak titles, honest GPS check-in</span></span></li>
+              <li><span><time datetime="2026-06-06">2026.06.06</time><span class="transmission-text">香港體感: feels-like formula rebuilt on apparent temperature</span></span></li>
+              <li><a href="https://github.com/rain2day/codex-pet-meter"><time datetime="2026-06-06">2026.06.06</time><span class="transmission-text">codex-pet-meter v0.3.0 open-sourced on GitHub</span></a></li>
+              <li><a href="https://apps.apple.com/hk/app/%E9%A6%99%E6%B8%AF%E9%AB%94%E6%84%9F/id6774880789"><time datetime="2026-06-04">2026.06.04</time><span class="transmission-text">香港體感 1.0 live on the App Store</span></a></li>
+              <li><a href="v4/"><time datetime="2026-05-27">2026.05.27</time><span class="transmission-text">edition 04 archived</span></a></li>
+              <li><span><time datetime="2026-05-26">2026.05.26</time><span class="transmission-text">expenseCal 1.5: net settlement and pair batches GA</span></span></li>
+              <li><span><time datetime="2026-05-22">2026.05.22</time><span class="transmission-text">vibe code: three Claude Code skills shipped</span></span></li>
             </ul>
             <a class="lab-card" href="black-hole/">
               <span>TAKE THE CONTROLS</span>
@@ -334,9 +436,9 @@
         <div class="act-pin">
           <div class="act-copy act-copy--contact" data-act-copy>
             <p class="kicker">05 — ESCAPE VELOCITY</p>
-            <h2 id="act-5-title">Let's build what's next.</h2>
+            <h2 id="act-5-title">Have something<br> <span class="display-serif">in mind?</span></h2>
             <p>New commissions, partnerships, advisory. Send a brief — we reply within one business day.</p>
-            <a class="magnetic-cta" href="mailto:hello@rainsday.com" data-magnetic>hello@rainsday.com</a>
+            <a class="magnetic-cta" href="mailto:hello@rainsday.com" data-magnetic>hello@rainsday.com<span aria-hidden="true">↗</span></a>
             <div class="secondary-links">
               <a href="https://github.com/rainsday">GitHub ↳</a>
               <a href="https://github.com/rain2day/codex-pet-meter">codex-pet-meter ↳</a>
@@ -351,36 +453,10 @@
 
     <noscript>
       <style>
-        .journey-canvas,
-        .journey-hud,
-        .journey-menu {
-          display: none !important;
-        }
-
-        body {
-          background:
-            radial-gradient(circle at 50% 15%, rgba(52, 255, 0, 0.16), transparent 26rem),
-            radial-gradient(circle at 50% 50%, #12142a 0, #06070f 52%, #020205 100%) !important;
-        }
-
-        .act {
-          min-height: auto !important;
-        }
-
-        .act-pin {
-          position: static !important;
-          min-height: auto !important;
-          height: auto !important;
-          padding: 7rem 1.25rem !important;
-        }
-
-        [data-act-copy] {
-          opacity: 1 !important;
-          transform: none !important;
-        }
+        .hud-menu-button, .orbit-controls { display: none !important; }
       </style>
     </noscript>
 
-    <script src="journey.js" defer></script>
+    <script src="journey.js?v=20260912" defer></script>
   </body>
 </html>

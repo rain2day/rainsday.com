@@ -16,10 +16,17 @@
   const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const coarsePointer = matchMedia("(pointer: coarse)").matches;
   const saveData = navigator.connection?.saveData === true;
+  const compactViewport = matchMedia("(max-width: 760px) and (max-height: 740px), (max-width: 1000px) and (max-height: 520px)");
+  const chapterLinks = [...document.querySelectorAll(".chapter-nav a")];
+  const projectSteps = [...document.querySelectorAll("[data-project-index]")];
+  const projectCurrent = document.querySelector("[data-project-current]");
+  let currentProjectIndex = 0;
+  let currentActIndex = -1;
+  let pendingProgress = null;
   const FALLBACK_KEY = "journey-fallback";
   const RS_KM = 1.27e7;
   const STEP_TIERS = [220, 150, 96];
-  const DEFAULT_ACT_SPANS = [120, 160, 540, 140, 160, 140];
+  const DEFAULT_ACT_SPANS = [120, 160, 810, 140, 160, 140];
   const DEFAULT_ACT_NAMES = ["DEPARTURE", "THE APPROACH", "IN ORBIT", "TIME DILATION", "EVENT HORIZON", "ESCAPE"];
   const actElements = [...document.querySelectorAll("[data-act]")].sort((a, b) => {
     return (Number(a.dataset.act) || 0) - (Number(b.dataset.act) || 0);
@@ -51,8 +58,8 @@
     return act.start + (act.end - act.start) * t;
   };
   const CAMERA_KEYFRAMES = [
-    { p: actBoundary(0, "start"), r: 34.0, polar: 78, azimuth: 0, offsetX: 0.00, offsetY: 0.12, diskScale: 0.04, steps: 96, exposure: 1.00 },
-    { p: actBoundary(0, "end"), r: 30.0, polar: 78, azimuth: 6, offsetX: 0.10, offsetY: 0.12, diskScale: 0.25, steps: 96, exposure: 1.00 },
+    { p: actBoundary(0, "start"), r: 17.5, polar: 78, azimuth: 0, offsetX: 0.47, offsetY: 0.10, diskScale: 0.80, steps: 150, exposure: 1.00 },
+    { p: actBoundary(0, "end"), r: 16.0, polar: 79, azimuth: 6, offsetX: 0.44, offsetY: 0.10, diskScale: 0.90, steps: 150, exposure: 1.00 },
     { p: actBoundary(1, "end"), r: 14.0, polar: 80, azimuth: 40, offsetX: 0.22, offsetY: 0.10, diskScale: 1.00, steps: 150, exposure: 1.05 },
     { p: actLocalP(2, 0.33), r: 13.0, polar: 81, azimuth: 87, offsetX: -0.12, offsetY: 0.09, diskScale: 1.05, steps: 150, exposure: 1.05 },
     { p: actLocalP(2, 0.66), r: 13.4, polar: 82, azimuth: 133, offsetX: -0.04, offsetY: 0.07, diskScale: 1.10, steps: 150, exposure: 1.05 },
@@ -97,14 +104,15 @@
     };
   });
   const orbitCards = [...document.querySelectorAll("[data-orbit-card]")];
-  const orbitIntro = document.querySelector(".orbit-intro");
   const fieldRuleItems = [...document.querySelectorAll("[data-field-rule]")];
 
   initMenu();
+  initChapterNavigation();
+  initProjectNavigation();
   initHoverMotion();
   initScrollHint();
 
-  if (!canvas || !story || reducedMotion || saveData || stickyFallback) {
+  if (!canvas || !story || reducedMotion || saveData || compactViewport.matches || stickyFallback) {
     activateStatic();
     return;
   }
@@ -120,10 +128,14 @@
   }
 
   function activateStatic() {
+    const resumeTarget = body.classList.contains("journey-static") ? null
+      : document.querySelector(".act.is-active .orbit-card.is-active") || document.querySelector(".act.is-active");
     body.classList.add("journey-static");
     if (canvas) canvas.hidden = true;
-    updateActContent(1);
+    actNodes.forEach((act) => { if (act.el) act.el.inert = false; });
+    orbitCards.forEach((card) => { card.inert = false; });
     updateOrbitCard(0);
+    resumeTarget?.scrollIntoView({ behavior: "instant" });
   }
 
   function initMenu() {
@@ -139,6 +151,7 @@
       lastFocus = document.activeElement;
       menuOverlay.hidden = false;
       body.classList.add("is-menu-open");
+      if (story) story.inert = true;
       menuButton.setAttribute("aria-expanded", "true");
       window.setTimeout(() => getFocusable()[0]?.focus({ preventScroll: true }), 0);
     };
@@ -146,6 +159,7 @@
     const closeMenu = () => {
       menuOverlay.hidden = true;
       body.classList.remove("is-menu-open");
+      if (story) story.inert = false;
       menuButton.setAttribute("aria-expanded", "false");
       if (lastFocus instanceof HTMLElement) lastFocus.focus({ preventScroll: true });
     };
@@ -181,19 +195,79 @@
     });
   }
 
-  function initHoverMotion() {
-    if (reducedMotion) return;
+  function scrollToProgress(progress) {
+    pendingProgress = clamp(progress, 0, 1);
+    const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    // Chapter and project controls are deliberate jumps; ordinary scrolling remains native.
+    window.scrollTo({ top: pendingProgress * maxScroll, behavior: "instant" });
+    updateActContent(pendingProgress);
+    updateOrbitFromProgress(pendingProgress);
+  }
 
-    orbitCards.forEach((card) => {
-      card.addEventListener("pointermove", (event) => {
-        const rect = card.getBoundingClientRect();
-        const x = ((event.clientX - rect.left) / Math.max(1, rect.width) - 0.5) * 2;
-        card.style.setProperty("--tilt", `${clamp(x * 4, -4, 4).toFixed(2)}deg`);
-      }, { passive: true });
-      card.addEventListener("pointerleave", () => {
-        card.style.setProperty("--tilt", "0deg");
+  function navigateToAct(index) {
+    const act = ACTS[index];
+    if (!act) return;
+    if (body.classList.contains("journey-static")) {
+      actNodes[index]?.el?.scrollIntoView({ behavior: reducedMotion ? "instant" : "smooth" });
+      return;
+    }
+    const local = index === 0 ? 0 : index === 2 ? 0.5 / getOrbitBeatCount() : 0.72;
+    scrollToProgress(actLocalP(index, local));
+  }
+
+  function initChapterNavigation() {
+    document.querySelectorAll('a[href^="#act-"]').forEach((link) => {
+      link.addEventListener("click", (event) => {
+        const hash = link.getAttribute("href");
+        const index = Number(hash?.replace("#act-", ""));
+        if (!Number.isInteger(index) || !ACTS[index]) return;
+        event.preventDefault();
+        if (location.hash !== hash) history.pushState(null, "", hash);
+        navigateToAct(index);
+        if (link.classList.contains("skip-link")) {
+          const heading = actNodes[index].el?.querySelector("h1, h2");
+          if (heading) {
+            heading.tabIndex = -1;
+            heading.focus({ preventScroll: true });
+          }
+        }
       });
     });
+    const restoreChapter = () => {
+      const index = Number(location.hash.replace("#act-", ""));
+      if ((!location.hash || /^#act-\d+$/.test(location.hash)) && ACTS[index]) navigateToAct(index);
+    };
+    window.addEventListener("popstate", restoreChapter);
+    window.addEventListener("hashchange", restoreChapter);
+  }
+
+  function initProjectNavigation() {
+    const count = getOrbitBeatCount();
+    document.querySelectorAll("[data-project-total]").forEach((node) => {
+      node.textContent = String(count).padStart(2, "0");
+    });
+    document.querySelector(".project-steps")?.style.setProperty("--project-count", String(count));
+    const showProject = (index) => {
+      const count = getOrbitBeatCount();
+      const next = (index + count) % count;
+      scrollToProgress(actLocalP(2, (next + 0.5) / count));
+    };
+    document.querySelector("[data-project-prev]")?.addEventListener("click", () => showProject(currentProjectIndex - 1));
+    document.querySelector("[data-project-next]")?.addEventListener("click", () => showProject(currentProjectIndex + 1));
+    projectSteps.forEach((button) => {
+      button.addEventListener("click", () => showProject(Number(button.dataset.projectIndex)));
+    });
+  }
+
+  function updateProjectNavigation(index) {
+    if (currentProjectIndex === index && projectCurrent?.textContent === String(index + 1).padStart(2, "0")) return;
+    currentProjectIndex = index;
+    if (projectCurrent) projectCurrent.textContent = String(index + 1).padStart(2, "0");
+    projectSteps.forEach((button, step) => button.setAttribute("aria-pressed", String(step === index)));
+  }
+
+  function initHoverMotion() {
+    if (reducedMotion || coarsePointer) return;
 
     document.querySelectorAll("[data-magnetic]").forEach((node) => {
       node.addEventListener("pointermove", (event) => {
@@ -213,7 +287,7 @@
   function initScrollHint() {
     if (!scrollHint) return;
     const mute = () => {
-      if (window.scrollY > 8) scrollHint.classList.add("is-muted");
+      scrollHint.classList.toggle("is-muted", window.scrollY > 8);
     };
     window.addEventListener("scroll", mute, { passive: true });
     mute();
@@ -248,7 +322,7 @@
       return;
     }
 
-    renderer.setClearColor(0x06070f, 1);
+    renderer.setClearColor(0x090c0d, 1);
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.0;
@@ -453,6 +527,10 @@
 
       const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
       state.targetP = clamp(window.scrollY / maxScroll, 0, 1);
+      if (pendingProgress !== null) {
+        state.displayP = state.targetP;
+        pendingProgress = null;
+      }
       state.displayP += (state.targetP - state.displayP) * 0.07;
       if (Math.abs(state.targetP - state.displayP) < 0.00005) state.displayP = state.targetP;
       state.renderAccumulator += frameMs;
@@ -502,7 +580,13 @@
     };
 
     function onResize() {
+      if (compactViewport.matches) {
+        teardown(false);
+        return;
+      }
+      const progress = state.targetP;
       applyRenderSize();
+      scrollToProgress(progress);
     }
 
     function onVisibilityChange() {
@@ -522,7 +606,15 @@
     window.addEventListener("keydown", markInteraction);
     document.addEventListener("visibilitychange", onVisibilityChange);
 
+    body.classList.remove("journey-static");
+    canvas.hidden = false;
     applyRenderSize();
+    const initialAct = /^#act-\d+$/.test(location.hash) ? Number(location.hash.replace("#act-", "")) : null;
+    if (initialAct !== null && ACTS[initialAct]) navigateToAct(initialAct);
+    state.targetP = clamp(window.scrollY / Math.max(1, document.documentElement.scrollHeight - window.innerHeight), 0, 1);
+    state.displayP = state.targetP;
+    updateActContent(state.displayP);
+    updateOrbitFromProgress(state.displayP);
     startLoop();
   }
 
@@ -557,8 +649,10 @@
     }
 
     if (aspect < 1) {
-      state.offsetX *= 0.45;
-      state.offsetY += 0.10;
+      const departure = 1 - smoothstep(ACTS[0].start, ACTS[1].end, p);
+      state.offsetX *= lerp(0.45, 0.05, departure);
+      state.offsetY += lerp(0.10, 0.30, departure);
+      state.r *= lerp(1, 1.2, departure);
     }
 
     return state;
@@ -574,6 +668,13 @@
 
   function updateHud(p, cameraState) {
     const active = getActiveAct(p);
+    if (currentActIndex !== active.index) {
+      currentActIndex = active.index;
+      chapterLinks.forEach((link, index) => {
+        if (index === active.index) link.setAttribute("aria-current", "step");
+        else link.removeAttribute("aria-current");
+      });
+    }
     const km = cameraState.r * RS_KM;
     const dilation = 1 / Math.sqrt(Math.max(0.0001, 1 - 1 / cameraState.r));
     const escapeVelocity = Math.sqrt(1 / cameraState.r);
@@ -594,13 +695,14 @@
       if (!act.el || !act.copy) return;
       const t = inverseLerp(act.start, act.end, p);
       const isDeparture = act.index === 0;
-      const enter = isDeparture ? 1 : smoothstep(0, 0.15, t);
-      const exit = isDeparture ? 1 - smoothstep(0.80, 1, t) : 1 - smoothstep(0.85, 1, t);
+      const enter = isDeparture ? 1 : smoothstep(0, 0.05, t);
+      const exit = act.index === 5 ? 1 : 1 - smoothstep(0.96, 1, t);
       const alpha = clamp(enter * exit, 0, 1);
       const y = (1 - enter) * 24 + (1 - exit) * -24;
       act.copy.style.setProperty("--act-alpha", alpha.toFixed(3));
       act.copy.style.setProperty("--act-y", `${y.toFixed(1)}px`);
       act.el.classList.toggle("is-active", alpha > 0.03);
+      act.el.inert = alpha <= 0.03;
 
       if (act.index === 3) updateFieldRules(t);
     });
@@ -609,18 +711,7 @@
   function updateOrbitFromProgress(p) {
     if (!orbitCards.length) return;
     const local = inverseLerp(ACTS[2].start, ACTS[2].end, p);
-    updateOrbitIntro(local);
     updateOrbitCards(local);
-  }
-
-  function updateOrbitIntro(local) {
-    if (!orbitIntro) return;
-    const beatSpan = 1 / getOrbitBeatCount();
-    const fadeStart = beatSpan;
-    const fadeEnd = fadeStart + beatSpan * 0.30;
-    const alpha = 1 - smoothstep(fadeStart, fadeEnd, local);
-    orbitIntro.style.setProperty("--orbit-intro-alpha", alpha.toFixed(3));
-    orbitIntro.style.setProperty("--orbit-intro-y", `${((1 - alpha) * -16).toFixed(1)}px`);
   }
 
   function updateOrbitCard(index) {
@@ -635,13 +726,16 @@
   function updateOrbitCards(local) {
     const beatCount = getOrbitBeatCount();
     const activeIndex = clamp(Math.floor(Math.min(beatCount - 0.001, local * beatCount)), 0, beatCount - 1);
+    updateProjectNavigation(activeIndex);
 
     orbitCards.forEach((card, index) => {
       const beatStart = index / beatCount;
       const beatEnd = (index + 1) / beatCount;
       const beatLocal = inverseLerp(beatStart, beatEnd, local);
       const envelope = orbitEnvelope(beatLocal);
-      card.classList.toggle("is-active", index === activeIndex && envelope.alpha > 0.03);
+      const isActive = index === activeIndex && envelope.alpha > 0.03;
+      card.classList.toggle("is-active", isActive);
+      card.inert = !isActive;
       card.style.setProperty("--card-alpha", envelope.alpha.toFixed(3));
       card.style.setProperty("--card-y", `${envelope.y.toFixed(1)}px`);
       card.style.setProperty("--card-scale", envelope.scale.toFixed(3));
@@ -836,11 +930,11 @@
       q -= rdLayer * dot(q, rdLayer) * warp;
       float dist = length(q);
       float starSize = mix(0.034, 0.012, hash12(cell + seed + 4.0));
-      float brightness = 0.50 + pow(hash12(cell + seed + 8.0), 7.0) * 3.50;
+      float brightness = 0.40 + pow(hash12(cell + seed + 8.0), 7.0) * 2.20;
       float core = pow(max(0.0, 1.0 - dist / starSize), 18.0);
       float spike = step(1.6, brightness)
         * pow(max(0.0, 1.0 - (abs(q.x) + abs(q.y)) / (starSize * 7.0)), 3.0)
-        * 0.60;
+        * 0.28;
       core += spike;
       float twinkle = 0.94 + 0.06 * sin(uTime * 1.7 + hash12(cell + seed + 12.0) * 20.0);
       vec3 tint = mix(vec3(1.0, 0.76, 0.55), vec3(0.74, 0.84, 1.0), hash12(cell + seed + 16.0));
@@ -873,10 +967,10 @@
 
     vec3 background(vec3 dir, vec3 centerDir) {
       float warp = clamp(uWarp, 0.0, 0.92);
-      vec3 color = vec3(0.0235, 0.0275, 0.0588);
-      color += nebulaPatch(dir, normalize(vec3(0.60, 0.20, -0.40)), 0.72, vec3(0.10, 0.06, 0.18), 5.1);
-      color += nebulaPatch(dir, normalize(vec3(-0.35, -0.16, -0.72)), 0.64, vec3(0.16, 0.08, 0.05), 8.4);
-      color += nebulaPatch(dir, normalize(vec3(-0.70, 0.32, 0.22)), 0.58, vec3(0.08, 0.05, 0.16), 11.6);
+      vec3 color = vec3(0.014, 0.020, 0.022);
+      color += nebulaPatch(dir, normalize(vec3(0.60, 0.20, -0.40)), 0.72, vec3(0.09, 0.075, 0.045), 5.1);
+      color += nebulaPatch(dir, normalize(vec3(-0.35, -0.16, -0.72)), 0.64, vec3(0.10, 0.075, 0.05), 8.4);
+      color += nebulaPatch(dir, normalize(vec3(-0.70, 0.32, 0.22)), 0.58, vec3(0.035, 0.06, 0.065), 11.6);
 
       vec3 bandNormal = normalize(vec3(0.25, 0.82, 0.50));
       float bandAxis = abs(dot(dir, bandNormal));
@@ -887,8 +981,8 @@
       float dust = smoothstep(0.54, 0.90, fbm3(dir * 22.0 + vec3(4.0, 0.0, 8.0)));
       float ridge = 1.0 - abs(2.0 * fbm3(dir * 13.0 + vec3(2.0, 6.0, 9.0)) - 1.0);
       float lanes = smoothstep(0.48, 0.88, ridge) * bandCore;
-      vec3 coolTint = vec3(0.18, 0.20, 0.30);
-      vec3 warmTint = vec3(0.32, 0.27, 0.30);
+      vec3 coolTint = vec3(0.11, 0.15, 0.17);
+      vec3 warmTint = vec3(0.22, 0.19, 0.14);
       vec3 bandTint = mix(coolTint, warmTint, bandCore);
       vec3 milky = bandTint * band * (0.12 + 0.54 * cloud);
       milky *= 1.0 - 0.62 * dust;
