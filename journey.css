@@ -596,36 +596,36 @@ h2 { font-size: clamp(3.6rem, 5.6vw, 6.2rem); }
   .magnetic-cta, .secondary-links { margin-top: 1rem; }
 }
 
-/* Reading mode is also the no-JavaScript, reduced-motion and WebGL fallback. */
+/* Motion fallback and readable short-screen layout are independent. */
 .journey-static .journey-canvas { display: none; }
 .journey-static .journey-fallback { display: block; }
-.journey-static .journey-hud::after { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 5.9rem; z-index: -1; background: rgba(9, 12, 13, 0.95); }
-.journey-static .hud-readouts, .journey-static .hud-progress, .journey-static .scroll-hint, .journey-static .chapter-nav, .journey-static .hud-frame { display: none; }
-.journey-static .act { min-height: 0; }
-.journey-static .act-pin { position: relative; inset: auto; display: grid; height: auto; min-height: 0; padding: 6rem var(--gutter); visibility: visible; pointer-events: auto; }
-.journey-static .act--departure .act-pin { min-height: 100svh; padding-top: 11rem; padding-bottom: 6rem; align-items: center; }
-.journey-static [data-act-copy], .journey-static .field-rules li { opacity: 1; transform: none; will-change: auto; }
-.journey-static .orbit-layout { grid-template-columns: 1fr; gap: 3rem; }
-.journey-static .orbit-intro { width: 100%; }
-.journey-static .orbit-intro h2 { max-width: 40rem; }
-.journey-static .orbit-controls { display: none; }
-.journey-static .orbit-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; height: auto; }
-.journey-static .orbit-card { position: relative; top: auto; left: auto; display: flex; flex-direction: column; opacity: 1; visibility: visible; transform: none; pointer-events: auto; will-change: auto; }
-.journey-static .orbit-card-copy { flex: 1; align-content: start; }
-.journey-static .mission-media { flex-shrink: 0; }
-.journey-static .mission-summary { min-height: 3.5em; }
-.journey-static .transmission-list { max-height: 32rem; }
-.journey-static .act-copy--right { justify-self: start; margin: 0; }
-.journey-static .act-copy--right::before { display: none; }
-.journey-static .hero-note { display: none; }
+.journey-reading .journey-hud::after { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 5.9rem; z-index: -1; background: rgba(9, 12, 13, 0.95); }
+.journey-reading .hud-readouts, .journey-reading .hud-progress, .journey-reading .scroll-hint, .journey-reading .chapter-nav, .journey-reading .hud-frame { display: none; }
+.journey-reading .act { min-height: 0; }
+.journey-reading .act-pin { position: relative; inset: auto; display: grid; height: auto; min-height: 0; padding: 6rem var(--gutter); visibility: visible; pointer-events: auto; }
+.journey-reading .act--departure .act-pin { min-height: 100svh; padding-top: 11rem; padding-bottom: 6rem; align-items: center; }
+.journey-reading [data-act-copy], .journey-reading .field-rules li { opacity: 1; transform: none; will-change: auto; }
+.journey-reading .orbit-layout { grid-template-columns: 1fr; gap: 3rem; }
+.journey-reading .orbit-intro { width: 100%; }
+.journey-reading .orbit-intro h2 { max-width: 40rem; }
+.journey-reading .orbit-controls { display: none; }
+.journey-reading .orbit-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; height: auto; }
+.journey-reading .orbit-card { position: relative; top: auto; left: auto; display: flex; flex-direction: column; opacity: 1; visibility: visible; transform: none; pointer-events: auto; will-change: auto; }
+.journey-reading .orbit-card-copy { flex: 1; align-content: start; }
+.journey-reading .mission-media { flex-shrink: 0; }
+.journey-reading .mission-summary { min-height: 3.5em; }
+.journey-reading .transmission-list { max-height: 32rem; }
+.journey-reading .act-copy--right { justify-self: start; margin: 0; }
+.journey-reading .act-copy--right::before { display: none; }
+.journey-reading .hero-note { display: none; }
 @media (max-width: 760px) {
-  .journey-static .journey-hud::after { height: 4.9rem; }
-  .journey-static .act-pin { padding-block: 4rem; }
-  .journey-static .act--departure .act-pin { min-height: 100svh; padding-top: 11rem; padding-bottom: 5rem; }
-  .journey-static .orbit-layout { gap: 2rem; }
-  .journey-static .orbit-cards { grid-template-columns: 1fr; }
-  .journey-static .mission-media { height: 12rem; }
-  .journey-static .transmission-list { max-height: 26rem; }
+  .journey-reading .journey-hud::after { height: 4.9rem; }
+  .journey-reading .act-pin { padding-block: 4rem; }
+  .journey-reading .act--departure .act-pin { min-height: 100svh; padding-top: 11rem; padding-bottom: 5rem; }
+  .journey-reading .orbit-layout { gap: 2rem; }
+  .journey-reading .orbit-cards { grid-template-columns: 1fr; }
+  .journey-reading .mission-media { height: 12rem; }
+  .journey-reading .transmission-list { max-height: 26rem; }
   .journey-static .fallback-core, .journey-static .fallback-ring, .journey-static .fallback-ray { top: 24%; left: 75%; }
 }
 @media (prefers-reduced-motion: reduce) {

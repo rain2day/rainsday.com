@@ -112,7 +112,7 @@
   initHoverMotion();
   initScrollHint();
 
-  if (!canvas || !story || reducedMotion || saveData || compactViewport.matches || stickyFallback) {
+  if (!canvas || !story || reducedMotion || saveData || stickyFallback) {
     activateStatic();
     return;
   }
@@ -127,13 +127,20 @@
     }
   }
 
+  function setReadingLayout(enabled) {
+    body.classList.toggle("journey-reading", enabled);
+    if (enabled) {
+      actNodes.forEach((act) => { if (act.el) act.el.inert = false; });
+      orbitCards.forEach((card) => { card.inert = false; });
+    }
+  }
+
   function activateStatic() {
-    const resumeTarget = body.classList.contains("journey-static") ? null
+    const resumeTarget = body.classList.contains("journey-reading") ? null
       : document.querySelector(".act.is-active .orbit-card.is-active") || document.querySelector(".act.is-active");
     body.classList.add("journey-static");
+    setReadingLayout(true);
     if (canvas) canvas.hidden = true;
-    actNodes.forEach((act) => { if (act.el) act.el.inert = false; });
-    orbitCards.forEach((card) => { card.inert = false; });
     updateOrbitCard(0);
     resumeTarget?.scrollIntoView({ behavior: "instant" });
   }
@@ -207,7 +214,7 @@
   function navigateToAct(index) {
     const act = ACTS[index];
     if (!act) return;
-    if (body.classList.contains("journey-static")) {
+    if (body.classList.contains("journey-reading")) {
       actNodes[index]?.el?.scrollIntoView({ behavior: reducedMotion ? "instant" : "smooth" });
       return;
     }
@@ -580,13 +587,27 @@
     };
 
     function onResize() {
-      if (compactViewport.matches) {
-        teardown(false);
-        return;
-      }
+      // Short viewports need flowing content, not a disabled renderer.
+      const wasReading = body.classList.contains("journey-reading");
+      const nextReading = compactViewport.matches;
       const progress = state.targetP;
+      const resumeTarget = !wasReading
+        ? document.querySelector(".act.is-active .orbit-card.is-active") || document.querySelector(".act.is-active") || actNodes[getActiveAct(progress).index]?.el
+        : null;
+      const readerIndex = (nodes) => nodes.reduce((index, node, i) =>
+        node.getBoundingClientRect().top <= window.innerHeight * 0.4 ? i : index, 0);
+      const readerAct = wasReading && !nextReading ? readerIndex(actElements) : 0;
+      const readerProject = readerAct === 2 ? readerIndex(orbitCards) : 0;
+      setReadingLayout(nextReading);
       applyRenderSize();
-      scrollToProgress(progress);
+      if (nextReading) {
+        if (!wasReading) resumeTarget?.scrollIntoView({ behavior: "instant", block: "start" });
+      } else if (wasReading) {
+        if (readerAct === 2) scrollToProgress(actLocalP(2, (readerProject + 0.5) / getOrbitBeatCount()));
+        else navigateToAct(readerAct);
+      } else {
+        scrollToProgress(progress);
+      }
     }
 
     function onVisibilityChange() {
@@ -607,6 +628,7 @@
     document.addEventListener("visibilitychange", onVisibilityChange);
 
     body.classList.remove("journey-static");
+    setReadingLayout(compactViewport.matches);
     canvas.hidden = false;
     applyRenderSize();
     const initialAct = /^#act-\d+$/.test(location.hash) ? Number(location.hash.replace("#act-", "")) : null;
@@ -691,6 +713,7 @@
   }
 
   function updateActContent(p) {
+    if (body.classList.contains("journey-reading")) return;
     actNodes.forEach((act) => {
       if (!act.el || !act.copy) return;
       const t = inverseLerp(act.start, act.end, p);
@@ -709,7 +732,7 @@
   }
 
   function updateOrbitFromProgress(p) {
-    if (!orbitCards.length) return;
+    if (!orbitCards.length || body.classList.contains("journey-reading")) return;
     const local = inverseLerp(ACTS[2].start, ACTS[2].end, p);
     updateOrbitCards(local);
   }
