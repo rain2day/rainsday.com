@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RaIN JLPT Grammar Lab — N3 · N2 文法練習</title>
-  <meta name="description" content="JLPT N3／N2 文法練習：題庫、場景、語彙、耳練同錯題複盤，一個乾淨 flow。做完即刻睇排除理由。">
+  <title>RaIN JLPT Grammar Lab — N3 · N2 · N1 文法練習</title>
+  <meta name="description" content="JLPT N3／N2／N1 文法練習：填空與語意辨析、283 組 N2／N1 文法筆記、場景閱讀、語彙及聽力練習。">
   <link rel="canonical" href="https://rainsday.com/jlpt/">
 
   <link rel="icon" href="/favicon.svg?v=4" type="image/svg+xml">
@@ -13,20 +13,24 @@
 
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://rainsday.com/jlpt/">
-  <meta property="og:title" content="RaIN JLPT Grammar Lab — N3 · N2 文法練習">
-  <meta property="og:description" content="題庫、場景、語彙、耳練同錯題複盤，一個乾淨 flow。做完即刻睇排除理由。">
-  <meta property="og:image" content="https://rainsday.com/jlpt/og-cover.png?v=20260529">
+  <meta property="og:title" content="RaIN JLPT Grammar Lab — N3 · N2 · N1 文法練習">
+  <meta property="og:description" content="填空與語意辨析、283 組 N2／N1 文法筆記、場景閱讀、語彙及聽力練習。">
+  <meta property="og:image" content="https://rainsday.com/jlpt/og-study.jpg?v=20260912">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="RaIN JLPT Grammar Lab — N3・N2 文法練習。">
+  <meta property="og:image:alt" content="RaIN JLPT Grammar Lab — N3・N2・N1 文法練習。">
   <meta property="og:site_name" content="rainsday">
   <meta property="og:locale" content="zh_HK">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="RaIN JLPT Grammar Lab — N3 · N2 文法練習">
-  <meta name="twitter:description" content="題庫、場景、語彙、耳練同錯題複盤，一個乾淨 flow。">
-  <meta name="twitter:image" content="https://rainsday.com/jlpt/og-cover.png?v=20260529">
+  <meta name="twitter:title" content="RaIN JLPT Grammar Lab — N3 · N2 · N1 文法練習">
+  <meta name="twitter:description" content="283 組 N2／N1 文法筆記，配原創例句、粵語解釋及練習。">
+  <meta name="twitter:image" content="https://rainsday.com/jlpt/og-study.jpg?v=20260912">
   <script src="./jlpt-data.js?v=20260529-audit1"></script>
+  <script src="./grammar-n2.js?v=20260912-1"></script>
+  <script src="./grammar-n1.js?v=20260912-1"></script>
+  <script src="./grammar-catalog.js?v=20260912-1"></script>
+  <script src="./n1-study.js?v=20260912-1"></script>
   <script>
     (() => {
       try {
@@ -40,2283 +44,19 @@
       }
     })();
   </script>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Kosugi+Maru&family=Noto+Serif+JP:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Sans+TC:wght@400;500;700;900&family=Outfit:wght@400;500;600;700;800&display=swap');
-
-    :root {
-      --paper: #f5efe4;
-      --paper-deep: #e8ddcc;
-      --ink: #26231f;
-      --ink-soft: #625a50;
-      --ink-muted: #8b8073;
-      --surface: #fffaf1;
-      --surface-strong: #fff5e4;
-      --line: #dccbb3;
-      --line-strong: #c8ad89;
-      --vermillion: #b8432f;
-      --vermillion-soft: #f1d3c8;
-      --indigo: #263c68;
-      --indigo-soft: #d5deef;
-      --sage: #506d53;
-      --sage-soft: #dce7d5;
-      --gold: #b9862f;
-      --gold-soft: #f0dfbb;
-      --bad: #ad3943;
-      --bad-soft: #edd1d1;
-      --shadow: 0 22px 54px rgba(81, 61, 36, 0.16);
-      --shadow-soft: 0 10px 28px rgba(81, 61, 36, 0.10);
-      --radius: 8px;
-      --ease: cubic-bezier(.2,.8,.2,1);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      color: var(--ink);
-      font-family: "Noto Sans JP", "Noto Sans TC", system-ui, sans-serif;
-      background:
-        linear-gradient(90deg, rgba(38, 35, 31, 0.035) 1px, transparent 1px),
-        linear-gradient(180deg, rgba(38, 35, 31, 0.025) 1px, transparent 1px),
-        linear-gradient(160deg, var(--paper) 0%, #fbf6eb 46%, #ece0ce 100%);
-      background-size: 28px 28px, 28px 28px, auto;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background:
-        linear-gradient(90deg, rgba(184, 67, 47, 0.10), transparent 18% 82%, rgba(38, 60, 104, 0.09)),
-        radial-gradient(circle at 72% 12%, rgba(185, 134, 47, 0.13), transparent 28%);
-      mix-blend-mode: multiply;
-    }
-
-    button,
-    input {
-      font: inherit;
-    }
-
-    button {
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .app-shell {
-      width: min(1180px, calc(100% - 28px));
-      margin: 0 auto;
-      padding: 20px 0 76px;
-      position: relative;
-    }
-
-    .topbar {
-      position: sticky;
-      top: 10px;
-      z-index: 20;
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      align-items: center;
-      gap: 18px;
-      padding: 12px 14px;
-      margin-bottom: 28px;
-      border: 1px solid color-mix(in srgb, var(--line) 75%, transparent);
-      border-radius: var(--radius);
-      background: color-mix(in srgb, var(--surface) 88%, transparent);
-      box-shadow: var(--shadow-soft);
-      backdrop-filter: blur(18px);
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      min-width: 0;
-    }
-
-    .brand-mark {
-      display: grid;
-      place-items: center;
-      width: 46px;
-      height: 46px;
-      border-radius: 50%;
-      color: var(--surface);
-      background: var(--ink);
-      font-family: "Noto Serif JP", serif;
-      font-size: 1.1rem;
-      font-weight: 900;
-      flex: 0 0 auto;
-    }
-
-    .brand h1 {
-      margin: 0;
-      font-family: "Noto Serif JP", serif;
-      font-size: clamp(1.25rem, 3vw, 1.85rem);
-      line-height: 1.05;
-      letter-spacing: 0;
-    }
-
-    .brand p {
-      margin: 3px 0 0;
-      color: var(--ink-soft);
-      font-size: 0.88rem;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .top-actions {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    .level-tabs,
-    .view-tabs {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      padding: 4px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: rgba(255, 250, 241, 0.66);
-    }
-
-    .level-tab,
-    .view-tab {
-      min-height: 36px;
-      padding: 8px 13px;
-      border: 0;
-      border-radius: 999px;
-      background: transparent;
-      color: var(--ink-soft);
-      cursor: pointer;
-      transition: color 180ms var(--ease), background 180ms var(--ease), transform 180ms var(--ease);
-    }
-
-    .level-tab:hover,
-    .view-tab:hover {
-      color: var(--ink);
-      transform: translateY(-1px);
-    }
-
-    .level-tab.active,
-    .view-tab.active {
-      color: var(--surface);
-      background: var(--ink);
-      font-weight: 800;
-    }
-
-    .screen {
-      display: none;
-    }
-
-    .screen.active {
-      display: block;
-      animation: liftIn 360ms var(--ease);
-    }
-
-    @keyframes liftIn {
-      from { opacity: 0; transform: translateY(12px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1.08fr) minmax(330px, 0.92fr);
-      min-height: 430px;
-      margin-bottom: 24px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      overflow: hidden;
-      background: var(--surface);
-      box-shadow: var(--shadow);
-    }
-
-    .hero-copy {
-      padding: clamp(28px, 5vw, 54px);
-      display: grid;
-      align-content: center;
-      gap: 18px;
-    }
-
-    .eyebrow {
-      width: fit-content;
-      margin: 0;
-      padding: 6px 10px;
-      border: 1px solid var(--line-strong);
-      border-radius: 999px;
-      color: var(--vermillion);
-      font-size: 0.82rem;
-      font-weight: 800;
-      letter-spacing: 0;
-      background: var(--vermillion-soft);
-    }
-
-    .hero h2 {
-      margin: 0;
-      max-width: 11ch;
-      font-family: "Noto Serif JP", serif;
-      font-size: clamp(3rem, 8vw, 6.2rem);
-      line-height: 0.94;
-      letter-spacing: 0;
-      font-weight: 900;
-    }
-
-    .hero-copy p {
-      margin: 0;
-      max-width: 43rem;
-      color: var(--ink-soft);
-      font-size: clamp(1rem, 1.7vw, 1.12rem);
-      line-height: 1.85;
-    }
-
-    .hero-panel {
-      display: grid;
-      align-content: stretch;
-      gap: 1px;
-      background: var(--line);
-      border-left: 1px solid var(--line);
-    }
-
-    .hero-stat {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 14px;
-      align-items: center;
-      padding: 24px;
-      background: var(--surface-strong);
-    }
-
-    .hero-stat strong {
-      display: block;
-      font-family: "Noto Serif JP", serif;
-      font-size: clamp(1.9rem, 5vw, 3.2rem);
-      line-height: 1;
-    }
-
-    .hero-stat span {
-      display: block;
-      margin-top: 6px;
-      color: var(--ink-soft);
-      line-height: 1.45;
-      font-size: 0.92rem;
-    }
-
-    .stamp {
-      display: grid;
-      place-items: center;
-      width: 58px;
-      height: 58px;
-      border-radius: 50%;
-      border: 2px solid currentColor;
-      color: var(--vermillion);
-      font-family: "Kosugi Maru", sans-serif;
-      font-size: 0.82rem;
-      transform: rotate(-9deg);
-    }
-
-    .home-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(310px, 0.9fr);
-      gap: 20px;
-      align-items: start;
-    }
-
-    .panel,
-    .quiz-card,
-    .feedback-card,
-    .results-card,
-    .scenario-reader,
-    .grammar-bank {
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: color-mix(in srgb, var(--surface) 94%, transparent);
-      box-shadow: var(--shadow-soft);
-    }
-
-    .panel {
-      padding: 18px;
-      margin-bottom: 18px;
-    }
-
-    .panel-header {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 14px;
-    }
-
-    .panel h3,
-    .panel h4,
-    .results-card h3,
-    .scenario-reader h3,
-    .grammar-bank h3 {
-      margin: 0;
-      font-family: "Noto Serif JP", serif;
-      letter-spacing: 0;
-    }
-
-    .panel-header p,
-    .empty,
-    .muted {
-      margin: 0;
-      color: var(--ink-soft);
-      line-height: 1.7;
-    }
-
-    .mode-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-    }
-
-    .mode-card,
-    .scenario-card,
-    .category-chip,
-    .btn,
-    .option,
-    .grammar-item {
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--surface);
-      color: inherit;
-      cursor: pointer;
-      transition:
-        transform 180ms var(--ease),
-        border-color 180ms var(--ease),
-        background 180ms var(--ease),
-        box-shadow 180ms var(--ease);
-    }
-
-    .mode-card {
-      min-height: 122px;
-      padding: 18px;
-      text-align: left;
-      display: grid;
-      align-content: space-between;
-      gap: 14px;
-    }
-
-    .mode-card:hover,
-    .scenario-card:hover,
-    .grammar-item:hover,
-    .category-chip:hover,
-    .btn:hover:not(:disabled),
-    .option:hover:not(.locked) {
-      transform: translateY(-2px);
-      border-color: var(--line-strong);
-      box-shadow: 0 14px 26px rgba(81, 61, 36, 0.10);
-    }
-
-    .mode-card strong,
-    .scenario-card strong,
-    .grammar-item strong {
-      display: block;
-      font-size: 1.02rem;
-      line-height: 1.45;
-    }
-
-    .mode-card span,
-    .scenario-card span,
-    .grammar-item span {
-      display: block;
-      margin-top: 8px;
-      color: var(--ink-soft);
-      font-size: 0.88rem;
-      line-height: 1.55;
-    }
-
-    .mode-card.primary {
-      color: var(--surface);
-      background: var(--indigo);
-      border-color: var(--indigo);
-    }
-
-    .mode-card.primary span {
-      color: color-mix(in srgb, var(--surface) 78%, transparent);
-    }
-
-    .category-picker {
-      display: grid;
-      gap: 14px;
-      margin-top: 14px;
-      padding-top: 14px;
-      border-top: 1px dashed var(--line-strong);
-    }
-
-    .category-toolbar,
-    .btn-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .category-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      max-height: 240px;
-      overflow: auto;
-      padding-right: 4px;
-    }
-
-    .category-chip {
-      padding: 8px 12px;
-      color: var(--ink-soft);
-      background: rgba(255, 250, 241, 0.72);
-    }
-
-    .category-chip.active {
-      color: var(--surface);
-      background: var(--sage);
-      border-color: var(--sage);
-      font-weight: 800;
-    }
-
-    .scenario-grid {
-      display: grid;
-      gap: 12px;
-    }
-
-    .scenario-card {
-      padding: 16px;
-      text-align: left;
-    }
-
-    .scenario-card strong {
-      font-family: "Noto Serif JP", serif;
-    }
-
-    .phase-track {
-      display: grid;
-      gap: 10px;
-    }
-
-    .phase-item {
-      display: grid;
-      grid-template-columns: 76px minmax(0, 1fr);
-      gap: 12px;
-      align-items: start;
-      padding: 13px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: rgba(255, 250, 241, 0.62);
-    }
-
-    .phase-label {
-      color: var(--surface);
-      background: var(--vermillion);
-      border-radius: 999px;
-      padding: 5px 8px;
-      text-align: center;
-      font-size: 0.78rem;
-      font-weight: 900;
-    }
-
-    .phase-item p {
-      margin: 0;
-      color: var(--ink-soft);
-      line-height: 1.6;
-    }
-
-    .history-list,
-    .weak-list,
-    .mistake-list {
-      display: grid;
-      gap: 10px;
-    }
-
-    .history-item,
-    .weak-item,
-    .mistake-item {
-      display: grid;
-      gap: 6px;
-      padding: 13px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: rgba(255, 250, 241, 0.66);
-    }
-
-    .history-row,
-    .weak-row {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      align-items: center;
-    }
-
-    .history-item strong,
-    .weak-item strong {
-      color: var(--ink);
-    }
-
-    .history-item span,
-    .weak-item span,
-    .mistake-meta {
-      color: var(--ink-soft);
-      font-size: 0.88rem;
-      line-height: 1.55;
-    }
-
-    .btn {
-      min-height: 42px;
-      padding: 10px 15px;
-      background: var(--surface);
-      color: var(--ink);
-      font-weight: 800;
-    }
-
-    .btn:disabled {
-      opacity: 0.42;
-      cursor: not-allowed;
-      transform: none;
-      box-shadow: none;
-    }
-
-    .btn-primary {
-      color: var(--surface);
-      background: var(--vermillion);
-      border-color: var(--vermillion);
-    }
-
-    .btn-secondary {
-      color: var(--indigo);
-      background: var(--indigo-soft);
-      border-color: color-mix(in srgb, var(--indigo) 18%, var(--line));
-    }
-
-    .btn-ghost {
-      background: transparent;
-    }
-
-    .hidden {
-      display: none !important;
-    }
-
-    .quiz-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) 290px;
-      gap: 18px;
-      align-items: start;
-    }
-
-    .progress-panel {
-      position: sticky;
-      top: 94px;
-      display: grid;
-      gap: 14px;
-      padding: 16px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--surface);
-      box-shadow: var(--shadow-soft);
-    }
-
-    .progress-top {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      align-items: center;
-    }
-
-    .progress-label {
-      font-family: "Noto Serif JP", serif;
-      font-weight: 900;
-      font-size: 1.25rem;
-    }
-
-    .progress-score {
-      color: var(--ink-soft);
-      font-size: 0.9rem;
-    }
-
-    .progress-bar {
-      height: 12px;
-      overflow: hidden;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: var(--paper-deep);
-    }
-
-    .progress-bar > div {
-      width: 0;
-      height: 100%;
-      background: linear-gradient(90deg, var(--vermillion), var(--gold), var(--sage));
-      transition: width 240ms var(--ease);
-    }
-
-    .mini-map {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-    }
-
-    .mini-dot {
-      width: 11px;
-      height: 11px;
-      border-radius: 50%;
-      background: var(--line);
-    }
-
-    .mini-dot.done.good {
-      background: var(--sage);
-    }
-
-    .mini-dot.done.bad {
-      background: var(--bad);
-    }
-
-    .quiz-card {
-      padding: clamp(20px, 4vw, 34px);
-    }
-
-    .question-meta {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 20px;
-    }
-
-    .tag {
-      display: inline-flex;
-      align-items: center;
-      min-height: 28px;
-      padding: 5px 10px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      color: var(--ink-soft);
-      background: rgba(255, 250, 241, 0.72);
-      font-size: 0.82rem;
-      font-weight: 800;
-    }
-
-    .tag.grammar {
-      color: var(--indigo);
-      background: var(--indigo-soft);
-      border-color: color-mix(in srgb, var(--indigo) 18%, var(--line));
-    }
-
-    .tag.meaning {
-      color: var(--sage);
-      background: var(--sage-soft);
-      border-color: color-mix(in srgb, var(--sage) 18%, var(--line));
-    }
-
-    .question-text {
-      margin: 0;
-      font-family: "Noto Serif JP", serif;
-      font-size: clamp(1.45rem, 3.6vw, 2.25rem);
-      line-height: 1.72;
-      font-weight: 900;
-      letter-spacing: 0;
-    }
-
-    .question-sub {
-      margin: 14px 0 0;
-      color: var(--ink-soft);
-      line-height: 1.7;
-    }
-
-    .options {
-      display: grid;
-      gap: 12px;
-      margin-top: 24px;
-    }
-
-    .option {
-      width: 100%;
-      display: grid;
-      grid-template-columns: 42px minmax(0, 1fr);
-      gap: 14px;
-      align-items: start;
-      padding: 15px;
-      text-align: left;
-      background: rgba(255, 250, 241, 0.72);
-    }
-
-    .option.locked {
-      cursor: default;
-    }
-
-    .option.correct {
-      border-color: color-mix(in srgb, var(--sage) 58%, var(--line));
-      background: var(--sage-soft);
-    }
-
-    .option.wrong {
-      border-color: color-mix(in srgb, var(--bad) 62%, var(--line));
-      background: var(--bad-soft);
-    }
-
-    .option.dimmed {
-      opacity: 0.56;
-    }
-
-    .option-index {
-      display: grid;
-      place-items: center;
-      width: 42px;
-      height: 42px;
-      border: 1px solid var(--line-strong);
-      border-radius: 50%;
-      font-weight: 900;
-      color: var(--ink-soft);
-      background: var(--surface);
-    }
-
-    .option.correct .option-index {
-      color: var(--surface);
-      background: var(--sage);
-      border-color: var(--sage);
-    }
-
-    .option.wrong .option-index {
-      color: var(--surface);
-      background: var(--bad);
-      border-color: var(--bad);
-    }
-
-    .option-title {
-      margin: 0;
-      font-size: 1.05rem;
-      font-weight: 900;
-      line-height: 1.45;
-    }
-
-    .option-note {
-      margin-top: 8px;
-      color: var(--ink-soft);
-      font-size: 0.9rem;
-      line-height: 1.65;
-    }
-
-    .feedback-stack {
-      display: grid;
-      gap: 12px;
-      margin-top: 16px;
-    }
-
-    .feedback-card {
-      padding: 18px;
-    }
-
-    .feedback-card h3 {
-      margin: 0 0 10px;
-      font-family: "Noto Serif JP", serif;
-    }
-
-    .feedback-card p {
-      margin: 0;
-      color: var(--ink-soft);
-      line-height: 1.8;
-    }
-
-    .status-good {
-      color: var(--sage);
-    }
-
-    .status-bad {
-      color: var(--bad);
-    }
-
-    .results-card {
-      padding: clamp(22px, 5vw, 40px);
-    }
-
-    .results-hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 18px;
-      align-items: end;
-      margin-bottom: 22px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .results-hero strong {
-      display: block;
-      font-family: "Noto Serif JP", serif;
-      font-size: clamp(4rem, 11vw, 7.5rem);
-      line-height: 0.9;
-    }
-
-    .results-hero p {
-      margin: 12px 0 0;
-      color: var(--ink-soft);
-      line-height: 1.7;
-    }
-
-    .rank-stamp {
-      display: grid;
-      place-items: center;
-      width: clamp(86px, 15vw, 128px);
-      aspect-ratio: 1;
-      border: 3px double currentColor;
-      border-radius: 50%;
-      color: var(--vermillion);
-      font-family: "Noto Serif JP", serif;
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
-      font-weight: 900;
-      transform: rotate(-8deg);
-    }
-
-    .results-summary {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 10px;
-      margin-bottom: 24px;
-    }
-
-    .summary-box {
-      padding: 16px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: rgba(255, 250, 241, 0.72);
-    }
-
-    .summary-box strong {
-      display: block;
-      font-family: "Noto Serif JP", serif;
-      font-size: 2rem;
-      line-height: 1;
-    }
-
-    .summary-box span {
-      display: block;
-      margin-top: 8px;
-      color: var(--ink-soft);
-      font-size: 0.86rem;
-    }
-
-    .mistake-item p {
-      margin: 0;
-      line-height: 1.7;
-    }
-
-    .scenario-reader,
-    .grammar-bank {
-      padding: clamp(20px, 4vw, 32px);
-    }
-
-    .reader-head,
-    .bank-head {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 18px;
-      align-items: start;
-      margin-bottom: 22px;
-      padding-bottom: 18px;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .reader-head h2,
-    .bank-head h2 {
-      margin: 0;
-      font-family: "Noto Serif JP", serif;
-      font-size: clamp(2rem, 5vw, 3.7rem);
-      line-height: 1.02;
-      letter-spacing: 0;
-    }
-
-    .reader-head p,
-    .bank-head p {
-      margin: 10px 0 0;
-      color: var(--ink-soft);
-      line-height: 1.75;
-    }
-
-    .scenario-body {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) 320px;
-      gap: 22px;
-      align-items: start;
-    }
-
-    .passage {
-      display: grid;
-      gap: 12px;
-    }
-
-    .dialogue-line,
-    .story-block {
-      padding: 15px 16px;
-      border-left: 4px solid var(--line-strong);
-      background: rgba(255, 250, 241, 0.72);
-      line-height: 1.9;
-    }
-
-    .dialogue-line strong {
-      color: var(--indigo);
-    }
-
-    .story-block {
-      border-left-color: var(--vermillion);
-      font-family: "Noto Serif JP", serif;
-      font-size: 1.03rem;
-    }
-
-    .mark {
-      padding: 0 0.16em;
-      border-radius: 4px;
-      background: var(--gold-soft);
-      color: color-mix(in srgb, var(--ink) 82%, var(--gold));
-      font-weight: 900;
-    }
-
-    .reader-side {
-      position: sticky;
-      top: 94px;
-      display: grid;
-      gap: 14px;
-    }
-
-    .grammar-chips,
-    .drill-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .grammar-chip {
-      padding: 7px 10px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: var(--surface);
-      color: var(--ink-soft);
-      font-size: 0.86rem;
-      font-weight: 800;
-    }
-
-    .drill-list {
-      display: grid;
-    }
-
-    .drill-list li {
-      margin: 0;
-      color: var(--ink-soft);
-      line-height: 1.7;
-    }
-
-    .search-input {
-      width: 100%;
-      min-height: 48px;
-      padding: 12px 14px;
-      border: 1px solid var(--line-strong);
-      border-radius: var(--radius);
-      background: var(--surface);
-      color: var(--ink);
-      outline: none;
-    }
-
-    .search-input:focus {
-      border-color: var(--vermillion);
-      box-shadow: 0 0 0 3px var(--vermillion-soft);
-    }
-
-    .grammar-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 18px;
-    }
-
-    .grammar-item {
-      padding: 15px;
-      cursor: default;
-    }
-
-    .grammar-item mark {
-      padding: 0 0.15em;
-      background: var(--gold-soft);
-      color: var(--ink);
-      border-radius: 4px;
-    }
-
-    .study-shell {
-      padding: clamp(20px, 4vw, 32px);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: color-mix(in srgb, var(--surface) 94%, transparent);
-      box-shadow: var(--shadow-soft);
-    }
-
-    .study-head {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 18px;
-      align-items: start;
-      margin-bottom: 22px;
-      padding-bottom: 18px;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .study-head h2 {
-      margin: 0;
-      font-family: "Noto Serif JP", serif;
-      font-size: clamp(2rem, 5vw, 3.7rem);
-      line-height: 1.02;
-      letter-spacing: 0;
-    }
-
-    .study-head p {
-      margin: 10px 0 0;
-      color: var(--ink-soft);
-      line-height: 1.75;
-    }
-
-    .study-grid,
-    .listening-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    .study-card,
-    .study-panel,
-    .listening-card {
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: rgba(255, 250, 241, 0.74);
-      box-shadow: var(--shadow-soft);
-    }
-
-    .study-card,
-    .listening-card {
-      padding: 16px;
-    }
-
-    .study-panel {
-      padding: 18px;
-      margin-top: 18px;
-    }
-
-    .study-card h3,
-    .listening-card h3 {
-      margin: 0 0 12px;
-      font-family: "Noto Serif JP", serif;
-      font-size: 1.2rem;
-      line-height: 1.3;
-    }
-
-    .word-list,
-    .chunk-list {
-      display: grid;
-      gap: 10px;
-    }
-
-    .word-item,
-    .chunk-item {
-      display: grid;
-      gap: 5px;
-      padding: 12px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--surface);
-    }
-
-    .word-main {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .word-main strong,
-    .chunk-item strong {
-      font-size: 1.02rem;
-      line-height: 1.35;
-    }
-
-    .reading {
-      color: var(--vermillion);
-      font-family: "Kosugi Maru", sans-serif;
-      font-size: 0.88rem;
-    }
-
-    .word-meaning,
-    .word-example,
-    .chunk-note,
-    .listen-meta,
-    .listen-answer {
-      color: var(--ink-soft);
-      font-size: 0.9rem;
-      line-height: 1.65;
-    }
-
-    .word-example {
-      padding-top: 2px;
-      color: color-mix(in srgb, var(--ink) 74%, var(--indigo));
-    }
-
-    .collocation-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px;
-    }
-
-    .collocation-card {
-      padding: 12px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--surface);
-    }
-
-    .collocation-card strong {
-      display: block;
-      line-height: 1.35;
-    }
-
-    .collocation-card span {
-      display: block;
-      margin-top: 6px;
-      color: var(--ink-soft);
-      font-size: 0.88rem;
-      line-height: 1.55;
-    }
-
-    .listen-script {
-      margin: 12px 0;
-      padding: 14px;
-      border-left: 4px solid var(--indigo);
-      background: var(--surface);
-      font-family: "Noto Serif JP", serif;
-      line-height: 1.9;
-    }
-
-    .listen-question {
-      margin: 0 0 10px;
-      color: var(--ink);
-      font-weight: 900;
-      line-height: 1.55;
-    }
-
-    .listen-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 7px;
-      margin: 10px 0 12px;
-    }
-
-    .listen-tag {
-      padding: 5px 9px;
-      border-radius: 999px;
-      color: var(--indigo);
-      background: var(--indigo-soft);
-      font-size: 0.82rem;
-      font-weight: 800;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        animation-duration: 0.001ms !important;
-        scroll-behavior: auto !important;
-        transition-duration: 0.001ms !important;
-      }
-    }
-
-    @media (max-width: 980px) {
-      .topbar,
-      .hero,
-      .home-layout,
-      .quiz-layout,
-      .scenario-body,
-      .reader-head,
-      .bank-head,
-      .study-head,
-      .results-hero {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-panel {
-        border-left: 0;
-        border-top: 1px solid var(--line);
-      }
-
-      .progress-panel,
-      .reader-side {
-        position: static;
-      }
-
-      .grammar-grid,
-      .study-grid,
-      .listening-grid,
-      .collocation-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    @media (max-width: 640px) {
-      .app-shell {
-        width: min(100% - 18px, 1180px);
-        padding-top: 9px;
-      }
-
-      .topbar {
-        top: 6px;
-      }
-
-      .brand p {
-        white-space: normal;
-      }
-
-      .top-actions,
-      .level-tabs,
-      .view-tabs {
-        width: 100%;
-      }
-
-      .level-tabs,
-      .view-tabs {
-        justify-content: space-between;
-      }
-
-      .level-tab,
-      .view-tab {
-        flex: 1;
-        padding-inline: 9px;
-      }
-
-      .mode-grid,
-      .results-summary,
-      .grammar-grid,
-      .study-grid,
-      .listening-grid,
-      .collocation-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero {
-        min-height: unset;
-      }
-
-      .hero-stat {
-        grid-template-columns: 1fr;
-      }
-
-      .stamp {
-        width: 50px;
-        height: 50px;
-      }
-
-      .option {
-        grid-template-columns: 36px minmax(0, 1fr);
-      }
-
-      .option-index {
-        width: 36px;
-        height: 36px;
-      }
-    }
-
-    /* Clean white editorial refresh */
-    :root {
-      --paper: #ffffff;
-      --paper-deep: #f4f5f7;
-      --ink: #151515;
-      --ink-soft: #5b6068;
-      --ink-muted: #8d939c;
-      --surface: #ffffff;
-      --surface-strong: #f8f9fb;
-      --line: #e4e7ec;
-      --line-strong: #cdd3dc;
-      --vermillion: #b43c2d;
-      --vermillion-soft: #fff0ec;
-      --indigo: #1f3762;
-      --indigo-soft: #eef4ff;
-      --sage: #28734f;
-      --sage-soft: #edf8f1;
-      --gold: #aa7a22;
-      --gold-soft: #fff7df;
-      --bad: #b42335;
-      --bad-soft: #fff0f2;
-      --shadow: 0 26px 70px rgba(15, 23, 42, 0.10);
-      --shadow-soft: 0 14px 36px rgba(15, 23, 42, 0.07);
-      --radius: 10px;
-    }
-
-    body {
-      font-family: "Outfit", "Noto Sans JP", "Noto Sans TC", system-ui, sans-serif;
-      background:
-        linear-gradient(90deg, rgba(17, 24, 39, 0.04) 1px, transparent 1px),
-        linear-gradient(180deg, rgba(17, 24, 39, 0.035) 1px, transparent 1px),
-        #ffffff;
-      background-size: 44px 44px, 44px 44px, auto;
-    }
-
-    main {
-      width: 100%;
-      max-width: 100%;
-      overflow-x: hidden;
-    }
-
-    body::before {
-      background:
-        radial-gradient(circle at 8% 12%, rgba(180, 60, 45, 0.055), transparent 28%),
-        radial-gradient(circle at 88% 0%, rgba(31, 55, 98, 0.065), transparent 30%);
-      mix-blend-mode: normal;
-    }
-
-    .app-shell {
-      width: min(1240px, calc(100% - 40px));
-      padding-top: 18px;
-    }
-
-    .topbar {
-      top: 14px;
-      border-color: rgba(21, 21, 21, 0.10);
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.86);
-      box-shadow: 0 18px 46px rgba(15, 23, 42, 0.08);
-    }
-
-    .brand-mark {
-      width: 42px;
-      height: 42px;
-      background: var(--ink);
-      font-family: "Noto Serif JP", serif;
-    }
-
-    .brand h1 {
-      font-family: "Outfit", "Noto Sans JP", sans-serif;
-      font-size: clamp(1.1rem, 2vw, 1.35rem);
-      letter-spacing: 0;
-    }
-
-    .brand p {
-      font-size: 0.82rem;
-    }
-
-    .level-tabs,
-    .view-tabs {
-      border-color: rgba(21, 21, 21, 0.10);
-      background: #f6f7f9;
-    }
-
-    .level-tab,
-    .view-tab {
-      min-height: 34px;
-      font-weight: 700;
-    }
-
-    .level-tab.active,
-    .view-tab.active {
-      background: #151515;
-      color: #ffffff;
-    }
-
-    .hero {
-      grid-template-columns: minmax(0, 1.28fr) minmax(320px, 0.72fr);
-      min-height: 520px;
-      margin: 42px 0 34px;
-      border-color: rgba(21, 21, 21, 0.11);
-      border-radius: 18px;
-      background:
-        radial-gradient(circle at 78% 22%, rgba(180, 60, 45, 0.08), transparent 32%),
-        linear-gradient(135deg, #ffffff 0%, #fbfbfc 54%, #f1f3f7 100%);
-      box-shadow: var(--shadow);
-    }
-
-    .hero-copy {
-      padding: clamp(34px, 6vw, 74px);
-      gap: 22px;
-    }
-
-    .eyebrow {
-      padding: 0;
-      border: 0;
-      border-radius: 0;
-      background: transparent;
-      color: var(--vermillion);
-      font-size: 0.78rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .hero h2 {
-      max-width: 900px;
-      font-family: "Outfit", "Noto Serif JP", serif;
-      font-size: clamp(4rem, 9vw, 8.6rem);
-      line-height: 0.88;
-      font-weight: 800;
-    }
-
-    .hero-copy p:not(.eyebrow) {
-      max-width: 46rem;
-      color: #464b54;
-      font-size: clamp(1.03rem, 1.8vw, 1.2rem);
-    }
-
-    .hero-panel {
-      gap: 0;
-      padding: clamp(18px, 3vw, 28px);
-      align-content: center;
-      border-left: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.48);
-    }
-
-    .hero-stat {
-      grid-template-columns: 1fr;
-      padding: 28px 0;
-      border-bottom: 1px solid var(--line);
-      background: transparent;
-    }
-
-    .hero-stat:last-child {
-      border-bottom: 0;
-    }
-
-    .hero-stat strong {
-      font-family: "Outfit", "Noto Sans JP", sans-serif;
-      font-size: clamp(2.6rem, 5vw, 4.7rem);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-    }
-
-    .hero-stat span {
-      max-width: 20rem;
-      color: var(--ink-soft);
-    }
-
-    .stamp {
-      display: none;
-    }
-
-    .home-layout {
-      grid-template-columns: minmax(0, 1.12fr) minmax(330px, 0.88fr);
-      gap: 24px;
-    }
-
-    .panel,
-    .quiz-card,
-    .feedback-card,
-    .results-card,
-    .scenario-reader,
-    .grammar-bank,
-    .study-shell,
-    .study-card,
-    .study-panel,
-    .listening-card {
-      border-color: rgba(21, 21, 21, 0.10);
-      border-radius: 14px;
-      background: rgba(255, 255, 255, 0.94);
-      box-shadow: 0 16px 42px rgba(15, 23, 42, 0.06);
-    }
-
-    .panel {
-      padding: 22px;
-      margin-bottom: 24px;
-    }
-
-    .panel h3,
-    .panel h4,
-    .results-card h3,
-    .scenario-reader h3,
-    .grammar-bank h3,
-    .reader-head h2,
-    .bank-head h2,
-    .study-head h2,
-    .question-text,
-    .progress-label {
-      font-family: "Outfit", "Noto Serif JP", serif;
-    }
-
-    .panel-header {
-      align-items: start;
-    }
-
-    .panel-header p,
-    .empty,
-    .muted,
-    .mode-card span,
-    .scenario-card span,
-    .grammar-item span,
-    .option-note,
-    .feedback-card p {
-      color: var(--ink-soft);
-    }
-
-    .mode-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      grid-auto-flow: dense;
-      gap: 10px;
-    }
-
-    .mode-card,
-    .scenario-card,
-    .category-chip,
-    .btn,
-    .option,
-    .grammar-item {
-      border-color: rgba(21, 21, 21, 0.10);
-      background: #ffffff;
-    }
-
-    .mode-card,
-    .scenario-card {
-      overflow: hidden;
-      position: relative;
-    }
-
-    .mode-card::after,
-    .scenario-card::after {
-      content: "";
-      position: absolute;
-      inset: auto 16px 14px auto;
-      width: 42px;
-      height: 1px;
-      background: currentColor;
-      opacity: 0.18;
-      transform-origin: right center;
-      transition: transform 240ms var(--ease), opacity 240ms var(--ease);
-    }
-
-    .mode-card:hover::after,
-    .scenario-card:hover::after {
-      opacity: 0.42;
-      transform: scaleX(1.8);
-    }
-
-    .mode-card.primary {
-      background: #151515;
-      border-color: #151515;
-      color: #ffffff;
-    }
-
-    .category-grid {
-      max-height: 280px;
-    }
-
-    .category-chip.active {
-      color: #ffffff;
-      background: #151515;
-      border-color: #151515;
-    }
-
-    .btn {
-      min-height: 44px;
-      border-radius: 999px;
-      padding: 10px 18px;
-      font-weight: 800;
-    }
-
-    .btn-primary {
-      color: #ffffff;
-      background: #151515;
-      border-color: #151515;
-    }
-
-    .btn-secondary {
-      color: var(--indigo);
-      background: #eef4ff;
-      border-color: #d8e5fb;
-    }
-
-    .btn-ghost {
-      color: #151515;
-      background: #ffffff;
-    }
-
-    .quiz-layout {
-      grid-template-columns: minmax(0, 1fr) 310px;
-      gap: 24px;
-    }
-
-    .progress-panel,
-    .reader-side {
-      top: 108px;
-    }
-
-    .progress-bar {
-      border: 0;
-      background: #edf0f4;
-    }
-
-    .progress-bar > div {
-      background: #151515;
-    }
-
-    .tag {
-      border-color: transparent;
-      background: #f2f4f7;
-    }
-
-    .question-text {
-      max-width: 850px;
-      font-weight: 700;
-    }
-
-    .option {
-      border-radius: 12px;
-      background: #fbfcfd;
-    }
-
-    .option.correct {
-      background: var(--sage-soft);
-    }
-
-    .option.wrong {
-      background: var(--bad-soft);
-    }
-
-    .option-index {
-      border-color: #d6dbe3;
-      background: #ffffff;
-    }
-
-    .results-hero strong {
-      font-family: "Outfit", "Noto Sans JP", sans-serif;
-      letter-spacing: -0.04em;
-    }
-
-    .rank-stamp {
-      border: 1px solid var(--line-strong);
-      border-radius: 14px;
-      transform: none;
-      font-family: "Outfit", "Noto Serif JP", serif;
-      color: #151515;
-      background: #f8f9fb;
-    }
-
-    .summary-box,
-    .history-item,
-    .weak-item,
-    .mistake-item,
-    .phase-item,
-    .dialogue-line,
-    .story-block,
-    .word-item,
-    .chunk-item,
-    .collocation-card,
-    .listen-script {
-      border-color: rgba(21, 21, 21, 0.10);
-      background: #fbfcfd;
-    }
-
-    .search-input {
-      border-color: rgba(21, 21, 21, 0.13);
-      border-radius: 999px;
-      background: #ffffff;
-    }
-
-    .screen.active .hero,
-    .screen.active .panel,
-    .screen.active .quiz-card,
-    .screen.active .scenario-reader,
-    .screen.active .study-shell,
-    .screen.active .grammar-bank,
-    .screen.active .results-card {
-      animation: liftIn 420ms var(--ease);
-    }
-
-    /* ============================================================
-       Declutter pass — one spacing rhythm, flatter cards,
-       calmer home. Overrides the panel/home rules above.
-       ============================================================ */
-    :root {
-      --space-xl: 30px;
-      --space-lg: 22px;
-      --page-gutter: clamp(14px, 3vw, 56px);
-    }
-
-    .app-shell {
-      width: calc(100% - (var(--page-gutter) * 2));
-      max-width: none;
-    }
-
-    .topbar {
-      grid-template-columns: minmax(240px, 1fr) auto;
-    }
-
-    .top-actions {
-      min-width: 0;
-    }
-
-    .hero {
-      grid-template-columns: minmax(520px, 1.35fr) minmax(300px, 0.65fr);
-    }
-
-    .hero h2 {
-      max-width: min(960px, 100%);
-    }
-
-    /* Even rhythm: home columns + stacked blocks share one gap */
-    .home-layout {
-      grid-template-columns: minmax(560px, 1.25fr) minmax(330px, 0.75fr);
-      gap: var(--space-xl);
-      align-items: start;
-    }
-
-    .home-main > * + *,
-    .home-rail > * + * {
-      margin-top: var(--space-xl);
-    }
-
-    .panel {
-      padding: var(--space-lg);
-      margin-bottom: 0;
-    }
-
-    .panel-header {
-      align-items: center;
-      margin-bottom: 16px;
-    }
-
-    .panel-header h3 {
-      font-size: 1.18rem;
-    }
-
-    /* Hero stats: clean stacked numbers, tight label */
-    .hero-stat {
-      gap: 4px;
-      padding: 24px 0;
-    }
-
-    /* Category picker: replaces the removed .category-picker wrapper */
-    .category-grid {
-      max-height: none;
-      gap: 8px;
-    }
-
-    .category-toolbar {
-      margin-top: 16px;
-      padding-top: 16px;
-      border-top: 1px solid var(--line);
-    }
-
-    /* Mode cards: a touch more air */
-    .mode-grid { gap: 12px; }
-    .mode-card { min-height: 112px; padding: 18px; }
-    .mode-card span { font-size: 0.85rem; }
-
-    /* "Other ways to practice": one light row replacing two panels */
-    .more-strip {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      gap: 12px;
-    }
-
-    .more-link {
-      display: grid;
-      gap: 4px;
-      padding: 16px 18px;
-      text-align: left;
-      border: 1px solid rgba(21, 21, 21, 0.10);
-      border-radius: 14px;
-      background: #ffffff;
-      color: inherit;
-      cursor: pointer;
-      transition: transform 180ms var(--ease), border-color 180ms var(--ease), box-shadow 180ms var(--ease);
-    }
-
-    .more-link:hover {
-      transform: translateY(-2px);
-      border-color: var(--line-strong);
-      box-shadow: 0 12px 26px rgba(15, 23, 42, 0.07);
-    }
-
-    .more-link strong { font-size: 1rem; }
-    .more-link span { color: var(--ink-soft); font-size: 0.84rem; }
-
-    /* Flatten box-in-box: inner data items lose shadow, hairline fill */
-    .history-item,
-    .weak-item,
-    .summary-box,
-    .mistake-item,
-    .phase-item,
-    .word-item,
-    .chunk-item,
-    .collocation-card {
-      box-shadow: none;
-      border-color: rgba(21, 21, 21, 0.07);
-      background: #fafbfc;
-    }
-
-    /* Rail reads lighter than the main practice column */
-    .home-rail .panel {
-      box-shadow: 0 10px 26px rgba(15, 23, 42, 0.05);
-    }
-
-    /* Small inline button for panel actions */
-    .btn-sm {
-      min-height: 34px;
-      padding: 6px 14px;
-      font-size: 0.86rem;
-    }
-
-    /* Feedback card: structured, line-broken explanation */
-    .fb-head {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 8px 12px;
-      margin-bottom: 14px;
-    }
-
-    .fb-head h3 { margin: 0; }
-
-    .fb-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .fb-explain {
-      display: grid;
-      gap: 7px;
-    }
-
-    .fb-line {
-      margin: 0;
-      line-height: 1.7;
-    }
-
-    .fb-line.alt {
-      padding-left: 12px;
-      border-left: 2px solid var(--line-strong);
-      color: var(--ink-soft);
-    }
-
-    .quiz-layout {
-      grid-template-columns: minmax(0, 1fr) minmax(280px, clamp(290px, 24vw, 380px));
-    }
-
-    .grammar-grid {
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    }
-
-    .study-grid,
-    .listening-grid {
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    }
-
-    .collocation-grid {
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    }
-
-    .theme-toggle {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 44px;
-      min-width: 44px;
-      border: 1px solid rgba(21, 21, 21, 0.10);
-      border-radius: 999px;
-      background: #ffffff;
-      color: var(--ink);
-      cursor: pointer;
-      font: inherit;
-      font-weight: 900;
-      transition:
-        transform 180ms var(--ease),
-        border-color 180ms var(--ease),
-        background 180ms var(--ease),
-        color 180ms var(--ease),
-        box-shadow 180ms var(--ease);
-    }
-
-    .theme-toggle:hover {
-      transform: translateY(-1px);
-      border-color: var(--line-strong);
-      box-shadow: 0 12px 26px rgba(15, 23, 42, 0.07);
-    }
-
-    .theme-toggle:focus-visible {
-      outline: 3px solid color-mix(in srgb, var(--indigo) 34%, transparent);
-      outline-offset: 3px;
-    }
-
-    .theme-toggle-icon {
-      display: inline-grid;
-      place-items: center;
-      width: 1.1em;
-      line-height: 1;
-    }
-
-    html[data-theme="dark"] {
-      color-scheme: dark;
-      --paper: #0e1117;
-      --paper-deep: #171b23;
-      --ink: #f4f6fb;
-      --ink-soft: #a8b0bf;
-      --ink-muted: #70798a;
-      --surface: #151922;
-      --surface-strong: #1b202b;
-      --line: #2a303d;
-      --line-strong: #3b4658;
-      --vermillion: #ff7d66;
-      --vermillion-soft: #3a1d1a;
-      --indigo: #9fc1ff;
-      --indigo-soft: #17243a;
-      --sage: #78d7a0;
-      --sage-soft: #173323;
-      --gold: #e3b85d;
-      --gold-soft: #352817;
-      --bad: #ff8794;
-      --bad-soft: #3a171e;
-      --shadow: 0 28px 80px rgba(0, 0, 0, 0.42);
-      --shadow-soft: 0 16px 42px rgba(0, 0, 0, 0.28);
-    }
-
-    html[data-theme="dark"] body {
-      background:
-        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-        linear-gradient(180deg, rgba(255, 255, 255, 0.026) 1px, transparent 1px),
-        #0e1117;
-      color: var(--ink);
-    }
-
-    html[data-theme="dark"] body::before {
-      background:
-        radial-gradient(circle at 8% 12%, rgba(255, 125, 102, 0.10), transparent 30%),
-        radial-gradient(circle at 88% 0%, rgba(159, 193, 255, 0.12), transparent 34%),
-        linear-gradient(180deg, rgba(0, 0, 0, 0.12), transparent 36%);
-    }
-
-    html[data-theme="dark"] .topbar {
-      border-color: rgba(255, 255, 255, 0.10);
-      background: rgba(20, 24, 32, 0.86);
-      box-shadow: 0 20px 54px rgba(0, 0, 0, 0.36);
-    }
-
-    html[data-theme="dark"] .brand-mark,
-    html[data-theme="dark"] .level-tab.active,
-    html[data-theme="dark"] .view-tab.active,
-    html[data-theme="dark"] .btn-primary,
-    html[data-theme="dark"] .mode-card.primary,
-    html[data-theme="dark"] .category-chip.active {
-      color: #0f131a;
-      background: #f4f6fb;
-      border-color: #f4f6fb;
-    }
-
-    html[data-theme="dark"] .level-tabs,
-    html[data-theme="dark"] .view-tabs {
-      border-color: rgba(255, 255, 255, 0.10);
-      background: #111722;
-    }
-
-    html[data-theme="dark"] .level-tab,
-    html[data-theme="dark"] .view-tab {
-      color: var(--ink-soft);
-    }
-
-    html[data-theme="dark"] .hero {
-      border-color: rgba(255, 255, 255, 0.10);
-      background:
-        radial-gradient(circle at 78% 22%, rgba(255, 125, 102, 0.10), transparent 34%),
-        linear-gradient(135deg, #151922 0%, #111722 55%, #0c1017 100%);
-    }
-
-    html[data-theme="dark"] .hero-copy p:not(.eyebrow),
-    html[data-theme="dark"] .reader-head p,
-    html[data-theme="dark"] .bank-head p,
-    html[data-theme="dark"] .study-head p {
-      color: var(--ink-soft);
-    }
-
-    html[data-theme="dark"] .hero-panel {
-      background: rgba(13, 16, 23, 0.36);
-      border-color: var(--line);
-    }
-
-    html[data-theme="dark"] .panel,
-    html[data-theme="dark"] .quiz-card,
-    html[data-theme="dark"] .feedback-card,
-    html[data-theme="dark"] .results-card,
-    html[data-theme="dark"] .scenario-reader,
-    html[data-theme="dark"] .grammar-bank,
-    html[data-theme="dark"] .study-shell,
-    html[data-theme="dark"] .study-card,
-    html[data-theme="dark"] .study-panel,
-    html[data-theme="dark"] .listening-card,
-    html[data-theme="dark"] .progress-panel {
-      border-color: rgba(255, 255, 255, 0.09);
-      background: rgba(21, 25, 34, 0.94);
-      box-shadow: var(--shadow-soft);
-    }
-
-    html[data-theme="dark"] .mode-card,
-    html[data-theme="dark"] .scenario-card,
-    html[data-theme="dark"] .category-chip,
-    html[data-theme="dark"] .btn,
-    html[data-theme="dark"] .option,
-    html[data-theme="dark"] .grammar-item,
-    html[data-theme="dark"] .more-link,
-    html[data-theme="dark"] .theme-toggle {
-      border-color: rgba(255, 255, 255, 0.10);
-      background: #151922;
-      color: var(--ink);
-    }
-
-    html[data-theme="dark"] .btn-secondary,
-    html[data-theme="dark"] .btn-ghost {
-      color: var(--indigo);
-      background: #17243a;
-      border-color: #283a59;
-    }
-
-    html[data-theme="dark"] .tag,
-    html[data-theme="dark"] .grammar-chip,
-    html[data-theme="dark"] .listen-tag {
-      color: var(--ink-soft);
-      background: #202632;
-      border-color: rgba(255, 255, 255, 0.08);
-    }
-
-    html[data-theme="dark"] .tag.grammar,
-    html[data-theme="dark"] .listen-tag {
-      color: var(--indigo);
-      background: var(--indigo-soft);
-    }
-
-    html[data-theme="dark"] .tag.meaning {
-      color: var(--sage);
-      background: var(--sage-soft);
-    }
-
-    html[data-theme="dark"] .option,
-    html[data-theme="dark"] .summary-box,
-    html[data-theme="dark"] .history-item,
-    html[data-theme="dark"] .weak-item,
-    html[data-theme="dark"] .mistake-item,
-    html[data-theme="dark"] .phase-item,
-    html[data-theme="dark"] .dialogue-line,
-    html[data-theme="dark"] .story-block,
-    html[data-theme="dark"] .word-item,
-    html[data-theme="dark"] .chunk-item,
-    html[data-theme="dark"] .collocation-card,
-    html[data-theme="dark"] .listen-script {
-      border-color: rgba(255, 255, 255, 0.09);
-      background: #111722;
-    }
-
-    html[data-theme="dark"] .option.correct {
-      border-color: color-mix(in srgb, var(--sage) 50%, var(--line));
-      background: var(--sage-soft);
-    }
-
-    html[data-theme="dark"] .option.wrong {
-      border-color: color-mix(in srgb, var(--bad) 55%, var(--line));
-      background: var(--bad-soft);
-    }
-
-    html[data-theme="dark"] .option-index {
-      border-color: var(--line-strong);
-      background: #0e1117;
-      color: var(--ink-soft);
-    }
-
-    html[data-theme="dark"] .option.correct .option-index {
-      color: #0f131a;
-      background: var(--sage);
-      border-color: var(--sage);
-    }
-
-    html[data-theme="dark"] .option.wrong .option-index {
-      color: #0f131a;
-      background: var(--bad);
-      border-color: var(--bad);
-    }
-
-    html[data-theme="dark"] .progress-bar {
-      background: #252c38;
-    }
-
-    html[data-theme="dark"] .progress-bar > div {
-      background: #f4f6fb;
-    }
-
-    html[data-theme="dark"] .search-input {
-      border-color: rgba(255, 255, 255, 0.12);
-      background: #111722;
-      color: var(--ink);
-    }
-
-    html[data-theme="dark"] .search-input:focus {
-      border-color: var(--indigo);
-      box-shadow: 0 0 0 3px rgba(159, 193, 255, 0.20);
-    }
-
-    html[data-theme="dark"] .mark,
-    html[data-theme="dark"] .grammar-item mark {
-      color: #ffe6a6;
-      background: rgba(227, 184, 93, 0.18);
-    }
-
-    html[data-theme="dark"] .rank-stamp {
-      color: var(--ink);
-      background: #111722;
-    }
-
-    @media (max-width: 980px) {
-      .topbar,
-      .hero,
-      .home-layout,
-      .quiz-layout,
-      .scenario-body,
-      .reader-head,
-      .bank-head,
-      .study-head,
-      .results-hero {
-        grid-template-columns: 1fr;
-      }
-
-      .hero {
-        min-height: auto;
-      }
-
-      .hero-panel {
-        border-left: 0;
-        border-top: 1px solid var(--line);
-      }
-    }
-
-    @media (max-width: 640px) {
-      .mode-grid,
-      .more-strip {
-        grid-template-columns: 1fr;
-      }
-
-      .home-main > * + *,
-      .home-rail > * + * {
-        margin-top: var(--space-lg);
-      }
-    }
-
-    @media (max-width: 640px) {
-      .app-shell {
-        width: calc(100% - 16px);
-        padding-top: 8px;
-      }
-
-      .topbar {
-        top: 6px;
-        display: grid;
-        grid-template-columns: 34px minmax(0, 1fr);
-        gap: 6px;
-        align-items: center;
-        padding: 8px;
-        border-radius: 16px;
-      }
-
-      .brand {
-        min-width: 0;
-        width: 34px;
-      }
-
-      .brand-mark {
-        width: 34px;
-        height: 34px;
-        font-size: 0.95rem;
-      }
-
-      .brand h1 {
-        position: absolute;
-        overflow: hidden;
-        width: 1px;
-        height: 1px;
-        clip: rect(0 0 0 0);
-        white-space: nowrap;
-      }
-
-      .brand p {
-        display: none;
-      }
-
-      .top-actions {
-        display: grid;
-        grid-template-columns: minmax(78px, 0.68fr) 36px minmax(0, 1.5fr);
-        width: 100%;
-        gap: 6px;
-        align-items: center;
-      }
-
-      .level-tabs,
-      .view-tabs {
-        width: auto;
-        min-width: 0;
-        justify-content: flex-start;
-        gap: 2px;
-        padding: 3px;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-      }
-
-      .level-tabs::-webkit-scrollbar,
-      .view-tabs::-webkit-scrollbar {
-        display: none;
-      }
-
-      .level-tab,
-      .view-tab {
-        flex: 0 0 auto;
-        min-height: 30px;
-        padding: 6px 10px;
-        font-size: 0.86rem;
-      }
-
-      .theme-toggle {
-        width: 36px;
-        height: 36px;
-        min-width: 36px;
-        min-height: 36px;
-        padding: 0;
-      }
-
-      .hero {
-        margin-top: 18px;
-      }
-
-      .hero h2 {
-        font-size: clamp(3.2rem, 15vw, 4.4rem);
-        line-height: 0.95;
-      }
-
-      .hero-copy {
-        padding: 28px 22px;
-      }
-
-      .hero-panel {
-        padding: 0 22px 18px;
-      }
-
-      .hero-stat {
-        padding: 20px 0;
-      }
-
-      .hero-stat strong {
-        font-size: clamp(2.4rem, 13vw, 3.4rem);
-      }
-
-      .btn-row .btn {
-        flex: 1 1 150px;
-      }
-    }
-  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+JP:wght@500;700&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./jlpt.css?v=20260912-design2">
 </head>
 <body>
+  <a class="skip-link" href="#main-content">跳到學習內容</a>
   <div class="app-shell">
     <header class="topbar">
       <div class="brand">
-        <div class="brand-mark" aria-hidden="true">文</div>
+        <a class="brand-mark" href="/" aria-label="返回 rainsday 主頁"><img src="/assets/logo-mark.svg" alt="" width="48" height="32"></a>
         <div>
-          <h1>RaIN JLPT Grammar Lab</h1>
+          <h1><span>RaIN</span> 日本語練習室</h1>
           <p id="top-summary">題庫、場景、語彙、錯題複盤，一個乾淨 flow。</p>
         </div>
       </div>
@@ -2324,33 +64,41 @@
         <div class="level-tabs" aria-label="JLPT level switch">
           <button class="level-tab active" data-level="N3" type="button">N3</button>
           <button class="level-tab" data-level="N2" type="button">N2</button>
+          <button class="level-tab" data-level="N1" type="button">N1</button>
         </div>
         <button id="theme-toggle" class="theme-toggle" type="button" aria-label="切換深色模式" aria-pressed="false" title="切換深色模式">
           <span id="theme-toggle-icon" class="theme-toggle-icon" aria-hidden="true">☾</span>
         </button>
-        <nav class="view-tabs" aria-label="App view">
-          <button class="view-tab active" data-view="home" type="button">練習</button>
-          <button class="view-tab" data-view="scenario" type="button">場景</button>
-          <button class="view-tab" data-view="vocab" type="button">語彙</button>
-          <button class="view-tab" data-view="listening" type="button">耳練</button>
-          <button class="view-tab" data-view="bank" type="button">索引</button>
+        <nav class="view-tabs" aria-label="學習導覽">
+          <button class="view-tab active" data-view="home" type="button"><span class="nav-number">01</span>文法練習<span class="nav-jp" lang="ja">文法</span></button>
+          <button class="view-tab" data-view="scenario" type="button"><span class="nav-number">02</span>場景閱讀<span class="nav-jp" lang="ja">読解</span></button>
+          <button class="view-tab" data-view="vocab" type="button"><span class="nav-number">03</span>語彙筆記<span class="nav-jp" lang="ja">語彙</span></button>
+          <button class="view-tab" data-view="listening" type="button"><span class="nav-number">04</span>聽力練習<span class="nav-jp" lang="ja">聴解</span></button>
+          <button class="view-tab" data-view="bank" type="button"><span class="nav-number">05</span>文法索引<span class="nav-jp" lang="ja">索引</span></button>
         </nav>
       </div>
     </header>
 
-    <main>
+    <main id="main-content" tabindex="-1">
       <section id="screen-home" class="screen active">
         <div class="hero">
           <div class="hero-copy">
             <p class="eyebrow" id="hero-eyebrow">Focused grammar practice</p>
-            <h2 id="hero-level">N3 文法</h2>
+            <h2 id="hero-level">N3 文法，<br>一步步練熟。</h2>
             <p id="hero-description">用短題建立語感，再用錯題複盤迫自己講得出「點解呢個自然，其他答案唔自然」。</p>
             <div class="btn-row">
-              <button class="btn btn-primary" data-mode="random20" type="button">開始 20 題</button>
-              <button class="btn btn-ghost" data-jump="bank" type="button">查文法索引</button>
+              <button class="btn btn-primary" data-mode="random20" type="button">開始 20 題 <span aria-hidden="true">↗</span></button>
+              <button class="btn btn-ghost" data-jump="bank" type="button">查文法索引 <span aria-hidden="true">→</span></button>
             </div>
           </div>
-          <div class="hero-panel" aria-label="Current level overview">
+          <div class="hero-panel" aria-label="學習概覽">
+            <div class="notebook-art" aria-hidden="true">
+              <div class="notebook-label">THE DAILY PRACTICE <span>日本語</span></div>
+              <p lang="ja">学びは、<br>毎日の中に。</p>
+              <span class="daily-seal" lang="ja">日々</span>
+              <div class="notebook-caption">每天一點，慢慢變成自己的語言。</div>
+            </div>
+            <div class="hero-stats">
             <div class="hero-stat">
               <strong id="hero-total">0</strong>
               <span>題庫總數</span>
@@ -2363,6 +111,7 @@
               <strong id="hero-scenarios">2</strong>
               <span>場景篇章</span>
             </div>
+            </div>
           </div>
         </div>
 
@@ -2370,12 +119,16 @@
           <div class="home-main">
             <section class="panel">
               <div class="panel-header">
-                <h3>今日練習</h3>
+                <h3><span class="section-number">01</span> 今日練習</h3><span class="section-note">揀一個節奏，開始就好。</span>
+              </div>
+              <div id="catalog-banner" class="catalog-banner hidden">
+                <div><span class="eyebrow">文法筆記</span><p id="catalog-summary"></p></div>
+                <button class="btn btn-secondary btn-sm" data-jump="bank" type="button">打開筆記 →</button>
               </div>
               <div class="mode-grid">
                 <button class="mode-card primary" data-mode="random20" type="button">
                   <strong>20 題節奏練</strong>
-                  <span>每日 warm-up，快速暴露語感盲點。</span>
+                  <span>每日暖身，找出未熟嘅語感。</span>
                 </button>
                 <button class="mode-card" data-mode="random50" type="button">
                   <strong>50 題穩定度</strong>
@@ -2383,18 +136,18 @@
                 </button>
                 <button class="mode-card" data-mode="all" type="button">
                   <strong>全題庫巡回</strong>
-                  <span>完整覆蓋當前 level。</span>
+                  <span>由頭到尾，練完整個級別。</span>
                 </button>
                 <button class="mode-card" data-mode="weak" type="button">
                   <strong>弱點重做</strong>
-                  <span>抽常錯分類；未有紀錄時轉隨機。</span>
+                  <span>重溫常錯分類，逐點練穩。</span>
                 </button>
               </div>
             </section>
 
             <section class="panel">
               <div class="panel-header">
-                <h3>分類攻防</h3>
+                <h3><span class="section-number">02</span> 專注一個文法</h3>
                 <button id="select-all-btn" class="btn btn-ghost btn-sm" type="button">全選</button>
               </div>
               <div id="category-list" class="category-grid"></div>
@@ -2416,7 +169,7 @@
               </button>
               <button class="more-link" data-jump="listening" type="button">
                 <strong>聞き取り</strong>
-                <span>聽解 chunk</span>
+                <span>短句・語意・聽解</span>
               </button>
             </nav>
           </div>
@@ -2424,14 +177,14 @@
           <aside class="home-rail">
             <section class="panel">
               <div class="panel-header">
-                <h3>最近成績</h3>
+                <h3>練習足跡</h3><span class="rail-label">YOUR RECORD</span>
               </div>
               <div id="history-list" class="history-list"></div>
             </section>
 
             <section class="panel">
               <div class="panel-header">
-                <h3>弱點雷達</h3>
+                <h3>下一步，練這些</h3>
               </div>
               <div id="weak-list" class="weak-list"></div>
             </section>
@@ -2453,7 +206,7 @@
               <div id="options" class="options"></div>
             </article>
 
-            <div id="feedback-stack" class="feedback-stack hidden"></div>
+            <div id="feedback-stack" class="feedback-stack hidden" aria-live="polite"></div>
 
             <div class="btn-row" style="margin-top:16px;">
               <button id="next-btn" class="btn btn-primary hidden" type="button">下一題</button>
@@ -2544,7 +297,7 @@
               <section class="panel">
                 <div class="panel-header">
                   <div>
-                    <h3>Phase 目標</h3>
+                    <h3>閱讀步驟</h3>
                   </div>
                 </div>
                 <div id="phase-track" class="phase-track"></div>
@@ -2586,7 +339,7 @@
           <div id="vocab-grid" class="study-grid"></div>
           <section class="study-panel">
             <div class="panel-header">
-              <h3>組合詞攻防</h3>
+              <h3>常用搭配</h3>
             </div>
             <div id="collocation-grid" class="collocation-grid"></div>
           </section>
@@ -2606,6 +359,7 @@
               <button id="listen-vocab-btn" class="btn btn-ghost" type="button">返回語彙</button>
             </div>
           </div>
+          <p id="speech-status" class="speech-status" role="status">朗讀使用裝置提供嘅日文語音。</p>
           <div id="listening-grid" class="listening-grid"></div>
         </div>
       </section>
@@ -2622,17 +376,25 @@
               <button id="bank-random-btn" class="btn btn-primary" type="button">抽 20 題</button>
             </div>
           </div>
-          <input id="grammar-search" class="search-input" type="search" placeholder="搜尋文法、意思、分類或例句" autocomplete="off">
+          <input id="grammar-search" class="search-input" aria-label="搜尋文法、意思、分類或例句" type="search" placeholder="搜尋文法、意思、分類或例句" autocomplete="off">
+          <div class="bank-toolbar">
+            <label for="grammar-filter">範圍</label><select id="grammar-filter"></select>
+            <span id="bank-count" class="muted" aria-live="polite"></span>
+          </div>
           <div id="grammar-grid" class="grammar-grid"></div>
+          <button id="bank-more-btn" class="btn btn-secondary hidden" type="button">顯示更多文法</button>
+          <p class="bank-footnote">新增筆記依學習目錄分級，例句及語意練習為原創內容；並非官方試題。每組列出主要用法，練習以當前例句語境為準。</p>
         </div>
       </section>
     </main>
+    <footer class="site-footer"><a href="/">RaIN <span>·</span> 用心做一點日常。</a><span>日本語練習室 <span aria-hidden="true">／</span> N3 · N2 · N1</span></footer>
   </div>
 
   <script>
     const questionBanks = {
       N3: Array.isArray(window.__N3) ? window.__N3 : [],
-      N2: Array.isArray(window.__N2) ? window.__N2 : []
+      N2: [...(window.__N2 || []), ...(window.__GRAMMAR_PRACTICE?.N2 || [])],
+      N1: window.__GRAMMAR_PRACTICE?.N1 || []
     };
 
     const scenarioContent = [
@@ -3046,6 +808,11 @@
       "だけあって": "不愧是…，通常帶正面評價。"
     };
 
+    vocabContent.N1 = window.__N1_STUDY.vocab;
+    collocationContent.N1 = window.__N1_STUDY.collocations;
+    listeningContent.N1 = window.__N1_STUDY.listening;
+    scenarioContent.push(...window.__N1_STUDY.scenarios);
+
     const optionLetters = ["A", "B", "C", "D"];
     const historyKey = "jlpt_quiz_history_v3";
     const weaknessKey = "jlpt_quiz_weakness_v1";
@@ -3063,7 +830,9 @@
       answerLog: [],
       sessionStartedAt: 0,
       activeScenario: scenarioContent[0],
-      bankQuery: ""
+      bankQuery: "",
+      bankFilter: "all",
+      bankLimit: 30
     };
 
     const screens = {
@@ -3122,7 +891,10 @@
         node.classList.toggle("active", key === name);
       });
       document.querySelectorAll(".view-tab").forEach((btn) => {
-        btn.classList.toggle("active", btn.dataset.view === name || (name === "results" && btn.dataset.view === "home"));
+        const active = btn.dataset.view === name || (["quiz", "results"].includes(name) && btn.dataset.view === "home");
+        btn.classList.toggle("active", active);
+        if (active) btn.setAttribute("aria-current", "page");
+        else btn.removeAttribute("aria-current");
       });
     }
 
@@ -3131,15 +903,24 @@
       const categories = [...new Set(pool.map((item) => item.cat))];
       document.querySelectorAll(".level-tab").forEach((btn) => {
         btn.classList.toggle("active", btn.dataset.level === state.level);
+        btn.setAttribute("aria-pressed", String(btn.dataset.level === state.level));
       });
-      document.getElementById("hero-eyebrow").textContent = `${state.level} focused practice`;
-      document.getElementById("hero-level").textContent = `${state.level} 文法`;
+      document.getElementById("hero-eyebrow").textContent = `JLPT ${state.level} · 一日一練`;
+      document.getElementById("hero-level").textContent = `${state.level} 文法，\n一步步練熟。`;
       document.getElementById("hero-total").textContent = pool.length;
       document.getElementById("hero-categories").textContent = categories.length;
+      document.getElementById("hero-scenarios").textContent = getCurrentScenarios().length;
+      const notes = window.__GRAMMAR_CATALOG[state.level] || [];
+      document.getElementById("catalog-banner").classList.toggle("hidden", !notes.length);
+      document.getElementById("catalog-summary").textContent = notes.length
+        ? `${state.level} · ${new Set(notes.map(item => item.chapter)).size} 章 · ${notes.length} 組文法，配接續、例句及語意辨析。`
+        : "";
       document.getElementById("hero-description").textContent =
         state.level === "N3"
           ? "N3 先練句型反射，再用分類攻防分清近義文法。答完即刻看排除理由，不靠運氣撞答案。"
-          : "N2 重點是語氣、接續、正式度和相近表現。題庫配合場景篇章，讓文法回到真正句子。";
+          : state.level === "N2"
+            ? "由填空到語意辨析，分清接續同相近表現。127 組文法筆記，配例句一步步練熟。"
+            : "156 組進階文法，練準語氣、立場同言外之意。由一句例句開始，讀出真正意思。";
       document.getElementById("top-summary").textContent =
         `${state.level}：${pool.length} 題 · ${categories.length} 分類 · ${getVocabCount()} 語彙 · ${listeningContent[state.level].length} 段耳練`;
       renderCategoryPicker();
@@ -3157,10 +938,11 @@
         .map((cat) => {
           const count = pool.filter((item) => item.cat === cat).length;
           const active = state.selectedCategories.has(cat) ? "active" : "";
-          return `<button class="category-chip ${active}" data-cat="${escapeHtml(cat)}" type="button">${escapeHtml(cat)} (${count})</button>`;
+          return `<button class="category-chip ${active}" aria-pressed="${Boolean(active)}" data-cat="${escapeHtml(cat)}" type="button"><span>${escapeHtml(cat.replace(/^文法筆記 /, ""))}</span><span class="category-size">${count}</span></button>`;
         })
         .join("");
       const selectedCount = state.selectedCategories.size;
+      document.getElementById("start-category-btn").disabled = selectedCount === 0;
       document.getElementById("category-count").textContent =
         selectedCount ? `已選 ${selectedCount} 個分類` : "未選分類";
     }
@@ -3255,6 +1037,7 @@
       }
       const terms = scenario.grammar.map((item) => normalizeGrammar(item.text));
       const pool = getCurrentPool().filter((question) => {
+        if (scenario.catalogIds) return scenario.catalogIds.includes(question.catalogId);
         const grammar = normalizeGrammar(question.grammar);
         const text = `${question.q} ${question.meaning} ${question.explain}`;
         return terms.some((term) => grammar.includes(term) || text.includes(term));
@@ -3266,6 +1049,7 @@
     function renderHomeHeaderOnly() {
       document.querySelectorAll(".level-tab").forEach((btn) => {
         btn.classList.toggle("active", btn.dataset.level === state.level);
+        btn.setAttribute("aria-pressed", String(btn.dataset.level === state.level));
       });
     }
 
@@ -3302,7 +1086,11 @@
       document.getElementById("question-meaning").textContent = q.meaning;
       document.getElementById("question-grammar").classList.add("hidden");
       document.getElementById("question-meaning").classList.add("hidden");
-      document.getElementById("question-text").textContent = q.q;
+      document.getElementById("question-text").innerHTML = escapeHtml(q.q).replace(/＿+/g, '<span class="question-blank">$&</span>');
+      document.getElementById("question-text").classList.toggle("meaning-question", q.type === "meaning");
+      document.querySelector(".question-sub").textContent = q.type === "meaning"
+        ? "語意辨析：先讀完整句子，再揀呢個文法喺當前語境嘅意思。"
+        : "填空練習：選最自然的一個。作答後會顯示文法名稱、意思同選項解釋。";
       document.getElementById("feedback-stack").classList.add("hidden");
       document.getElementById("next-btn").classList.add("hidden");
 
@@ -3387,7 +1175,7 @@
         } else {
           node.classList.add("dimmed");
         }
-        const noteText = current === q.ans
+        const noteText = q.type === "meaning" ? q.optionNotes[current] : current === q.ans
           ? `正解。${glossForOption(current) || q.meaning || ""}`.trim()
           : extractOptionNote(q, current);
         if (noteText) {
@@ -3400,6 +1188,7 @@
 
       renderFeedback(q, isCorrect);
       renderMiniMap();
+      document.getElementById("progress-fill").style.width = `${Math.round(((state.currentIndex + 1) / state.quiz.length) * 100)}%`;
       document.getElementById("feedback-stack").classList.remove("hidden");
       document.getElementById("next-btn").classList.remove("hidden");
       document.getElementById("next-btn").textContent =
@@ -3547,7 +1336,12 @@
       }
     }
 
+    function getCurrentScenarios() {
+      return scenarioContent.filter(item => item.relatedLevel === state.level);
+    }
+
     function renderScenario(scenario = state.activeScenario) {
+      if (scenario.relatedLevel !== state.level) scenario = getCurrentScenarios()[0];
       state.activeScenario = scenario;
       document.getElementById("scenario-title").textContent = scenario.title;
       document.getElementById("scenario-description").textContent = scenario.description;
@@ -3584,8 +1378,9 @@
     }
 
     function switchScenario() {
-      const currentIndex = scenarioContent.findIndex((item) => item.id === state.activeScenario.id);
-      const next = scenarioContent[(currentIndex + 1) % scenarioContent.length];
+      const scenarios = getCurrentScenarios();
+      const currentIndex = scenarios.findIndex((item) => item.id === state.activeScenario.id);
+      const next = scenarios[(currentIndex + 1) % scenarios.length];
       renderScenario(next);
     }
 
@@ -3593,7 +1388,7 @@
       const sections = vocabContent[state.level];
       document.getElementById("vocab-title").textContent = `${state.level} 語彙・組合詞`;
       document.getElementById("vocab-description").textContent =
-        state.level === "N3"
+        state.level === "N1" ? "用論點、制度、判斷同經過四組詞彙，讀清進階文章嘅立場。" : state.level === "N3"
           ? "N3 先補日常、學校、工作、感情、狀態變化的核心詞。每個字都配一組常見搭配。"
           : "N2 先補抽象詞、正式公告、社會變化、職場判斷。這些詞常常同文法一起出現。";
 
@@ -3635,7 +1430,7 @@
       const items = listeningContent[state.level];
       document.getElementById("listening-title").textContent = `${state.level} 聞き取り Lab`;
       document.getElementById("listening-description").textContent =
-        state.level === "N3"
+        state.level === "N1" ? "聽清讓步、保留同最後決定，唔好畀開首嘅說法帶走。" : state.level === "N3"
           ? "N3 先練日常指示、預約、地點、順序。重點係聽到「先做咩」同「最後決定」。"
           : "N2 先練職場、公告、ニュース式表達。重點係逆接、原因、方針、延期中止的差別。";
       document.getElementById("listening-grid").innerHTML = items
@@ -3664,10 +1459,13 @@
     }
 
     function speakJapanese(text) {
+      const status = document.getElementById("speech-status");
       if (!("speechSynthesis" in window) || !("SpeechSynthesisUtterance" in window)) {
+        status.textContent = "此瀏覽器暫不支援朗讀，可以閱讀本文繼續練習。";
         return;
       }
       window.speechSynthesis.cancel();
+      status.textContent = "正在準備日文朗讀…";
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.lang = "ja-JP";
       utterance.rate = 0.88;
@@ -3677,47 +1475,66 @@
       if (japaneseVoice) {
         utterance.voice = japaneseVoice;
       }
+      utterance.onstart = () => { status.textContent = "日文朗讀中…"; };
+      utterance.onend = () => { status.textContent = "朗讀完成，可以再聽一次。"; };
+      utterance.onerror = (event) => {
+        if (["canceled", "interrupted"].includes(event.error)) return;
+        status.textContent = "未能啟動日文朗讀，請檢查裝置語音或使用其他瀏覽器。";
+      };
       window.speechSynthesis.speak(utterance);
+    }
+
+    function getBankEntries() {
+      const notes = (window.__GRAMMAR_CATALOG[state.level] || []).map(item => ({
+        ...item, kind: "note", cat: item.chapterTitle, q: item.example, explain: item.usage
+      }));
+      const seen = new Set();
+      const original = getCurrentPool().filter(item => item.type !== "meaning").filter(item => {
+        const key = `${item.grammar}-${item.meaning}`;
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      }).map(item => ({ ...item, kind: "original" }));
+      return [...notes, ...original];
     }
 
     function renderBank() {
       const query = state.bankQuery.trim().toLowerCase();
-      const pool = getCurrentPool();
-      const seen = new Set();
-      const items = pool
-        .filter((item) => {
-          const haystack = `${item.cat} ${item.grammar} ${item.meaning} ${item.q} ${item.explain}`.toLowerCase();
-          return !query || haystack.includes(query);
-        })
-        .filter((item) => {
-          const key = `${item.grammar}-${item.meaning}`;
-          if (seen.has(key)) {
-            return false;
-          }
-          seen.add(key);
-          return true;
-        })
-        .slice(0, 60);
-
-      document.getElementById("grammar-grid").innerHTML = items.length
-        ? items.map((item) => `
-          <article class="grammar-item">
-            <strong>${highlight(item.grammar, query)}</strong>
-            <span>${highlight(item.meaning || item.cat, query)}</span>
-            <span>${highlight(item.q, query)}</span>
-          </article>
-        `).join("")
-        : '<p class="empty">找不到相符文法。試下用分類或日文句型其中一部分搜尋。</p>';
+      const pool = getBankEntries();
+      const chapters = [...new Map(pool.filter(item => item.kind === "note").map(item => [item.chapter, item.chapterTitle])).entries()];
+      document.getElementById("grammar-filter").innerHTML = '<option value="all">全部文法</option>'
+        + (chapters.length ? '<option value="notes">新增文法筆記</option>' : '')
+        + (pool.some(item => item.kind === "original") ? '<option value="original">原有填空文法</option>' : '')
+        + chapters.map(([chapter, title]) => `<option value="chapter:${chapter}">第 ${chapter} 章 · ${escapeHtml(title)}</option>`).join("");
+      document.getElementById("grammar-filter").value = state.bankFilter;
+      const matches = pool.filter(item => {
+        const inScope = state.bankFilter === "all"
+          || (state.bankFilter === "notes" && item.kind === "note")
+          || item.kind === state.bankFilter
+          || state.bankFilter === `chapter:${item.chapter}`;
+        const haystack = `${item.cat} ${item.grammar} ${item.meaning} ${item.q} ${item.explain}`.toLowerCase();
+        return inScope && (!query || haystack.includes(query));
+      });
+      const items = matches.slice(0, state.bankLimit);
+      document.getElementById("bank-count").textContent = `顯示 ${items.length} / ${matches.length} 組`;
+      document.getElementById("bank-more-btn").classList.toggle("hidden", items.length >= matches.length);
+      document.getElementById("grammar-grid").innerHTML = items.length ? items.map(item => `
+        <article class="grammar-item ${item.kind === "note" ? "grammar-note" : ""}">
+          <div class="grammar-entry-meta">${item.kind === "note" ? `第 ${item.chapter} 章 · ${escapeHtml(item.chapterTitle)}<span>目錄 p.${item.page}</span>` : escapeHtml(item.cat)}</div>
+          <strong lang="ja">${highlight(item.grammar, query)}</strong>
+          <span class="grammar-entry-meaning">${highlight(item.meaning || item.cat, query)}</span>
+          <p class="grammar-example" lang="ja">${highlight(item.q, query)}</p>
+          ${item.kind === "note" ? `<p class="grammar-usage">${highlight(item.usage, query)}</p><button class="btn btn-ghost btn-sm note-practice-btn" data-note-id="${escapeHtml(item.id)}" type="button">練這個文法 →</button>` : ""}
+        </article>
+      `).join("") : '<p class="empty">找不到相符文法。試下用分類或日文句型其中一部分搜尋。</p>';
       showScreen("bank");
     }
 
     function highlight(text, query) {
-      const safe = escapeHtml(text || "");
-      if (!query) {
-        return safe;
-      }
+      if (!query) return escapeHtml(text || "");
       const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-      return safe.replace(new RegExp(`(${escaped})`, "ig"), "<mark>$1</mark>");
+      return String(text || "").split(new RegExp(`(${escaped})`, "ig"))
+        .map((part, index) => index % 2 ? `<mark>${escapeHtml(part)}</mark>` : escapeHtml(part)).join("");
     }
 
     function normalizeGrammar(text) {
@@ -3774,12 +1591,17 @@
           const activeScreen = document.querySelector(".screen.active")?.id || "screen-home";
           state.level = btn.dataset.level;
           state.selectedCategories = new Set();
+          state.bankFilter = "all";
+          state.bankLimit = 30;
           document.querySelectorAll(".level-tab").forEach((levelBtn) => {
             levelBtn.classList.toggle("active", levelBtn.dataset.level === state.level);
+            levelBtn.setAttribute("aria-pressed", String(levelBtn.dataset.level === state.level));
           });
           document.getElementById("top-summary").textContent =
             `${state.level}：${getCurrentPool().length} 題 · ${new Set(getCurrentPool().map((item) => item.cat)).size} 分類 · ${getVocabCount()} 語彙 · ${listeningContent[state.level].length} 段耳練`;
-          if (activeScreen === "screen-vocab") {
+          if (activeScreen === "screen-scenario") {
+            renderScenario();
+          } else if (activeScreen === "screen-vocab") {
             renderVocab();
           } else if (activeScreen === "screen-listening") {
             renderListening();
@@ -3849,6 +1671,7 @@
         if ("speechSynthesis" in window) {
           window.speechSynthesis.cancel();
         }
+        document.getElementById("speech-status").textContent = "已停止朗讀。";
       });
       document.getElementById("listening-grid").addEventListener("click", (event) => {
         const scriptButton = event.target.closest(".speak-btn");
@@ -3866,15 +1689,33 @@
       document.getElementById("bank-random-btn").addEventListener("click", () => startMode("random20"));
       document.getElementById("grammar-search").addEventListener("input", (event) => {
         state.bankQuery = event.target.value;
+        state.bankLimit = 30;
         renderBank();
       });
 
+      document.getElementById("grammar-filter").addEventListener("change", event => {
+        state.bankFilter = event.target.value;
+        state.bankLimit = 30;
+        renderBank();
+      });
+      document.getElementById("bank-more-btn").addEventListener("click", () => {
+        state.bankLimit += 30;
+        renderBank();
+      });
+      document.getElementById("grammar-grid").addEventListener("click", event => {
+        const button = event.target.closest("[data-note-id]");
+        if (!button) return;
+        const question = getCurrentPool().find(item => item.catalogId === button.dataset.noteId);
+        if (question) startQuizFromPool([question], "文法語意辨析");
+      });
       document.getElementById("next-btn").addEventListener("click", nextQuestion);
       document.getElementById("home-btn").addEventListener("click", renderHome);
       document.getElementById("result-home-btn").addEventListener("click", renderHome);
       document.getElementById("retry-wrong-btn").addEventListener("click", retryWrong);
       document.getElementById("result-bank-btn").addEventListener("click", () => {
         state.bankQuery = state.wrongList[0]?.q?.grammar || "";
+        state.bankFilter = "all";
+        state.bankLimit = 30;
         document.getElementById("grammar-search").value = state.bankQuery;
         renderBank();
       });
