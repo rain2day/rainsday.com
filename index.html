@@ -49,7 +49,7 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap"
     >
-    <link rel="stylesheet" href="journey.css?v=20260912-mobile-motion">
+    <link rel="stylesheet" href="journey.css?v=20260930-flow-work">
     <script type="importmap">
       {
         "imports": {
@@ -183,7 +183,7 @@
         </div>
       </section>
 
-      <section class="act act--orbit" id="act-2" data-act="2" data-act-name="IN ORBIT" style="--span: 810vh" aria-labelledby="act-2-title">
+      <section class="act act--orbit" id="act-2" data-act="2" data-act-name="IN ORBIT" aria-labelledby="act-2-title">
         <div class="act-pin">
           <div class="orbit-layout" data-act-copy>
             <div class="orbit-intro">
@@ -199,21 +199,21 @@
                   </div>
                 </div>
                 <div class="project-steps" style="--project-count: 9">
-                  <button type="button" data-project-index="0" aria-label="Show KOI Keyboard" aria-pressed="true">01</button>
-                  <button type="button" data-project-index="1" aria-label="Show BCanteen" aria-pressed="false">02</button>
-                  <button type="button" data-project-index="2" aria-label="Show 山野蛙 WildFrog" aria-pressed="false">03</button>
-                  <button type="button" data-project-index="3" aria-label="Show 公道計算器 expenseCal" aria-pressed="false">04</button>
-                  <button type="button" data-project-index="4" aria-label="Show 香港體感" aria-pressed="false">05</button>
-                  <button type="button" data-project-index="5" aria-label="Show Quest 學習天地" aria-pressed="false">06</button>
-                  <button type="button" data-project-index="6" aria-label="Show Love Contract" aria-pressed="false">07</button>
-                  <button type="button" data-project-index="7" aria-label="Show RaIN JLPT Grammar Lab" aria-pressed="false">08</button>
-                  <button type="button" data-project-index="8" aria-label="Show Research and longform" aria-pressed="false">09</button>
+                  <button type="button" data-project-index="0" aria-controls="project-01" aria-label="Show KOI Keyboard" aria-pressed="true">01</button>
+                  <button type="button" data-project-index="1" aria-controls="project-02" aria-label="Show BCanteen" aria-pressed="false">02</button>
+                  <button type="button" data-project-index="2" aria-controls="project-03" aria-label="Show 山野蛙 WildFrog" aria-pressed="false">03</button>
+                  <button type="button" data-project-index="3" aria-controls="project-04" aria-label="Show 公道計算器 expenseCal" aria-pressed="false">04</button>
+                  <button type="button" data-project-index="4" aria-controls="project-05" aria-label="Show 香港體感" aria-pressed="false">05</button>
+                  <button type="button" data-project-index="5" aria-controls="project-06" aria-label="Show Quest 學習天地" aria-pressed="false">06</button>
+                  <button type="button" data-project-index="6" aria-controls="project-07" aria-label="Show Love Contract" aria-pressed="false">07</button>
+                  <button type="button" data-project-index="7" aria-controls="project-08" aria-label="Show RaIN JLPT Grammar Lab" aria-pressed="false">08</button>
+                  <button type="button" data-project-index="8" aria-controls="project-09" aria-label="Show Research and longform" aria-pressed="false">09</button>
                 </div>
               </div>
             </div>
 
             <div class="orbit-cards" data-orbit-cards>
-              <article class="orbit-card is-active" data-orbit-card data-side="right">
+              <article class="orbit-card is-active" id="project-01" tabindex="-1" data-orbit-card data-side="right">
                 <span class="mission-ghost" aria-hidden="true">01</span>
                 <figure class="mission-media mission-media--koi">
                     <img src="assets/projects/koi-themes.webp" alt="KOI 隱翹・霓主題，近期原生鍵盤淺色及深色預覽。" loading="lazy" decoding="async">
@@ -230,7 +230,7 @@
                 </div>
               </article>
 
-              <article class="orbit-card" data-orbit-card data-side="left">
+              <article class="orbit-card" id="project-02" tabindex="-1" data-orbit-card data-side="left">
                 <span class="mission-ghost" aria-hidden="true">02</span>
                 <figure class="mission-media mission-media--bcanteen mission-media--screens">
                     <div class="media-wordmark" aria-hidden="true"><span>BCanteen</span><strong>食咗啲咩？</strong><small>A little conversation.<br>A daily food journal.</small></div>
@@ -248,7 +248,7 @@
                 </div>
               </article>
 
-              <article class="orbit-card" data-orbit-card data-side="right">
+              <article class="orbit-card" id="project-03" tabindex="-1" data-orbit-card data-side="right">
                 <span class="mission-ghost" aria-hidden="true">03</span>
                 <figure class="mission-media mission-media--wildfrog mission-media--screens">
                     <img src="assets/projects/wildfrog-1.jpg" alt="山野蛙 App Store 畫面：山峰總覽與香港山峰地圖。" loading="lazy" decoding="async">
@@ -266,7 +266,7 @@
                 </div>
               </article>
 
-              <article class="orbit-card" data-orbit-card data-side="left">
+              <article class="orbit-card" id="project-04" tabindex="-1" data-orbit-card data-side="left">
                 <span class="mission-ghost" aria-hidden="true">04</span>
                 <figure class="mission-media mission-media--expense mission-media--screens">
                     <img src="assets/projects/expense-1.jpg" alt="公道計算器最新 App Store 宣傳圖：旅費公數首頁。" loading="lazy" decoding="async">
@@ -286,7 +286,7 @@
                 </div>
               </article>
 
-              <article class="orbit-card" data-orbit-card data-side="right">
+              <article class="orbit-card" id="project-05" tabindex="-1" data-orbit-card data-side="right">
                 <span class="mission-ghost" aria-hidden="true">05</span>
                 <figure class="mission-media mission-media--weather mission-media--screens">
                     <img src="assets/projects/hk-1.jpg" alt="香港體感 App Store 宣傳圖：十八區體感溫度與天氣首頁。" loading="lazy" decoding="async">
@@ -304,7 +304,7 @@
                 </div>
               </article>
 
-              <article class="orbit-card" data-orbit-card data-side="left">
+              <article class="orbit-card" id="project-06" tabindex="-1" data-orbit-card data-side="left">
                 <span class="mission-ghost" aria-hidden="true">06</span>
                 <figure class="mission-media mission-media--quest">
                     <img src="assets/projects/quest.webp" alt="Quest 學習天地正式分享圖：學趣魚仔及五個學習科目。" loading="lazy" decoding="async">
@@ -321,7 +321,7 @@
                 </div>
               </article>
 
-              <article class="orbit-card" data-orbit-card data-side="right">
+              <article class="orbit-card" id="project-07" tabindex="-1" data-orbit-card data-side="right">
                 <span class="mission-ghost" aria-hidden="true">07</span>
                 <figure class="mission-media mission-media--concept">
                     <img src="assets/project-2.jpg" alt="Love Contract 早期介面概念圖。" loading="lazy" decoding="async">
@@ -338,7 +338,7 @@
                 </div>
               </article>
 
-              <article class="orbit-card" data-orbit-card data-side="left">
+              <article class="orbit-card" id="project-08" tabindex="-1" data-orbit-card data-side="left">
                 <span class="mission-ghost" aria-hidden="true">08</span>
                 <figure class="mission-media mission-media--jlpt">
                     <img src="assets/projects/jlpt-current.webp" alt="2026 年 9 月擷取的 RaIN JLPT Grammar Lab 現行練習首頁。" loading="lazy" decoding="async">
@@ -355,7 +355,7 @@
                 </div>
               </article>
 
-              <article class="orbit-card" data-orbit-card data-side="right">
+              <article class="orbit-card" id="project-09" tabindex="-1" data-orbit-card data-side="right">
                 <span class="mission-ghost" aria-hidden="true">09</span>
                 <figure class="mission-media mission-media--research">
                     <div class="research-cover" aria-label="Research workflow: sources, findings, decisions">
@@ -457,6 +457,6 @@
       </style>
     </noscript>
 
-    <script src="journey.js?v=20260912-mobile-motion" defer></script>
+    <script src="journey.js?v=20260930-flow-work" defer></script>
   </body>
 </html>

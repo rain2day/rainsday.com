@@ -16,7 +16,7 @@
   const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const coarsePointer = matchMedia("(pointer: coarse)").matches;
   const saveData = navigator.connection?.saveData === true;
-  const compactViewport = matchMedia("(max-width: 760px) and (max-height: 740px), (max-width: 1000px) and (max-height: 520px)");
+  const compactViewport = matchMedia("(max-width: 760px), (max-width: 1000px) and (max-height: 520px)");
   const chapterLinks = [...document.querySelectorAll(".chapter-nav a")];
   const projectSteps = [...document.querySelectorAll("[data-project-index]")];
   const projectCurrent = document.querySelector("[data-project-current]");
@@ -85,8 +85,6 @@
     return t * t * (3 - 2 * t);
   };
   const easeOutExpo = (t) => (t >= 1 ? 1 : 1 - Math.pow(2, -10 * t));
-  const easeOutCubic = (t) => 1 - Math.pow(1 - clamp(t, 0, 1), 3);
-  const easeInCubic = (t) => Math.pow(clamp(t, 0, 1), 3);
   const degToRad = (degrees) => (degrees * Math.PI) / 180;
 
   function readActSpan(el, fallback) {
@@ -111,6 +109,7 @@
   initProjectNavigation();
   initHoverMotion();
   initScrollHint();
+  initFlowTracking();
 
   if (!canvas || !story || reducedMotion || saveData || stickyFallback) {
     activateStatic();
@@ -136,8 +135,10 @@
   }
 
   function activateStatic() {
+    const workRect = actNodes[2]?.el?.getBoundingClientRect();
+    const inWork = workRect && workRect.top <= innerHeight * 0.4 && workRect.bottom > innerHeight * 0.4;
     const resumeTarget = body.classList.contains("journey-reading") ? null
-      : document.querySelector(".act.is-active .orbit-card.is-active") || document.querySelector(".act.is-active");
+      : inWork ? orbitCards[currentProjectIndex] : document.querySelector(".act.is-active");
     body.classList.add("journey-static");
     setReadingLayout(true);
     if (canvas) canvas.hidden = true;
@@ -202,24 +203,71 @@
     });
   }
 
+  // Camera progress stays on the original artistic timeline. Physical scroll
+  // positions come from the DOM, so flowing work cards cannot skew later acts.
+  function chapterStops() {
+    const maxScroll = Math.max(1, document.documentElement.scrollHeight - innerHeight);
+    const stops = actElements.map((el, i) => i === 0 ? 0
+      : clamp(el.getBoundingClientRect().top + scrollY - innerHeight * 0.65, 0, maxScroll));
+    return [...stops, maxScroll];
+  }
+
+  function progressAtScroll() {
+    const stops = chapterStops();
+    for (let i = 0; i < ACTS.length; i += 1) {
+      if (scrollY < stops[i + 1] || i === ACTS.length - 1) {
+        return actLocalP(i, inverseLerp(stops[i], stops[i + 1], scrollY));
+      }
+    }
+    return 1;
+  }
+
   function scrollToProgress(progress) {
     pendingProgress = clamp(progress, 0, 1);
-    const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
-    // Chapter and project controls are deliberate jumps; ordinary scrolling remains native.
-    window.scrollTo({ top: pendingProgress * maxScroll, behavior: "instant" });
+    const act = getActiveAct(pendingProgress);
+    const stops = chapterStops();
+    const local = inverseLerp(act.start, act.end, pendingProgress);
+    window.scrollTo({ top: lerp(stops[act.order], stops[act.order + 1], local), behavior: "instant" });
     updateActContent(pendingProgress);
-    updateOrbitFromProgress(pendingProgress);
   }
 
   function navigateToAct(index) {
     const act = ACTS[index];
     if (!act) return;
-    if (body.classList.contains("journey-reading")) {
+    if (index === 2 || body.classList.contains("journey-reading")) {
       actNodes[index]?.el?.scrollIntoView({ behavior: reducedMotion ? "instant" : "smooth" });
       return;
     }
-    const local = index === 0 ? 0 : index === 2 ? 0.5 / getOrbitBeatCount() : 0.72;
-    scrollToProgress(actLocalP(index, local));
+    scrollToProgress(actLocalP(index, index === 0 ? 0 : 0.72));
+  }
+
+  function scrollToProject(index) {
+    const next = clamp(index, 0, orbitCards.length - 1);
+    const card = orbitCards[next];
+    card?.scrollIntoView({ behavior: "instant", block: "start" });
+    card?.focus({ preventScroll: true });
+    updateProjectNavigation(next);
+  }
+
+  function initFlowTracking() {
+    let scheduled = false;
+    const update = () => {
+      scheduled = false;
+      const readingLine = Math.min(innerHeight * 0.4, 260);
+      const index = orbitCards.reduce((active, card, i) =>
+        card.getBoundingClientRect().top <= readingLine ? i : active, 0);
+      updateProjectNavigation(index);
+      const progress = progressAtScroll();
+      updateActContent(progress);
+      updateHud(progress, computeCameraState(progress, innerWidth / Math.max(1, innerHeight)));
+    };
+    const schedule = () => {
+      if (!scheduled) { scheduled = true; requestAnimationFrame(update); }
+    };
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule, { passive: true });
+    if (typeof ResizeObserver !== "undefined") new ResizeObserver(schedule).observe(story);
+    schedule();
   }
 
   function initChapterNavigation() {
@@ -257,7 +305,7 @@
     const showProject = (index) => {
       const count = getOrbitBeatCount();
       const next = (index + count) % count;
-      scrollToProgress(actLocalP(2, (next + 0.5) / count));
+      scrollToProject(next);
     };
     document.querySelector("[data-project-prev]")?.addEventListener("click", () => showProject(currentProjectIndex - 1));
     document.querySelector("[data-project-next]")?.addEventListener("click", () => showProject(currentProjectIndex + 1));
@@ -269,6 +317,7 @@
   function updateProjectNavigation(index) {
     if (currentProjectIndex === index && projectCurrent?.textContent === String(index + 1).padStart(2, "0")) return;
     currentProjectIndex = index;
+    orbitCards.forEach((card, step) => card.classList.toggle("is-active", step === index));
     if (projectCurrent) projectCurrent.textContent = String(index + 1).padStart(2, "0");
     projectSteps.forEach((button, step) => button.setAttribute("aria-pressed", String(step === index)));
   }
@@ -532,8 +581,7 @@
       state.lastFrameTime = now;
       state.simTime += frameMs / 1000;
 
-      const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
-      state.targetP = clamp(window.scrollY / maxScroll, 0, 1);
+      state.targetP = progressAtScroll();
       if (pendingProgress !== null) {
         state.displayP = state.targetP;
         pendingProgress = null;
@@ -557,9 +605,8 @@
       uniforms.uWarp.value = clamp(velocityWarp + escapeWarp, 0, 0.92);
 
       updateCameraUniforms(cameraState);
-      updateHud(state.displayP, cameraState);
-      updateActContent(state.displayP);
-      updateOrbitFromProgress(state.displayP);
+      updateHud(state.targetP, cameraState);
+      updateActContent(state.targetP);
 
       uniforms.uTime.value = state.simTime;
       uniforms.uFrame.value = state.frame;
@@ -591,20 +638,25 @@
       const wasReading = body.classList.contains("journey-reading");
       const nextReading = compactViewport.matches;
       const progress = state.targetP;
+      const workRect = actNodes[2]?.el?.getBoundingClientRect();
+      const inWork = getActiveAct(progress).index === 2 ||
+        (workRect && workRect.top <= innerHeight * 0.4 && workRect.bottom > innerHeight * 0.4);
       const resumeTarget = !wasReading
-        ? document.querySelector(".act.is-active .orbit-card.is-active") || document.querySelector(".act.is-active") || actNodes[getActiveAct(progress).index]?.el
+        ? (inWork ? orbitCards[currentProjectIndex] : document.querySelector(".act.is-active")) || actNodes[getActiveAct(progress).index]?.el
         : null;
       const readerIndex = (nodes) => nodes.reduce((index, node, i) =>
         node.getBoundingClientRect().top <= window.innerHeight * 0.4 ? i : index, 0);
-      const readerAct = wasReading && !nextReading ? readerIndex(actElements) : 0;
-      const readerProject = readerAct === 2 ? readerIndex(orbitCards) : 0;
+      const readerAct = wasReading && !nextReading ? (inWork ? 2 : readerIndex(actElements)) : 0;
+      const readerProject = readerAct === 2 ? currentProjectIndex : 0;
       setReadingLayout(nextReading);
       applyRenderSize();
       if (nextReading) {
         if (!wasReading) resumeTarget?.scrollIntoView({ behavior: "instant", block: "start" });
       } else if (wasReading) {
-        if (readerAct === 2) scrollToProgress(actLocalP(2, (readerProject + 0.5) / getOrbitBeatCount()));
+        if (readerAct === 2) scrollToProject(readerProject);
         else navigateToAct(readerAct);
+      } else if (inWork) {
+        orbitCards[currentProjectIndex]?.scrollIntoView({ behavior: "instant", block: "start" });
       } else {
         scrollToProgress(progress);
       }
@@ -633,10 +685,9 @@
     applyRenderSize();
     const initialAct = /^#act-\d+$/.test(location.hash) ? Number(location.hash.replace("#act-", "")) : null;
     if (initialAct !== null && ACTS[initialAct]) navigateToAct(initialAct);
-    state.targetP = clamp(window.scrollY / Math.max(1, document.documentElement.scrollHeight - window.innerHeight), 0, 1);
+    state.targetP = progressAtScroll();
     state.displayP = state.targetP;
     updateActContent(state.displayP);
-    updateOrbitFromProgress(state.displayP);
     startLoop();
   }
 
@@ -714,13 +765,21 @@
 
   function updateActContent(p) {
     if (body.classList.contains("journey-reading")) return;
+    const workRect = actNodes[2]?.el?.getBoundingClientRect();
+
     actNodes.forEach((act) => {
       if (!act.el || !act.copy) return;
+      if (act.index === 2) { act.el.inert = false; return; }
       const t = inverseLerp(act.start, act.end, p);
       const isDeparture = act.index === 0;
       const enter = isDeparture ? 1 : smoothstep(0, 0.05, t);
       const exit = act.index === 5 ? 1 : 1 - smoothstep(0.96, 1, t);
-      const alpha = clamp(enter * exit, 0, 1);
+      // Give flowing cards room to enter/leave without abruptly blanking the
+      // fixed neighboring chapter or letting its text cover a project card.
+      const handoff = !workRect ? 1 : act.index < 2
+        ? smoothstep(innerHeight * 0.55, innerHeight * 0.95, workRect.top)
+        : 1 - smoothstep(innerHeight * 0.05, innerHeight * 0.45, workRect.bottom);
+      const alpha = clamp(enter * exit * handoff, 0, 1);
       const y = (1 - enter) * 24 + (1 - exit) * -24;
       act.copy.style.setProperty("--act-alpha", alpha.toFixed(3));
       act.copy.style.setProperty("--act-y", `${y.toFixed(1)}px`);
@@ -731,49 +790,9 @@
     });
   }
 
-  function updateOrbitFromProgress(p) {
-    if (!orbitCards.length || body.classList.contains("journey-reading")) return;
-    const local = inverseLerp(ACTS[2].start, ACTS[2].end, p);
-    updateOrbitCards(local);
-  }
-
-  function updateOrbitCard(index) {
-    orbitCards.forEach((card, cardIndex) => {
-      card.classList.toggle("is-active", cardIndex === index);
-      card.style.setProperty("--card-alpha", cardIndex === index ? "1.000" : "0.000");
-      card.style.setProperty("--card-y", cardIndex === index ? "0.0px" : "28.0px");
-      card.style.setProperty("--card-scale", cardIndex === index ? "1.000" : "0.970");
-    });
-  }
-
-  function updateOrbitCards(local) {
-    const beatCount = getOrbitBeatCount();
-    const activeIndex = clamp(Math.floor(Math.min(beatCount - 0.001, local * beatCount)), 0, beatCount - 1);
-    updateProjectNavigation(activeIndex);
-
-    orbitCards.forEach((card, index) => {
-      const beatStart = index / beatCount;
-      const beatEnd = (index + 1) / beatCount;
-      const beatLocal = inverseLerp(beatStart, beatEnd, local);
-      const envelope = orbitEnvelope(beatLocal);
-      const isActive = index === activeIndex && envelope.alpha > 0.03;
-      card.classList.toggle("is-active", isActive);
-      card.inert = !isActive;
-      card.style.setProperty("--card-alpha", envelope.alpha.toFixed(3));
-      card.style.setProperty("--card-y", `${envelope.y.toFixed(1)}px`);
-      card.style.setProperty("--card-scale", envelope.scale.toFixed(3));
-    });
-  }
-
-  function orbitEnvelope(t) {
-    if (t <= 0 || t >= 1) return { alpha: 0, y: t >= 1 ? -28 : 28, scale: t >= 1 ? 1 : 0.97 };
-    if (t < 0.18) {
-      const enter = easeOutCubic(t / 0.18);
-      return { alpha: enter, y: lerp(28, 0, enter), scale: lerp(0.97, 1, enter) };
-    }
-    if (t <= 0.82) return { alpha: 1, y: 0, scale: 1 };
-    const exit = easeInCubic((t - 0.82) / 0.18);
-    return { alpha: 1 - exit, y: lerp(0, -28, exit), scale: 1 };
+  // Work is ordinary document content: never fade, hide or inert a card.
+  function updateOrbitCard() {
+    orbitCards.forEach((card) => { card.inert = false; });
   }
 
   function updateFieldRules(local) {
